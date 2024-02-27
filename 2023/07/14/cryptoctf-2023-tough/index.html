@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+    
+        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
+
+
+    
+    
+    <title>
+        
+            CryptoCTF 2023 tough分类 团队解题writeup | Hexo
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Hexo</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">tools</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/icons/avatar.gif"/>
+                
+            </div>
+            <div class="sidebar-author-name">John Doe</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
+                    <a href="mailto:xxx@xxx.com" class="mdui-chip-title">E-Mail</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://your.url" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-steam"></i></span>
+                    <a target="_blank" rel="noopener" href="https://your.url" class="mdui-chip-title">Steam</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-weibo"></i></span>
+                    <a target="_blank" rel="noopener" href="https://your.url" class="mdui-chip-title">Weibo</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://garybear.cn/hexo-theme-meadow/" class="mdui-list-item mdui-ripple">
+                            Meadow说明文档
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2023/07/14/cryptoctf-2023-tough/">CryptoCTF 2023 tough分类 团队解题writeup</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-07-14
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-02-27
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=CryptoCTF 2023 tough分类 团队解题writeup&url=http://example.com/2023/07/14/cryptoctf-2023-tough/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=CryptoCTF 2023 tough分类 团队解题writeup&url=http://example.com/2023/07/14/cryptoctf-2023-tough/&via=John Doe" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2023/07/14/cryptoctf-2023-tough/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/2023/07/14/cryptoctf-2023-tough/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2023/07/14/cryptoctf-2023-tough/&title=CryptoCTF 2023 tough分类 团队解题writeup" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=Hexo&title=CryptoCTF 2023 tough分类 团队解题writeup&summary=&pics=http://example.com/null&url=http://example.com/2023/07/14/cryptoctf-2023-tough/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/2023/07/14/cryptoctf-2023-tough/&text=CryptoCTF 2023 tough分类 团队解题writeup" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/CTF/ >CTF</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/Crypto/ >Crypto</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <p>这次tough分类真的也就还好，没有那种很长的算法需要审计，思维上也没有到那种难到抓狂的，也没有涉及太高级的数学工具，对算力也没有啥很苛刻的要求。</p>
+<p>所以综合下来，跟去年以及前年的最高难度相比，真的也就还好。</p>
+<h2 id="Slowsum"><a href="#Slowsum" class="headerlink" title="Slowsum"></a>Slowsum</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目里面所给出的系统巨复杂，感觉就是用来把人绕晕的。</p>
+<p>首先$q &#x3D; 113$，整套系统基于$\mathbb{F}_q$中的多项式。</p>
+<p>一开始我们可以输入变量的个数$n$以及多项式$f$的次数$d$，需要满足$n \ge 5, d \ge 3, n d&#x2F;q &lt; 0.1$</p>
+<p>我们可用的变量为$x_0, x_1, \ldots, x_{n-1}$</p>
+<p>然后我们需要输入这个$d$次多项式$f(x_0, x_1, \ldots, x_{n-1})$。记</p>
+<p>$$g &#x3D; \sum_{x_0 &#x3D; 0}^{1}\sum_{x_1 &#x3D; 0}^{1} \ldots \sum_{x_{n-1} &#x3D; 0}^{1} f(x_0, x_1, \ldots, x_{n-1})$$</p>
+<p>然后我们需要输入一个数$g’ \ne g$。</p>
+<p>然后我们需要输入$n$个一元多项式$p_0, p_1, \ldots, p_{n-1}$，以及$n$个数$h_0, h_1, \ldots, h_{n-1}$，满足如下条件：</p>
+<ul>
+<li>对所有的$i &#x3D; 0, 1, \ldots, n-1$，多项式$p_i$的度数需要不大于$d$</li>
+<li>对所有的$i &#x3D; 0, 1, \ldots, n-1$，记多项式$p_i$的系数之和为$s_{i}$，则$h_i &#x3D; s_i^{(q-1) &#x2F; 2 - s_i} \bmod q$</li>
+<li>对$i &#x3D; 0$，$p_i(0) + p_i(1) &#x3D; g’$</li>
+<li>对$i &#x3D; 1, 2, \ldots, n - 1$，$p_i(0) + p_i(1) &#x3D; p_{i-1}(h_{i-1})$</li>
+<li>$f(h_0, h_1, \ldots, h_{n-1}) &#x3D; p_{n-1}(h_{n-1})$</li>
+</ul>
+<p>如果所输入的所有多项式和值能通过上面的检查的话，那么我们就会得到flag。</p>
+<h3 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h3><p>所以这道题tough的一个点在于不能被他这么多的输入，以及这么多的条件判断给绕晕。</p>
+<p>往简单的想：我们可以就令$(n, d) &#x3D; (5, 3)$，然后令所有的$p_i \equiv 0$，那么由$h_i$的计算式，所有的$h_i$也会等于0。</p>
+<p>然后这样$g’$也会是0了。这样一路看下来，只需要保证最后一个条件，$f(h_0, h_1, \ldots, h_{n-1}) &#x3D; p_{n-1}(h_{n-1}) &#x3D; 0$，以及$g \ne 0$，$\deg f &#x3D; 3$了。</p>
+<p>因为所有的$h_i$都会是0，所以实际上最后一个条件可以进一步写为：</p>
+<p>$$f(0, 0, \ldots, 0) &#x3D; 0$$</p>
+<p>那很简单，也就是说只需要保证常数项为0就行了。随便构造一个$f(x_0, x_1, \ldots, x_4) &#x3D; x_4^3$即可，此时$g &#x3D; 2^4 &#x3D; 16$</p>
+<p>只需要把这组无脑的答案提交上去就行了，代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> sage.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># self.conn = process([&#x27;sage&#x27;, &#x27;another.sage&#x27;])</span></span><br><span class="line">        self.conn = remote(<span class="string">&#x27;02.cr.yp.toc.tf&#x27;</span>, <span class="number">31337</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_d</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;D&#x27;</span>)</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;5,3&#x27;</span>)</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;x4^3&#x27;</span>)</span><br><span class="line">        self.g = <span class="number">16</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_c</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;C&#x27;</span>)</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">            self.conn.sendline(<span class="string">&#x27;0,0&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        self.gao_d()</span><br><span class="line">        self.gao_c()</span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    g = Gao()</span><br><span class="line">    g.gao()</span><br></pre></td></tr></table></figure>
+
+<p>得到flag为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;Rem3Mb3er_tH4t_F14t_5h4m1r_tR4nsf0rm4tiOn_n33Ds_A_g00D_r4Nd0m_Or4cLe!&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ASIv2"><a href="#ASIv2" class="headerlink" title="ASIv2"></a>ASIv2</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/643106267">ASIv1</a>的基础上进行了加强。</p>
+<p>首先将flag转成三进制的012序列，记为${m_i}$，即$m_i \in {0, 1, 2}$，其中$i &#x3D; 1, 2, \ldots, l$</p>
+<p>生成一个$l^2 \times l$的012随机矩阵$R&#x3D;[r_{ij}]$，即$r_{ij} \in {0, 1, 2}$，该随机矩阵已知。</p>
+<p>然后还知道一个向量$s$，其中</p>
+<p>$$s_i &#x3D; \left(\sum_{j&#x3D;1}^{l}{(r_{ij} + m_{j}) \bmod 3}\right) \bmod 2$$</p>
+<p>对于$i &#x3D; 1, 2, \ldots, l^2$</p>
+<p>已知$R, s$，求flag。</p>
+<h3 id="我的解答-1"><a href="#我的解答-1" class="headerlink" title="我的解答"></a>我的解答</h3><p>这里的难点是，在每一项$r_{ij} + m_{j}$计算完之后是模3，完了求和的时候结果却给出来的是模2。所以让人不知道到底是在$GF(3)$下想问题还是在$GF(2)$下想问题</p>
+<p>然后我的思路是，有没有一种可能，将$f(a, b) &#x3D; ((a + b) \bmod 3) \bmod 2$的结果用一个$GF(2)$下的关于$a$和$b$的运算表示？首先我们先画出$f(a, b)$的真值表：</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>f</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p><em>好像知乎的markdown在表格里套公式就会渲染不出东西来，所以只能这样应付一下了，大家明白意思就行</em></p>
+<p>说白了，$GF(2)$下关于$a$和$b$的运算，性质比较好的就是$A a b + B a + C b + D$这种的，那试了一下，不能写出这么好的形式的。而且说白了，上面的$a$和$b$也是模3意义下的等价类。</p>
+<p>那么有没有办法把未知的$m_j$给强行弄到$GF(2)$上捏？这个时候我想到了数字电路里面有一个<strong>38译码器</strong>，它把输入的3位二进制位变成了8位二进制位，写成一个函数的形式就是：</p>
+<p>$$g(x) &#x3D; ([x \ne 0], [x \ne 1], \ldots, [x \ne 7])$$</p>
+<p>其中$[t]$为判断函数，如果表达式$t$为真则$[t]$取1；反之，如果表达式$t$为假则$[t]$取0。这样结果就变成了一个每个分量为$GF(2)$中元素的8维向量。</p>
+<p>那么类似地，由于$m_{j} \in {0, 1, 2}$，我们就可以把未知的$m_{j}$尝试表示成$(x_{j0}, x_{j1}, x_{j2})$，其中$x_{jk} &#x3D; [m_j &#x3D; k]$。</p>
+<p>然后因为$m_j$只能为$0, 1, 2$中的某个数，所以我们马上就有$x_{j0} + x_{j1} + x_{j2} &#x3D; 1$。</p>
+<p>然后我们就能对$f(r_{ij}, m_{j})$的结果进行定制化的一些分析了：</p>
+<ul>
+<li>如果$r_{ij} &#x3D; 0$，那么可得如下真值表：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>xj0</th>
+<th>xj1</th>
+<th>xj2</th>
+<th>f</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>写成线性表达式就是$f(r_{ij}, m_{j}) &#x3D; x_{j1}$</p>
+<ul>
+<li>如果$r_{ij} &#x3D; 1$，那么可得如下真值表：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>xj0</th>
+<th>xj1</th>
+<th>xj2</th>
+<th>f</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>写成线性表达式就是$f(r_{ij}, m_{j}) &#x3D; x_{j0}$</p>
+<ul>
+<li>如果$r_{ij} &#x3D; 2$，那么可得如下真值表：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>xj0</th>
+<th>xj1</th>
+<th>xj2</th>
+<th>f</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>写成线性表达式就是$f(r_{ij}, m_{j}) &#x3D; x_{j2}$</p>
+<p>然后，由于$x_{j0} + x_{j1} + x_{j2} &#x3D; 1$，所以进一步可以将$f(r_{ij}, m_{j})$写成$1 + x_{j1} + x_{j2}$</p>
+<p>然后就可以把$s_i$写成关于$x_{j1}, x_{j2}$的线性方程组，并解得即可。因为我们一共有$l^2$组数据，所以挑$2l$组出来解即可。</p>
+<p>解出$x_{j1}, x_{j2}$之后，再弄回$m_j$，再弄回flag即可。代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;output.txt&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read().splitlines()</span><br><span class="line"></span><br><span class="line">R = <span class="built_in">eval</span>(s[<span class="number">0</span>][<span class="number">4</span>:])</span><br><span class="line">S = <span class="built_in">eval</span>(s[<span class="number">1</span>][<span class="number">4</span>:])</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">len</span>(R[<span class="number">0</span>])</span><br><span class="line">A = []</span><br><span class="line">b = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span> * n):</span><br><span class="line">    Aline = []</span><br><span class="line">    bline = S[i]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">if</span> (R[i][j] == <span class="number">0</span>):</span><br><span class="line">            Aline.extend([<span class="number">1</span>, <span class="number">0</span>])</span><br><span class="line">        <span class="keyword">elif</span> (R[i][j] == <span class="number">1</span>):</span><br><span class="line">            Aline.extend([<span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">            bline ^= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> (R[i][j] == <span class="number">2</span>):</span><br><span class="line">            Aline.extend([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">    A.append(Aline)</span><br><span class="line">    b.append(bline)</span><br><span class="line"></span><br><span class="line">A = matrix(GF(<span class="number">2</span>), A)</span><br><span class="line">b = vector(GF(<span class="number">2</span>), b)</span><br><span class="line"><span class="built_in">print</span>(A.det())</span><br><span class="line">x = A.solve_right(b)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line">ans = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> (x[<span class="number">2</span>*i] == <span class="number">0</span>) <span class="keyword">and</span> (x[<span class="number">2</span>*i+<span class="number">1</span>] == <span class="number">0</span>):</span><br><span class="line">        ans.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> (x[<span class="number">2</span>*i] == <span class="number">1</span>) <span class="keyword">and</span> (x[<span class="number">2</span>*i+<span class="number">1</span>] == <span class="number">0</span>):</span><br><span class="line">        ans.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> (x[<span class="number">2</span>*i] == <span class="number">0</span>) <span class="keyword">and</span> (x[<span class="number">2</span>*i+<span class="number">1</span>] == <span class="number">1</span>):</span><br><span class="line">        ans.append(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">&#x27;GG&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">ans = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> ans)</span><br><span class="line">ans = long_to_bytes(<span class="built_in">int</span>(ans, <span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(ans)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;4n0Th3R_47tACkER_!n_Vi5A!&#125;</span><br></pre></td></tr></table></figure>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 已经结束咧 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> Goodbye --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/2024/02/27/hello-world/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>Goodbye World</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2023/07/13/cryptoctf-2023-hard-2/">
+        <span>CryptoCTF 2023 hard分类 团队解题writeup 之二</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2023/07/14/cryptoctf-2023-tough/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Slowsum"><span class="toc-number">1.</span> <span class="toc-text">Slowsum</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94"><span class="toc-number">1.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ASIv2"><span class="toc-number">2.</span> <span class="toc-text">ASIv2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-1"><span class="toc-number">2.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
+      </div>
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2024 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        John Doe
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

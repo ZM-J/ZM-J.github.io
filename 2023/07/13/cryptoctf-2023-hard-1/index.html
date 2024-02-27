@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+    
+        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
+
+
+    
+    
+    <title>
+        
+            CryptoCTF 2023 hard分类 团队解题writeup 之一 | Hexo
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Hexo</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">tools</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/icons/avatar.gif"/>
+                
+            </div>
+            <div class="sidebar-author-name">John Doe</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
+                    <a href="mailto:xxx@xxx.com" class="mdui-chip-title">E-Mail</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://your.url" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-steam"></i></span>
+                    <a target="_blank" rel="noopener" href="https://your.url" class="mdui-chip-title">Steam</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-weibo"></i></span>
+                    <a target="_blank" rel="noopener" href="https://your.url" class="mdui-chip-title">Weibo</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://garybear.cn/hexo-theme-meadow/" class="mdui-list-item mdui-ripple">
+                            Meadow说明文档
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2023/07/13/cryptoctf-2023-hard-1/">CryptoCTF 2023 hard分类 团队解题writeup 之一</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-07-13
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-02-27
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=CryptoCTF 2023 hard分类 团队解题writeup 之一&url=http://example.com/2023/07/13/cryptoctf-2023-hard-1/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=CryptoCTF 2023 hard分类 团队解题writeup 之一&url=http://example.com/2023/07/13/cryptoctf-2023-hard-1/&via=John Doe" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2023/07/13/cryptoctf-2023-hard-1/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/2023/07/13/cryptoctf-2023-hard-1/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2023/07/13/cryptoctf-2023-hard-1/&title=CryptoCTF 2023 hard分类 团队解题writeup 之一" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=Hexo&title=CryptoCTF 2023 hard分类 团队解题writeup 之一&summary=&pics=http://example.com/null&url=http://example.com/2023/07/13/cryptoctf-2023-hard-1/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/2023/07/13/cryptoctf-2023-hard-1/&text=CryptoCTF 2023 hard分类 团队解题writeup 之一" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/CTF/ >CTF</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/Crypto/ >Crypto</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <p>这次hard分类也有5题，虽然思维方面肯定比medium要难些，但也还中规中矩。</p>
+<h2 id="Big"><a href="#Big" class="headerlink" title="Big"></a>Big</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>$p$是一个512位的$4k+3$型素数，$q$是把$p$的十进制表示进行逆序之后的数，也是素数。$N&#x3D;pq$。</p>
+<p>然后$a$是一个模$N$的二次剩余。</p>
+<p>首先得到flag的二进制为${m_1, m_2, \ldots, m_l}$，其中$m_i \in {0, 1}$对于$i &#x3D; 1, 2, \ldots, l$。</p>
+<p>然后生成一个随机的$t_i$，使得$t_i$在$m_i &#x3D; 0$时不为模$N$的二次剩余，在$m_i$为1时为模$N$的二次剩余。</p>
+<p>然后记$c_i &#x3D; (t_i - a t_i^{-1}) \bmod N$。</p>
+<p>已知$N, a, c_1, c_2, \ldots, c_l$，求flag。</p>
+<h3 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h3><p>首先是找到$N&#x3D;pq$的分解。</p>
+<p>由于$q$是把$p$的十进制表示进行逆序之后的数，所以可以用估界的手法：逐步猜测$p$和$q$的高位值，通过模$10^k$的验证，以及根据已有猜测对$N$进行估界，得到范围限制，来得到分解。不过由于$2^{511} &lt; 10^{154} &lt; 2^{512}$，所以$p$的十进制长度有可能是154，也有可能是155，需要分别进行尝试。估界代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">N = <span class="number">72271787633166084700895603235291055045699965307538401174867474485084272711938364003794151073975875159886045553516299177522950407802715116792937858353646755246888532333536918663888208381012106370000886903776721867958523682675624556576505534100750339626081218194389244007622749982917071344697799413034317147013</span></span><br><span class="line"></span><br><span class="line">pdigits = <span class="number">154</span></span><br><span class="line"></span><br><span class="line">cur_sol = [(<span class="number">0</span>, <span class="number">0</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>((pdigits + <span class="number">1</span>) // <span class="number">2</span>):</span><br><span class="line">    nxt_sol = []</span><br><span class="line">    cur_modulus = (<span class="number">10</span> ** (i+<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">for</span> cur_p, cur_q <span class="keyword">in</span> cur_sol:</span><br><span class="line">        <span class="keyword">if</span> (pdigits % <span class="number">2</span> == <span class="number">1</span>) <span class="keyword">and</span> (i == (pdigits - <span class="number">1</span>) // <span class="number">2</span>):</span><br><span class="line">            <span class="keyword">for</span> ph <span class="keyword">in</span> itertools.product(<span class="built_in">range</span>(<span class="number">10</span>)):</span><br><span class="line">                nxt_p_add = ph * <span class="number">10</span> ** i</span><br><span class="line">                nxt_q_add = ph * <span class="number">10</span> ** i</span><br><span class="line">                nxt_p = cur_p + nxt_p_add</span><br><span class="line">                nxt_q = cur_q + nxt_q_add</span><br><span class="line">                <span class="keyword">if</span> (nxt_p * nxt_q == N):</span><br><span class="line">                    nxt_sol.append((nxt_p, nxt_q))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> ph, qh <span class="keyword">in</span> itertools.product(<span class="built_in">range</span>(<span class="number">10</span>), repeat=<span class="number">2</span>):</span><br><span class="line">                nxt_p_add = ph * <span class="number">10</span> ** (pdigits - <span class="number">1</span> - i) + qh * <span class="number">10</span> ** i</span><br><span class="line">                nxt_q_add = qh * <span class="number">10</span> ** (pdigits - <span class="number">1</span> - i) + ph * <span class="number">10</span> ** i</span><br><span class="line">                nxt_p = cur_p + nxt_p_add</span><br><span class="line">                nxt_q = cur_q + nxt_q_add</span><br><span class="line">                nxt_min_p, nxt_max_p = nxt_p, nxt_p + <span class="number">10</span> ** (pdigits - <span class="number">1</span> - i) - <span class="number">10</span> ** (i+<span class="number">1</span>)</span><br><span class="line">                nxt_min_q, nxt_max_q = nxt_q, nxt_q + <span class="number">10</span> ** (pdigits - <span class="number">1</span> - i) - <span class="number">10</span> ** (i+<span class="number">1</span>)</span><br><span class="line">                nxt_min_N, nxt_max_N = nxt_min_p * nxt_min_q, nxt_max_p * nxt_max_q</span><br><span class="line">                <span class="keyword">if</span> ((nxt_p * nxt_q % cur_modulus == N % cur_modulus) <span class="keyword">and</span> (nxt_min_N &lt;= N &lt;= nxt_max_N)):</span><br><span class="line">                    nxt_sol.append((nxt_p, nxt_q))</span><br><span class="line">    cur_sol = nxt_sol</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;i = &#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;<span class="built_in">len</span>(cur_sol) = &#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(cur_sol)</span><br></pre></td></tr></table></figure>
+
+<p>得到$N&#x3D;pq$的分解。</p>
+<p>然后方程就可以分别在在模$p$和模$q$下考虑，然后好巧不巧，$q$也是$4k+3$型素数。就可以解模$p$的二次同余方程。得到$t_i$，然后根据$t_i$是否为模$N$的二次剩余来得到$m_i$。然后这里非常巧的是，$a$是模$p$的非二次剩余。因为$a$是模$N$的二次剩余，所以$a$是模$q$的非二次剩余。解得$t_i$会得到两个解，但是随便用一个就行了，因为他们模$p$要么均为二次剩余，要么均不为二次剩余，这是因为考虑方程：</p>
+<p>$$-x^2 + c_i x + a &#x3D; 0$$</p>
+<p>由韦达定理，$x_1 x_2 &#x3D; -a$，所以</p>
+<p>$$x_1^{\frac{p-1}{2}} x_2^{\frac{p-1}{2}} \equiv (-a)^{\frac{p-1}{2}} \equiv (-1)^{2k+1} a^{\frac{p-1}{2}} \equiv 1 \pmod{p}$$</p>
+<p>逐一求解，就能得到flag。代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">72271787633166084700895603235291055045699965307538401174867474485084272711938364003794151073975875159886045553516299177522950407802715116792937858353646755246888532333536918663888208381012106370000886903776721867958523682675624556576505534100750339626081218194389244007622749982917071344697799413034317147013</span></span><br><span class="line"></span><br><span class="line">p = <span class="number">7690745050590286968025665448815927548186441771518218204702842288098845344789340509868897149374937793107491606741591691437711395848517107039674900831427939</span></span><br><span class="line">q = <span class="number">9397241380094769307017158485931177341961951476061947013977394739417988689050439874435488908822482074028128151771446818457295188445665208696820950505470967</span></span><br><span class="line"></span><br><span class="line">E = </span><br><span class="line"></span><br><span class="line">a, c_list = E</span><br><span class="line"></span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(p))</span><br><span class="line"></span><br><span class="line">m_list = []</span><br><span class="line"><span class="keyword">for</span> ci <span class="keyword">in</span> c_list:</span><br><span class="line">    f = ci * x - x^<span class="number">2</span> + a</span><br><span class="line">    xi = f.roots()</span><br><span class="line">    <span class="keyword">if</span> (kronecker(xi[<span class="number">0</span>], p) == <span class="number">1</span>):</span><br><span class="line">        m_list.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        m_list.append(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">m = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> m_list)</span><br><span class="line">m = <span class="built_in">int</span>(m, <span class="number">2</span>)</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+
+<p>得到flag为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;_Cocks_18e_5chEm3&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Marjan"><a href="#Marjan" class="headerlink" title="Marjan"></a>Marjan</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目基于椭圆曲线上的数字签名。</p>
+<p>给定256位素数$p$，在$\mathbb{Z}_p$上定义椭圆曲线</p>
+<p>$$E: y^2 &#x3D; x^3 + a x + b$$</p>
+<p>其中$a, b$已知。记椭圆曲线$E$的阶为$n$。</p>
+<p>在$E$上选取一个生成元$G$，然后生成倍点$P &#x3D; d G$，其中$G, P$已知。远程有如下选项可以互动：</p>
+<p><strong>签名算法</strong></p>
+<ol>
+<li>生成231位随机数$k_0, k_1$</li>
+<li>计算椭圆曲线上的倍点$R &#x3D; k_0 G, S &#x3D; k_1 G$</li>
+<li>令$r$和$s$分别为$R$和$S$的横坐标，保证$r$和$s$均不为0</li>
+<li>计算消息$m$的哈希值$h &#x3D; H(m)$</li>
+<li>计算$t &#x3D; k_0^{-1} (h r - d s) \bmod n$</li>
+<li>返回签名$(r, s, t)$</li>
+</ol>
+<p><strong>验签算法</strong></p>
+<ol>
+<li>计算消息$m$的哈希值$h &#x3D; H(m)$</li>
+<li>计算$u &#x3D; h r t ^{-1} \bmod n$</li>
+<li>计算$v &#x3D; s t ^{-1} \bmod n$</li>
+<li>计算椭圆曲线上的倍点$R &#x3D; u G - v P$</li>
+<li>验证点$R$的横坐标是否为$r$</li>
+</ol>
+<p><strong>对指定消息的加密算法（没啥卵用）</strong></p>
+<ol>
+<li>将flag字符串拆成两部分，并分别转换成整数$m_1, m_2$</li>
+<li>生成随机数$e$，并计算倍点$Q &#x3D; e P$</li>
+<li>记点$Q$的横坐标和纵坐标分别为$e_1$和$e_2$</li>
+<li>记$c_1 &#x3D; e_1 m_1, c2 &#x3D; e_2 m_2$，返回$c_1, c_2, e G$</li>
+</ol>
+<p>我们的目标是对于一个给定的消息，给出其签名。如果我们给出的签名能通过上面的验签算法，就能得到flag。</p>
+<h3 id="我的解答-1"><a href="#我的解答-1" class="headerlink" title="我的解答"></a>我的解答</h3><p>要对消息进行签名的话，如果能知道倍数$d$就行了。</p>
+<p>而题目中签名所用的随机数$k_0$仅有231位，区别于阶$n$的255位，那么自然想到把变成HNP问题，高位为0的情形：</p>
+<p>[HNP] 一类基于各种DSA的HNP问题求解 - ZM.J的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/581146119">https://zhuanlan.zhihu.com/p/581146119</a></p>
+<p>直接参考高位为0的情况就行了。令</p>
+<p>$$(k’, h’, d’, r’, s’) &#x3D; (k, hr, d, s, t)$$</p>
+<p>即可套用格求解。</p>
+<p>但是当时做的时候，重新推了一下公式：因为一开始他那个代码写得似乎像是每组$k$的低24位相等且未知，所以先要把固定的低位消掉，再去做低位为0的情况……写着写着才发现这TMD不对劲。然后构造格，就也可以求出倍数$d$来。然后根据他的签名步骤弄出已知消息的签名出来即可。中间可能因为$n$不是素数而导致的模逆不存在报错等需要重新运行代码若干次以赌人品。</p>
+<p>然后这题还有一个搞心态的地方：在我们输入任意消息，服务器去求消息的哈希的时候，他奶奶的，会拿输入消息加上一个回车的值丢进去算哈希，那是真的牛批！我当时做的时候，说在调试的时候怎么调都调不通，原来是服务器上他妈的要加一个回车……无力吐槽……</p>
+<p>代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">from</span> sage.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># self.conn = process([&#x27;sage&#x27;, &#x27;another_2.sage&#x27;])</span></span><br><span class="line">        self.conn = remote(<span class="string">&#x27;06.cr.yp.toc.tf&#x27;</span>, <span class="number">13337</span>)</span><br><span class="line">        self.p = <span class="number">114863632180633827211184132915225798242263961691870412740605315763112513729991</span></span><br><span class="line">        self.A = -<span class="number">3</span></span><br><span class="line">        self.B = <span class="number">105675527217961035404524512435875047840495516468907806313576241823653895562912</span></span><br><span class="line">        self.E = EllipticCurve(GF(self.p), [self.A, self.B])</span><br><span class="line">        self.order = self.E.order()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_pubkey</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;P&#x27;</span>)</span><br><span class="line">        self.conn.recvuntil(<span class="string">&#x27;| pkey = &#x27;</span>)</span><br><span class="line">        s = self.conn.recvline().strip().decode()[<span class="number">1</span>:-<span class="number">1</span>]</span><br><span class="line">        x, y, z = <span class="built_in">map</span>(<span class="built_in">int</span>, s.split(<span class="string">&#x27;:&#x27;</span>))</span><br><span class="line">        self.P = self.E(x, y)</span><br><span class="line"></span><br><span class="line">        self.conn.recvuntil(<span class="string">&#x27;| G = &#x27;</span>)</span><br><span class="line">        s = self.conn.recvline().strip().decode()[<span class="number">1</span>:-<span class="number">1</span>]</span><br><span class="line">        x, y, z = <span class="built_in">map</span>(<span class="built_in">int</span>, s.split(<span class="string">&#x27;:&#x27;</span>))</span><br><span class="line">        self.G = self.E(x, y)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_recv</span>(<span class="params">self</span>):</span><br><span class="line">        msg = <span class="string">b&#x27;1&#x27;</span></span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;S&#x27;</span>)</span><br><span class="line">        self.conn.sendline(msg)</span><br><span class="line">        self.conn.recvuntil(<span class="string">&#x27;| sgn = &#x27;</span>)</span><br><span class="line">        r, s, t = <span class="built_in">eval</span>(self.conn.recvline())</span><br><span class="line">        h = bytes_to_long(sha256(msg+<span class="string">b&#x27;\n&#x27;</span>).digest())</span><br><span class="line">        <span class="keyword">return</span> h, r, s, t</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_abc</span>(<span class="params">self, params0, paramsi</span>):</span><br><span class="line">        h0, r0, s0, t0 = params0</span><br><span class="line">        hi, ri, si, ti = paramsi</span><br><span class="line">        A = (s0 * inverse_mod(t0, self.order) - si * inverse_mod(ti, self.order)) % self.order</span><br><span class="line">        B = <span class="number">1</span></span><br><span class="line">        C = (h0 * r0 * inverse_mod(t0, self.order) - hi * ri * inverse_mod(ti, self.order)) % self.order</span><br><span class="line">        <span class="keyword">return</span> A, B, C</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_alphabetagamma</span>(<span class="params">self, ABC1, ABCi</span>):</span><br><span class="line">        A1, B1, C1 = ABC1</span><br><span class="line">        Ai, Bi, Ci = ABCi</span><br><span class="line">        alphai = Bi * inverse_mod(Ai, self.order) % self.order</span><br><span class="line">        betai = -B1 * inverse_mod(A1, self.order) % self.order</span><br><span class="line">        gammai = (Ci * inverse_mod(Ai, self.order) - C1 * inverse_mod(A1, self.order)) % self.order</span><br><span class="line">        <span class="keyword">return</span> alphai, betai, gammai</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_uv</span>(<span class="params">self, abg</span>):</span><br><span class="line">        alpha, beta, gamma = abg</span><br><span class="line">        u = (-beta * inverse_mod(alpha, self.order)) % self.order</span><br><span class="line">        v = gamma * inverse_mod(alpha, self.order) % self.order</span><br><span class="line">        <span class="keyword">return</span> u, v</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_sign</span>(<span class="params">self</span>):</span><br><span class="line">        original_msg = <span class="string">b&#x27;I love all cryptographers!!!&#x27;</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">sign</span>(<span class="params">msg, skey</span>):</span><br><span class="line">            _tail = bytes_to_long(sha256(<span class="built_in">str</span>(skey).encode(<span class="string">&#x27;utf-8&#x27;</span>)).digest()) % (<span class="number">1</span> &lt;&lt; <span class="number">24</span>)</span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                K = [randint(<span class="number">1</span>, <span class="number">2</span>**<span class="number">255</span>) // (<span class="number">1</span> &lt;&lt; <span class="number">24</span>) + _tail <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="string">&#x27;__&#x27;</span>]</span><br><span class="line">                r, s = <span class="built_in">int</span>((K[<span class="number">0</span>] * self.G).xy()[<span class="number">0</span>]), <span class="built_in">int</span>((K[<span class="number">1</span>] * self.G).xy()[<span class="number">1</span>])</span><br><span class="line">                <span class="keyword">if</span> r * s != <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            h = bytes_to_long(sha256(msg).digest())</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;h = &#125;</span>&#x27;</span>)</span><br><span class="line">            t = inverse(K[<span class="number">0</span>], self.order) * (h * r - s * skey) % self.order</span><br><span class="line">            <span class="keyword">assert</span> (K[<span class="number">0</span>] * t - (h * r - s * skey)) == <span class="number">0</span></span><br><span class="line">            <span class="keyword">return</span> (r, s, t)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">verify</span>(<span class="params">msg, pkey, _sign</span>):</span><br><span class="line">            r, s, t = [<span class="built_in">int</span>(_) % self.order <span class="keyword">for</span> _ <span class="keyword">in</span> _sign]</span><br><span class="line">            h = bytes_to_long(sha256(msg).digest())</span><br><span class="line">            u = <span class="built_in">int</span>(h * r * inverse(t, self.order) % self.order)</span><br><span class="line">            v = <span class="built_in">int</span>(s * inverse(t, self.order) % self.order)</span><br><span class="line">            _R = (u * self.G - v * pkey).xy()[<span class="number">0</span>]</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;_R = &#125;</span>&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;r = &#125;</span>&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> _R == r</span><br><span class="line">        r, s, t = sign(original_msg, self.sk_)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Local verify:&#x27;</span>, verify(original_msg, self.P, (r, s, t)))</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;G&#x27;</span>)</span><br><span class="line">        self.conn.sendline(<span class="string">f&#x27;<span class="subst">&#123;r&#125;</span>,<span class="subst">&#123;s&#125;</span>,<span class="subst">&#123;t&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_sk</span>(<span class="params">self</span>):</span><br><span class="line">        </span><br><span class="line">        n = <span class="number">32</span></span><br><span class="line">        param_list = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;i = &#125;</span>&#x27;</span>)</span><br><span class="line">            h, r, s, t = self.gao_recv()</span><br><span class="line">            param_list.append((h, r, s, t))</span><br><span class="line">        </span><br><span class="line">        ABC1 = self.get_abc(param_list[<span class="number">0</span>], param_list[<span class="number">1</span>])</span><br><span class="line">        A1, B1, C1 = ABC1</span><br><span class="line"></span><br><span class="line">        M = [[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        M[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        M[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">            ABCi = self.get_abc(param_list[<span class="number">0</span>], param_list[i])</span><br><span class="line">            alphai, betai, gammai = self.get_alphabetagamma(ABC1, ABCi)</span><br><span class="line">            u, v = self.get_uv((alphai, betai, gammai))</span><br><span class="line">            M[<span class="number">0</span>][i] = v</span><br><span class="line">            M[<span class="number">1</span>][i] = u</span><br><span class="line">            M[i][i] = self.order</span><br><span class="line">        </span><br><span class="line">        weights = [<span class="number">2</span>**(<span class="number">255</span>-<span class="number">24</span>)] + [<span class="number">1</span>] * (n-<span class="number">1</span>)</span><br><span class="line">        M = matrix(ZZ, M) * diagonal_matrix(weights)</span><br><span class="line">        v = M.BKZ(block_size=<span class="number">12</span>)[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> (v[<span class="number">0</span>] &lt; <span class="number">0</span>):</span><br><span class="line">            v = -v</span><br><span class="line">        deltak1_ = v[<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        self.sk_ = (C1 - B1 * deltak1_) * inverse_mod(A1, self.order) % self.order</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        self.gao_pubkey()</span><br><span class="line">        self.gao_sk()</span><br><span class="line">        self.gao_sign()</span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    g = Gao()</span><br><span class="line">    g.gao()</span><br></pre></td></tr></table></figure>
+
+<p>获取flag为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;L4T71c3_atTAck5_a9A!nS7_ECDSA!&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>然而，这道题还有一个比较鬼畜的地方：该题只有在<strong>签名算法</strong>检查了$r$和$s$的非平凡性，没有在<strong>验签算法</strong>中检查！！当时在做这道题的时候，都通过HNP求出倍数$d$了，再回过头来去看它的签名和验签算法才发现的这个猫腻，然后当时就觉得这里面肯定不对劲，不过当时想着都到那一步了，就没必要再去折腾了……</p>
+<p>所以说，我们回顾验签算法，说白了就是检查：</p>
+<p>$$R &#x3D; u G - v P &#x3D; (h r t ^{-1} - s t^{-1} d) G$$</p>
+<p>的横坐标是否为$r$</p>
+<p>先假设$R&#x3D;O$，那么可以得到一组$(0, 0, 1)$满足上式，但是实际交互的时候会产生一个问题：因为无穷远点的齐次坐标形式是$(0 : 1 : 0)$，是不能对它应用<code>xy()</code>方法的，因为这会导致除以零异常。 </p>
+<p>那我们退一步，假设$R&#x3D;G$，那么此时$r$已知，令$s &#x3D; 0$以消除未知量$d$对签名式的影响，然后令$hrt^{-1} &#x3D; 1$，即$t &#x3D; hr$即可。结果您猜怎么着？这样还就真行了！而且不需要写交互代码，只需要从远程得到生成元$G$，然后手搓构造交上去就行了！那真是盖了帽儿了我的老卑鄙！构造代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"></span><br><span class="line">p = <span class="number">114863632180633827211184132915225798242263961691870412740605315763112513729991</span></span><br><span class="line">A = -<span class="number">3</span></span><br><span class="line">B = <span class="number">105675527217961035404524512435875047840495516468907806313576241823653895562912</span></span><br><span class="line">E = EllipticCurve(GF(p), [A, B])</span><br><span class="line"></span><br><span class="line">n = E.order()</span><br><span class="line"></span><br><span class="line">original_msg = <span class="string">&#x27;I love all cryptographers!!!&#x27;</span></span><br><span class="line">msg = original_msg.encode()</span><br><span class="line">h = bytes_to_long(sha256(msg).digest())</span><br><span class="line"></span><br><span class="line">Gx = <span class="number">28071498537525775917654662519370445472757062171881667597321861083632963432687</span></span><br><span class="line"><span class="comment"># Gy = 2246985053428078910721122714095306631783741268269376734366735762893909876497</span></span><br><span class="line"></span><br><span class="line">r = Gx</span><br><span class="line">s = <span class="number">0</span></span><br><span class="line">t = (h * r) % n</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;r&#125;</span>,<span class="subst">&#123;s&#125;</span>,<span class="subst">&#123;t&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Byeween"><a href="#Byeween" class="headerlink" title="Byeween"></a>Byeween</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>需要在$\mathbb{Q}$上定义的一个随机椭圆曲线上，给定$Q$，找到所有$P$使得$2P &#x3D; Q$</p>
+<h3 id="我的解答-2"><a href="#我的解答-2" class="headerlink" title="我的解答"></a>我的解答</h3><p>应该就是把二倍点的公式往里面一套得到方程，然后求解就行了。</p>
+<p>不过坑爹的是，输入格式没有任何的指明。经过尝试，是要输入<code>x,y</code>的形式，譬如<code>504047401/36,11310647101325/216</code>，然后提交的结果如下：</p>
+<ul>
+<li>提交的点不符合格式或不在给定椭圆曲线上：无效，退出！</li>
+<li>提交的点在给定椭圆曲线上，但是两倍不是$Q$：没有任何的回显</li>
+<li>提交的点在给定椭圆曲线上，而且两倍是$Q$：回显当前已提交的点的个数</li>
+</ul>
+<p>求解代码如下（懒得写交互代码了）：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a = - <span class="number">198166535281</span></span><br><span class="line">b = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">Px = <span class="number">1278302329349797852690249</span>/<span class="number">364089267083610000</span></span><br><span class="line">Py = <span class="number">1433610390621693549402395951257392443</span>/<span class="number">219690771988642815141000000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = var(<span class="string">&#x27;x, y&#x27;</span>)</span><br><span class="line"></span><br><span class="line">s = (<span class="number">3</span> * x^<span class="number">2</span> + a) / (<span class="number">2</span> * y)</span><br><span class="line"></span><br><span class="line">xr = s^<span class="number">2</span> - <span class="number">2</span> * x</span><br><span class="line">yr = - y + s * (x - xr)</span><br><span class="line"></span><br><span class="line">sol = solve([xr == Px, yr == Py], x, y, solution_dict=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> sol:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;s[x]&#125;</span>,<span class="subst">&#123;s[y]&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;H4lVin9_pO!ntS_0n_3lLipT1C_cuRve5!&#125;</span><br></pre></td></tr></table></figure>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 已经结束咧 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> Goodbye --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/2023/07/13/cryptoctf-2023-hard-2/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>CryptoCTF 2023 hard分类 团队解题writeup 之二</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2023/07/12/cryptoctf-2023-medium-4/">
+        <span>CryptoCTF 2023 medium分类 团队解题writeup 之四</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2023/07/13/cryptoctf-2023-hard-1/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Big"><span class="toc-number">1.</span> <span class="toc-text">Big</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94"><span class="toc-number">1.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Marjan"><span class="toc-number">2.</span> <span class="toc-text">Marjan</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-1"><span class="toc-number">2.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Byeween"><span class="toc-number">3.</span> <span class="toc-text">Byeween</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-2"><span class="toc-number">3.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
+      </div>
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2024 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        John Doe
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >
