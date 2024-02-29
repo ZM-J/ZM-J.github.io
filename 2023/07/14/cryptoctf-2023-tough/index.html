@@ -294,7 +294,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-02-27
+      Edited on:&nbsp;2024-02-29
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -362,45 +362,45 @@
 
   
   <div class="mdui-card-content mdui-typo mdui-p-x-4">
-    <p>这次tough分类真的也就还好，没有那种很长的算法需要审计，思维上也没有到那种难到抓狂的，也没有涉及太高级的数学工具，对算力也没有啥很苛刻的要求。</p>
+    <p>这次 tough 分类真的也就还好，没有那种很长的算法需要审计，思维上也没有到那种难到抓狂的，也没有涉及太高级的数学工具，对算力也没有啥很苛刻的要求。</p>
 <p>所以综合下来，跟去年以及前年的最高难度相比，真的也就还好。</p>
 <h2 id="Slowsum"><a href="#Slowsum" class="headerlink" title="Slowsum"></a>Slowsum</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目里面所给出的系统巨复杂，感觉就是用来把人绕晕的。</p>
-<p>首先$q &#x3D; 113$，整套系统基于$\mathbb{F}_q$中的多项式。</p>
-<p>一开始我们可以输入变量的个数$n$以及多项式$f$的次数$d$，需要满足$n \ge 5, d \ge 3, n d&#x2F;q &lt; 0.1$</p>
-<p>我们可用的变量为$x_0, x_1, \ldots, x_{n-1}$</p>
-<p>然后我们需要输入这个$d$次多项式$f(x_0, x_1, \ldots, x_{n-1})$。记</p>
+<p>首先 $q &#x3D; 113$，整套系统基于 $\mathbb{F}_q$ 中的多项式。</p>
+<p>一开始我们可以输入变量的个数 $n$ 以及多项式 $f$ 的次数 $d$，需要满足 $n \ge 5, d \ge 3, n d&#x2F;q &lt; 0.1$</p>
+<p>我们可用的变量为 $x_0, x_1, \ldots, x_{n-1}$</p>
+<p>然后我们需要输入这个 $d$ 次多项式 $f(x_0, x_1, \ldots, x_{n-1})$。记</p>
 <p>$$g &#x3D; \sum_{x_0 &#x3D; 0}^{1}\sum_{x_1 &#x3D; 0}^{1} \ldots \sum_{x_{n-1} &#x3D; 0}^{1} f(x_0, x_1, \ldots, x_{n-1})$$</p>
-<p>然后我们需要输入一个数$g’ \ne g$。</p>
-<p>然后我们需要输入$n$个一元多项式$p_0, p_1, \ldots, p_{n-1}$，以及$n$个数$h_0, h_1, \ldots, h_{n-1}$，满足如下条件：</p>
+<p>然后我们需要输入一个数 $g’ \ne g$。</p>
+<p>然后我们需要输入 $n$ 个一元多项式 $p_0, p_1, \ldots, p_{n-1}$，以及 $n$ 个数 $h_0, h_1, \ldots, h_{n-1}$，满足如下条件：</p>
 <ul>
-<li>对所有的$i &#x3D; 0, 1, \ldots, n-1$，多项式$p_i$的度数需要不大于$d$</li>
-<li>对所有的$i &#x3D; 0, 1, \ldots, n-1$，记多项式$p_i$的系数之和为$s_{i}$，则$h_i &#x3D; s_i^{(q-1) &#x2F; 2 - s_i} \bmod q$</li>
-<li>对$i &#x3D; 0$，$p_i(0) + p_i(1) &#x3D; g’$</li>
-<li>对$i &#x3D; 1, 2, \ldots, n - 1$，$p_i(0) + p_i(1) &#x3D; p_{i-1}(h_{i-1})$</li>
+<li>对所有的 $i &#x3D; 0, 1, \ldots, n-1$，多项式 $p_i$ 的度数需要不大于 $d$</li>
+<li>对所有的 $i &#x3D; 0, 1, \ldots, n-1$，记多项式 $p_i$ 的系数之和为 $s_{i}$，则 $h_i &#x3D; s_i^{(q-1) &#x2F; 2 - s_i} \bmod q$</li>
+<li>对 $i &#x3D; 0$，$p_i(0) + p_i(1) &#x3D; g’$</li>
+<li>对 $i &#x3D; 1, 2, \ldots, n - 1$，$p_i(0) + p_i(1) &#x3D; p_{i-1}(h_{i-1})$</li>
 <li>$f(h_0, h_1, \ldots, h_{n-1}) &#x3D; p_{n-1}(h_{n-1})$</li>
 </ul>
-<p>如果所输入的所有多项式和值能通过上面的检查的话，那么我们就会得到flag。</p>
-<h3 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h3><p>所以这道题tough的一个点在于不能被他这么多的输入，以及这么多的条件判断给绕晕。</p>
-<p>往简单的想：我们可以就令$(n, d) &#x3D; (5, 3)$，然后令所有的$p_i \equiv 0$，那么由$h_i$的计算式，所有的$h_i$也会等于0。</p>
-<p>然后这样$g’$也会是0了。这样一路看下来，只需要保证最后一个条件，$f(h_0, h_1, \ldots, h_{n-1}) &#x3D; p_{n-1}(h_{n-1}) &#x3D; 0$，以及$g \ne 0$，$\deg f &#x3D; 3$了。</p>
-<p>因为所有的$h_i$都会是0，所以实际上最后一个条件可以进一步写为：</p>
+<p>如果所输入的所有多项式和值能通过上面的检查的话，那么我们就会得到 flag。</p>
+<h3 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h3><p>所以这道题 tough 的一个点在于不能被他这么多的输入，以及这么多的条件判断给绕晕。</p>
+<p>往简单的想：我们可以就令 $(n, d) &#x3D; (5, 3)$，然后令所有的 $p_i \equiv 0$，那么由 $h_i$ 的计算式，所有的 $h_i$ 也会等于 0。</p>
+<p>然后这样 $g’$ 也会是 0 了。这样一路看下来，只需要保证最后一个条件，$f(h_0, h_1, \ldots, h_{n-1}) &#x3D; p_{n-1}(h_{n-1}) &#x3D; 0$，以及 $g \ne 0$，$\deg f &#x3D; 3$ 了。</p>
+<p>因为所有的 $h_i$ 都会是 0，所以实际上最后一个条件可以进一步写为：</p>
 <p>$$f(0, 0, \ldots, 0) &#x3D; 0$$</p>
-<p>那很简单，也就是说只需要保证常数项为0就行了。随便构造一个$f(x_0, x_1, \ldots, x_4) &#x3D; x_4^3$即可，此时$g &#x3D; 2^4 &#x3D; 16$</p>
+<p>那很简单，也就是说只需要保证常数项为 0 就行了。随便构造一个 $f(x_0, x_1, \ldots, x_4) &#x3D; x_4^3$ 即可，此时 $g &#x3D; 2^4 &#x3D; 16$</p>
 <p>只需要把这组无脑的答案提交上去就行了，代码如下：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> sage.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># self.conn = process([&#x27;sage&#x27;, &#x27;another.sage&#x27;])</span></span><br><span class="line">        self.conn = remote(<span class="string">&#x27;02.cr.yp.toc.tf&#x27;</span>, <span class="number">31337</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_d</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;D&#x27;</span>)</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;5,3&#x27;</span>)</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;x4^3&#x27;</span>)</span><br><span class="line">        self.g = <span class="number">16</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_c</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;C&#x27;</span>)</span><br><span class="line">        self.conn.sendline(<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">            self.conn.sendline(<span class="string">&#x27;0,0&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        self.gao_d()</span><br><span class="line">        self.gao_c()</span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    g = Gao()</span><br><span class="line">    g.gao()</span><br></pre></td></tr></table></figure>
 
-<p>得到flag为：</p>
+<p>得到 flag 为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;Rem3Mb3er_tH4t_F14t_5h4m1r_tR4nsf0rm4tiOn_n33Ds_A_g00D_r4Nd0m_Or4cLe!&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="ASIv2"><a href="#ASIv2" class="headerlink" title="ASIv2"></a>ASIv2</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/643106267">ASIv1</a>的基础上进行了加强。</p>
-<p>首先将flag转成三进制的012序列，记为${m_i}$，即$m_i \in {0, 1, 2}$，其中$i &#x3D; 1, 2, \ldots, l$</p>
-<p>生成一个$l^2 \times l$的012随机矩阵$R&#x3D;[r_{ij}]$，即$r_{ij} \in {0, 1, 2}$，该随机矩阵已知。</p>
-<p>然后还知道一个向量$s$，其中</p>
+<h2 id="ASIv2"><a href="#ASIv2" class="headerlink" title="ASIv2"></a>ASIv2</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目在 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/643106267">ASIv1</a> 的基础上进行了加强。</p>
+<p>首先将 flag 转成三进制的 012 序列，记为 ${m_i}$，即 $m_i \in {0, 1, 2}$，其中 $i &#x3D; 1, 2, \ldots, l$</p>
+<p>生成一个 $l^2 \times l$ 的 012 随机矩阵 $R&#x3D;[r_{ij}]$，即 $r_{ij} \in {0, 1, 2}$，该随机矩阵已知。</p>
+<p>然后还知道一个向量 $s$，其中</p>
 <p>$$s_i &#x3D; \left(\sum_{j&#x3D;1}^{l}{(r_{ij} + m_{j}) \bmod 3}\right) \bmod 2$$</p>
-<p>对于$i &#x3D; 1, 2, \ldots, l^2$</p>
-<p>已知$R, s$，求flag。</p>
-<h3 id="我的解答-1"><a href="#我的解答-1" class="headerlink" title="我的解答"></a>我的解答</h3><p>这里的难点是，在每一项$r_{ij} + m_{j}$计算完之后是模3，完了求和的时候结果却给出来的是模2。所以让人不知道到底是在$GF(3)$下想问题还是在$GF(2)$下想问题</p>
-<p>然后我的思路是，有没有一种可能，将$f(a, b) &#x3D; ((a + b) \bmod 3) \bmod 2$的结果用一个$GF(2)$下的关于$a$和$b$的运算表示？首先我们先画出$f(a, b)$的真值表：</p>
+<p>对于 $i &#x3D; 1, 2, \ldots, l^2$</p>
+<p>已知 $R, s$，求 flag。</p>
+<h3 id="我的解答-1"><a href="#我的解答-1" class="headerlink" title="我的解答"></a>我的解答</h3><p>这里的难点是，在每一项 $r_{ij} + m_{j}$ 计算完之后是模 3，完了求和的时候结果却给出来的是模 2。所以让人不知道到底是在 $GF(3)$ 下想问题还是在 $GF(2)$ 下想问题</p>
+<p>然后我的思路是，有没有一种可能，将 $f(a, b) &#x3D; ((a + b) \bmod 3) \bmod 2$ 的结果用一个 $GF(2)$ 下的关于 $a$ 和 $b$ 的运算表示？首先我们先画出 $f(a, b)$ 的真值表：</p>
 <table>
 <thead>
 <tr>
@@ -455,16 +455,16 @@
 <td>1</td>
 </tr>
 </tbody></table>
-<p><em>好像知乎的markdown在表格里套公式就会渲染不出东西来，所以只能这样应付一下了，大家明白意思就行</em></p>
-<p>说白了，$GF(2)$下关于$a$和$b$的运算，性质比较好的就是$A a b + B a + C b + D$这种的，那试了一下，不能写出这么好的形式的。而且说白了，上面的$a$和$b$也是模3意义下的等价类。</p>
-<p>那么有没有办法把未知的$m_j$给强行弄到$GF(2)$上捏？这个时候我想到了数字电路里面有一个<strong>38译码器</strong>，它把输入的3位二进制位变成了8位二进制位，写成一个函数的形式就是：</p>
+<p><em>好像知乎的 markdown 在表格里套公式就会渲染不出东西来，所以只能这样应付一下了，大家明白意思就行</em></p>
+<p>说白了，$GF(2)$ 下关于 $a$ 和 $b$ 的运算，性质比较好的就是 $A a b + B a + C b + D$ 这种的，那试了一下，不能写出这么好的形式的。而且说白了，上面的 $a$ 和 $b$ 也是模 3 意义下的等价类。</p>
+<p>那么有没有办法把未知的 $m_j$ 给强行弄到 $GF(2)$ 上捏？这个时候我想到了数字电路里面有一个 <strong>38 译码器</strong>，它把输入的 3 位二进制位变成了 8 位二进制位，写成一个函数的形式就是：</p>
 <p>$$g(x) &#x3D; ([x \ne 0], [x \ne 1], \ldots, [x \ne 7])$$</p>
-<p>其中$[t]$为判断函数，如果表达式$t$为真则$[t]$取1；反之，如果表达式$t$为假则$[t]$取0。这样结果就变成了一个每个分量为$GF(2)$中元素的8维向量。</p>
-<p>那么类似地，由于$m_{j} \in {0, 1, 2}$，我们就可以把未知的$m_{j}$尝试表示成$(x_{j0}, x_{j1}, x_{j2})$，其中$x_{jk} &#x3D; [m_j &#x3D; k]$。</p>
-<p>然后因为$m_j$只能为$0, 1, 2$中的某个数，所以我们马上就有$x_{j0} + x_{j1} + x_{j2} &#x3D; 1$。</p>
-<p>然后我们就能对$f(r_{ij}, m_{j})$的结果进行定制化的一些分析了：</p>
+<p>其中 $[t]$ 为判断函数，如果表达式 $t$ 为真则 $[t]$ 取 1；反之，如果表达式 $t$ 为假则 $[t]$ 取 0。这样结果就变成了一个每个分量为 $GF(2)$ 中元素的 8 维向量。</p>
+<p>那么类似地，由于 $m_{j} \in {0, 1, 2}$，我们就可以把未知的 $m_{j}$ 尝试表示成 $(x_{j0}, x_{j1}, x_{j2})$，其中 $x_{jk} &#x3D; [m_j &#x3D; k]$。</p>
+<p>然后因为 $m_j$ 只能为 $0, 1, 2$ 中的某个数，所以我们马上就有 $x_{j0} + x_{j1} + x_{j2} &#x3D; 1$。</p>
+<p>然后我们就能对 $f(r_{ij}, m_{j})$ 的结果进行定制化的一些分析了：</p>
 <ul>
-<li>如果$r_{ij} &#x3D; 0$，那么可得如下真值表：</li>
+<li>如果 $r_{ij} &#x3D; 0$，那么可得如下真值表：</li>
 </ul>
 <table>
 <thead>
@@ -494,9 +494,9 @@
 <td>0</td>
 </tr>
 </tbody></table>
-<p>写成线性表达式就是$f(r_{ij}, m_{j}) &#x3D; x_{j1}$</p>
+<p>写成线性表达式就是 $f(r_{ij}, m_{j}) &#x3D; x_{j1}$</p>
 <ul>
-<li>如果$r_{ij} &#x3D; 1$，那么可得如下真值表：</li>
+<li>如果 $r_{ij} &#x3D; 1$，那么可得如下真值表：</li>
 </ul>
 <table>
 <thead>
@@ -526,9 +526,9 @@
 <td>0</td>
 </tr>
 </tbody></table>
-<p>写成线性表达式就是$f(r_{ij}, m_{j}) &#x3D; x_{j0}$</p>
+<p>写成线性表达式就是 $f(r_{ij}, m_{j}) &#x3D; x_{j0}$</p>
 <ul>
-<li>如果$r_{ij} &#x3D; 2$，那么可得如下真值表：</li>
+<li>如果 $r_{ij} &#x3D; 2$，那么可得如下真值表：</li>
 </ul>
 <table>
 <thead>
@@ -558,13 +558,13 @@
 <td>1</td>
 </tr>
 </tbody></table>
-<p>写成线性表达式就是$f(r_{ij}, m_{j}) &#x3D; x_{j2}$</p>
-<p>然后，由于$x_{j0} + x_{j1} + x_{j2} &#x3D; 1$，所以进一步可以将$f(r_{ij}, m_{j})$写成$1 + x_{j1} + x_{j2}$</p>
-<p>然后就可以把$s_i$写成关于$x_{j1}, x_{j2}$的线性方程组，并解得即可。因为我们一共有$l^2$组数据，所以挑$2l$组出来解即可。</p>
-<p>解出$x_{j1}, x_{j2}$之后，再弄回$m_j$，再弄回flag即可。代码如下：</p>
+<p>写成线性表达式就是 $f(r_{ij}, m_{j}) &#x3D; x_{j2}$</p>
+<p>然后，由于 $x_{j0} + x_{j1} + x_{j2} &#x3D; 1$，所以进一步可以将 $f(r_{ij}, m_{j})$ 写成 $1 + x_{j1} + x_{j2}$</p>
+<p>然后就可以把 $s_i$ 写成关于 $x_{j1}, x_{j2}$ 的线性方程组，并解得即可。因为我们一共有 $l^2$ 组数据，所以挑 $2l$ 组出来解即可。</p>
+<p>解出 $x_{j1}, x_{j2}$ 之后，再弄回 $m_j$，再弄回 flag 即可。代码如下：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;output.txt&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read().splitlines()</span><br><span class="line"></span><br><span class="line">R = <span class="built_in">eval</span>(s[<span class="number">0</span>][<span class="number">4</span>:])</span><br><span class="line">S = <span class="built_in">eval</span>(s[<span class="number">1</span>][<span class="number">4</span>:])</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">len</span>(R[<span class="number">0</span>])</span><br><span class="line">A = []</span><br><span class="line">b = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span> * n):</span><br><span class="line">    Aline = []</span><br><span class="line">    bline = S[i]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">if</span> (R[i][j] == <span class="number">0</span>):</span><br><span class="line">            Aline.extend([<span class="number">1</span>, <span class="number">0</span>])</span><br><span class="line">        <span class="keyword">elif</span> (R[i][j] == <span class="number">1</span>):</span><br><span class="line">            Aline.extend([<span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">            bline ^= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> (R[i][j] == <span class="number">2</span>):</span><br><span class="line">            Aline.extend([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">    A.append(Aline)</span><br><span class="line">    b.append(bline)</span><br><span class="line"></span><br><span class="line">A = matrix(GF(<span class="number">2</span>), A)</span><br><span class="line">b = vector(GF(<span class="number">2</span>), b)</span><br><span class="line"><span class="built_in">print</span>(A.det())</span><br><span class="line">x = A.solve_right(b)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line">ans = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> (x[<span class="number">2</span>*i] == <span class="number">0</span>) <span class="keyword">and</span> (x[<span class="number">2</span>*i+<span class="number">1</span>] == <span class="number">0</span>):</span><br><span class="line">        ans.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> (x[<span class="number">2</span>*i] == <span class="number">1</span>) <span class="keyword">and</span> (x[<span class="number">2</span>*i+<span class="number">1</span>] == <span class="number">0</span>):</span><br><span class="line">        ans.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> (x[<span class="number">2</span>*i] == <span class="number">0</span>) <span class="keyword">and</span> (x[<span class="number">2</span>*i+<span class="number">1</span>] == <span class="number">1</span>):</span><br><span class="line">        ans.append(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">&#x27;GG&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">ans = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> ans)</span><br><span class="line">ans = long_to_bytes(<span class="built_in">int</span>(ans, <span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(ans)</span><br></pre></td></tr></table></figure>
 
-<p>得到flag为：</p>
+<p>得到 flag 为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;4n0Th3R_47tACkER_!n_Vi5A!&#125;</span><br></pre></td></tr></table></figure>
 
   </div>
