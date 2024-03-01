@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+    
+        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            李宏毅强化学习个人笔记 - 基于策略的方法（学习actor） | 春勃
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">春勃</a>
+    <a href="/" class="header-subtitle mdui-typo-headline">반갑습니다</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">tools</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/icons/avatar.jpg"/>
+                
+            </div>
+            <div class="sidebar-author-name">ZM-J</div>
+            <div class="sidebar-description">丧失年轻，勿失年华</div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
+                    <a href="mailto:zhumj7@mail2.sysu.edu.cn" class="mdui-chip-title">E-Mail</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/ZM-J" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://sh1k4ku.github.io/" class="mdui-list-item mdui-ripple">
+                            石卡酷
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://tover.xyz/" class="mdui-list-item mdui-ripple">
+                            套娃
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://jayxv.github.io/" class="mdui-list-item mdui-ripple">
+                            V
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://love-deng-feng.top/" class="mdui-list-item mdui-ripple">
+                            等风
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://github.com/kokifish/CTF-detailed-writeups/" class="mdui-list-item mdui-ripple">
+                            沛公
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2023/03/21/reinforcement-learning-hungyi-2/">李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-03-21
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）&url=http://example.com/2023/03/21/reinforcement-learning-hungyi-2/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）&url=http://example.com/2023/03/21/reinforcement-learning-hungyi-2/&via=ZM-J" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2023/03/21/reinforcement-learning-hungyi-2/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/2023/03/21/reinforcement-learning-hungyi-2/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2023/03/21/reinforcement-learning-hungyi-2/&title=李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=春勃&title=李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）&summary=丧失年轻，勿失年华&pics=http://example.com/null&url=http://example.com/2023/03/21/reinforcement-learning-hungyi-2/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/2023/03/21/reinforcement-learning-hungyi-2/&text=李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<p>基于策略的方法，也就是学习 actor。换言之，也就是学习一个策略函数 $\pi$：该函数输入观测，输出动作。</p>
+<p><img src="/2-1.png" alt="一图流"></p>
+<h2 id="将神经网络作为-actor"><a href="#将神经网络作为-actor" class="headerlink" title="将神经网络作为 actor"></a>将神经网络作为 actor</h2><ul>
+<li>神经网络擅长拟合函数</li>
+<li>网络输入：机器的观测表示成向量或矩阵；</li>
+<li>网络输出：每个动作对应输出层的一个神经元；</li>
+</ul>
+<p><img src="/2-2.png" alt="一图流"></p>
+<h3 id="神经网络相较于查表的作为-actor-的好处"><a href="#神经网络相较于查表的作为-actor-的好处" class="headerlink" title="神经网络相较于查表的作为 actor 的好处"></a>神经网络相较于查表的作为 actor 的好处</h3><ul>
+<li><p>有“采样”的步骤，可以带来更多变的决策。譬如猜拳，会随机出锤子剪刀布。</p>
+</li>
+<li><p>譬如上面的打飞机，无法穷举所有的像素值，这种情况下建立表不现实。</p>
+</li>
+<li><p>神经网络泛化性好，可以举一反三。就算有些画面机器完全没有看过，也能够得到较好的结果（动作）。</p>
+</li>
+</ul>
+<h3 id="决定-actor-的好坏"><a href="#决定-actor-的好坏" class="headerlink" title="决定 actor 的好坏"></a>决定 actor 的好坏</h3><p>回顾监督学习：用 loss 来刻画所学到函数的质量。</p>
+<ul>
+<li>求网络参数 $\theta’$ 使得能够最小化总误差 $L$</li>
+<li>或者说，使得预测分布与目标（target）越近越好</li>
+</ul>
+<p>给定具有网络参数 $\theta$ 的 actor：$\pi_{\theta}(s)$，用该 actor 来玩游戏：</p>
+<ul>
+<li>每一步可以记为三元组：(观测, 动作, 奖励)</li>
+<li>$(s_1, a_1, r_1) \to (s_2, a_2, r_2) \to \ldots \to (s_T, a_T, r_T)$</li>
+<li>总奖励：$R_{\theta} &#x3D; \sum_{t&#x3D;1}^{T}{r_t}$</li>
+<li>不是要优化某一步的奖励，而是要优化总的奖励</li>
+<li><strong>就算用同样的参数 $\theta$，得到的奖励也会不同</strong><ul>
+<li>由于 actor 的动作是通过采样得到的，所以具有一定随机性</li>
+<li>环境本身也会具有随机性</li>
+<li>故而，$R_{\theta}$ 为一个随机变量</li>
+<li>记 $\bar{R}<em>{\theta}$ 为 $R</em>{\theta}$ 的期望，该期望值衡量了 actor（$\pi_{\theta}$）的好坏。希望该期望越大越好</li>
+</ul>
+</li>
+<li>一局游戏（episode）可被视为轨迹（trajectory）$\tau$<ul>
+<li>$\tau &#x3D; {s_1, a_1, r_1, s_2, a_2, r_2, \ldots, s_T, a_T, r_T}$</li>
+<li>此时可将总奖励记为 $R(\tau)&#x3D;\sum_{t&#x3D;1}^{T}{r_t}$</li>
+<li>只选择一个 actor 来玩游戏的话，纵使可能的结果会有许多种，但是最后只会看到一种游戏结果（只被采样到一个）<ul>
+<li>每个轨迹可能被采样的概率由 actor 的参数 $\theta$：$P(\tau|\theta)$（为什么这里用大写的 P？因为 <strong>注意到 $\tau$ 是一个随机变量</strong>）</li>
+<li>有些游戏场景会较常出现，有些场景会较少出现。</li>
+<li>此时累积奖励的期望可被写为 $\bar{R}<em>{\theta}&#x3D;\sum</em>{\tau}{R(\tau)P(\tau|\theta)}$</li>
+<li>也就是对所有游戏的可能 $\tau$ 求期望</li>
+<li>当然穷举所有的 $\tau$ 不可能，所以一般是用 actor $\pi_{\theta}$ 玩 $n$ 次游戏，得到 $n$ 个不同的轨迹 ${\tau^1, \tau^2, \ldots, \tau^N}$，也就是说从 $P(\tau|\theta)$ 中采样 $N$ 次（采样出的 $\tau$ 次数与概率成正比）</li>
+<li>也就是说，$\bar{R}<em>{\theta}&#x3D;\sum</em>{\tau}{R(\tau)P(\tau|\theta)} \approx 1&#x2F;N \sum_{n&#x3D;1}^{N}R(\tau^n)$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="选一个最好的函数（actor）"><a href="#选一个最好的函数（actor）" class="headerlink" title="选一个最好的函数（actor）"></a>选一个最好的函数（actor）</h3><p>问题描述：</p>
+<p>找参数 $\theta^*&#x3D;\arg\max_{\theta}{\bar{R}_{\theta}}$</p>
+<p>其中 $\bar{R}<em>{\theta}$ 为累积奖励的期望，定义遵循上文 $\bar{R}</em>{\theta}&#x3D;\sum_{\tau}{R(\tau)P(\tau|\theta)}$</p>
+<p>方法：梯度上升（由于求的是最大化）</p>
+<p>$$\theta^{k} \leftarrow \theta^{k-1} + \eta \nabla \bar{R}_{\theta^{k-1}}$$</p>
+<p>譬如，假设 $\theta$ 的参数为 $w_1, w_2, \ldots, b_1, \ldots$，那么 $\bar{R}<em>\theta$ 的偏微分 $\nabla \bar{R}</em>{\theta}$ 就是</p>
+<p>$$\nabla \bar{R}<em>{\theta} &#x3D; \begin{bmatrix} \partial \bar{R}</em>{\theta} &#x2F; \partial w_1 \ \partial \bar{R}<em>{\theta} &#x2F; \partial w_2 \ \vdots \ \partial \bar{R}</em>{\theta} &#x2F; \partial b_1 \ \vdots \end{bmatrix}$$</p>
+<p>梯度上升的实际计算</p>
+<p>由于</p>
+<p>$$\bar{R}<em>{\theta}&#x3D;\sum</em>{\tau}{R(\tau)P(\tau|\theta)}$$</p>
+<p>那么</p>
+<p>$$\nabla \bar{R}<em>{\theta}&#x3D;\sum</em>{\tau}{R(\tau) \nabla P(\tau|\theta)}$$</p>
+<p>由此可见：<strong>累积奖励 $R(\tau)$ 不需要是可微的，甚至可以是一个黑盒。</strong></p>
+<p>再者，$R(\tau)$ 是环境给我们的，我们有时会对 $R(\tau)$ 缺乏理解，譬如说打飞机里面可能会有一些随机性。</p>
+<p>继续，让 $P(\tau|\theta)$ 嗯是要出现在外面：</p>
+<p>$$\nabla \bar{R}<em>{\theta} &#x3D; \sum</em>{\tau}{R(\tau) \nabla P(\tau|\theta)} &#x3D; \sum_{\tau}{R(\tau) P(\tau|\theta) \frac{\nabla P(\tau|\theta)}{P(\tau|\theta)}}$$</p>
+<p>然后就能写成：</p>
+<p>$$\nabla \bar{R}<em>{\theta} &#x3D; \sum</em>{\tau}{R(\tau) P(\tau|\theta) \nabla \log P(\tau|\theta)}$$</p>
+<p>然后因为看到了求和号为 $\sum_{\tau}$，求和里面有 $P(\tau|\theta)$ 这一项，所以就可以对 $\tau$ 采样进行近似（这也是我们上面在外面嗯凑出一个 $P(\tau|\theta)$ 的原因）。也就是说：</p>
+<p>$$\nabla \bar{R}<em>{\theta} \approx \frac{1}{N} \sum</em>{n&#x3D;1}^{N}{R(\tau^n) \nabla \log P(\tau^n|\theta)}$$</p>
+<p>接下来的问题，就是如何计算梯度 $\nabla \log P(\tau^n|\theta)$。首先用条件概率公式展开：</p>
+<p>$$P(\tau|\theta) &#x3D; p(s_1)p(a_1|s_1,\theta)p(r_1,s_2|s_1,a_1)p(a_2|s_2,\theta)p(r_2,s_3|s_2,a_2) \ldots$$</p>
+<ul>
+<li>游戏的开局状态 $s_1$ 有可能不同</li>
+<li>采取动作 $a_1$ 取决于开局状态 $s_1$ 和模型参数 $\theta$</li>
+<li>采取动作 $a_1$ 后，环境跳到状态 $s_2$ 也有一个概率在这里，以及奖励 $r_1$ 也会具有一定随机性</li>
+<li>$p(s_1), p(r_1,s_2|s_1,a_1), p(r_2,s_3|s_2,a_2), \ldots$ 与 actor 没关系</li>
+<li>$p(a_1|s_1,\theta), p(a_2|s_2,\theta), \ldots$ 与 actor 有关系</li>
+</ul>
+<p>$$P(\tau|\theta) &#x3D; p(s_1)\prod_{t&#x3D;1}^{T}p(a_t|s_t,\theta)p(r_t,s_{t+1}|s_t,a_t)$$</p>
+<p>常用技巧：概率相乘→对数概率相加，这一点其实也因为我们恰好就需要算 $\log P(\tau|\theta)$</p>
+<p>$$\log P(\tau|\theta) &#x3D; \log p(s_1) + \sum_{t&#x3D;1}^{T}\log p(a_t|s_t,\theta) + \log p(r_t,s_{t+1}|s_t,a_t)$$</p>
+<p>又有因为我们求的是梯度 $\nabla \log P(\tau^n|\theta)$，所以我们可以干掉上式中的常数项，也就是表达式中没有出现 $\theta$ 的那些项</p>
+<p>$$\nabla \log P(\tau|\theta) &#x3D; \sum_{t&#x3D;1}^{T} \nabla \log p(a_t|s_t,\theta)$$</p>
+<p>也就是说，累积奖励期望的梯度 $\nabla \bar{R}_{\theta}$ 可以被近似为</p>
+<p>$$\begin{align*}\nabla \bar{R}<em>{\theta} &amp; \approx \frac{1}{N} \sum</em>{n &#x3D; 1}^{N}{R(\tau^n) \nabla \log P(\tau^n|\theta)} \<br>&amp;&#x3D; \frac{1}{N} \sum_{n &#x3D; 1}^{N}{R(\tau^n) \sum_{t &#x3D; 1}^{T_n} \nabla \log p(a_t^n |s_t^n,\theta)} \<br>&amp;&#x3D; \frac{1}{N} \sum_{n &#x3D; 1}^{N} \sum_{t &#x3D; 1}^{T_n}{R(\tau^n) \nabla \log p(a_t^n|s_t^n,\theta)}\end{align*}$$</p>
+<p>上式就是大名鼎鼎的 <strong>策略梯度（policy gradient）</strong>。</p>
+<h4 id="上面公式的意义"><a href="#上面公式的意义" class="headerlink" title="上面公式的意义"></a>上面公式的意义</h4><ul>
+<li>和深度学习中的一样，这里我们习惯用下标表示 <strong>单个样本中某个值在序列中的标号</strong>，用上标表示 <strong>样本的标号</strong></li>
+<li>$R(\tau^n)$：在第 $n$ 次游戏的轨迹中所得到的累积奖励</li>
+<li>$\nabla \log p(a_t|s_t,\theta)$：看到 $s_t$ 产生 $a_t$ 的概率的对数梯度</li>
+<li>假设在第 $n$ 次玩游戏的过程中产生了轨迹 $\tau^n$，看到状态 $s_t^n$ 时采取动作 $a_t^n$，最后导致累积奖励 $R(\tau^n)$ 为正的，那么我们就会调 $\theta$ 使得 $p(a_t^n|s_t^n,\theta)$ 变大；</li>
+<li>反之，如果最后导致累积奖励 $R(\tau^n)$ 为负的，那么我们就会调 $\theta$ 使得 $p(a_t^n|s_t^n,\theta)$ 变小；</li>
+<li><strong>上面考虑整个轨迹 $\tau^n$ 的累积奖励 $R(\tau^n)$，而非单步的立即奖励 $r_t^n$，这点十分重要</strong>（假设仅考虑单步的立即奖励的话，那么譬如像打飞机，只会调大打飞机这个动作，而不会调大挪位置的动作）</li>
+</ul>
+<h4 id="为什么要对概率取-log"><a href="#为什么要对概率取-log" class="headerlink" title="为什么要对概率取 log"></a>为什么要对概率取 log</h4><p>$$\nabla \log p(a_t^n|s_t^n,\theta) &#x3D; \frac{\nabla p(a_t^n|s_t^n,\theta)}{p(a_t^n|s_t^n,\theta)}$$</p>
+<p>假设能在某些轨迹 $\tau$ 中看到一个状态 $s$ 出现（随机的）。对于这个状态，actor 采取不同的动作，譬如：</p>
+<ul>
+<li>1 次采取 a 这个动作，得到奖励为 2；</li>
+<li>3 次采取 b 这个动作，得到奖励为 1。</li>
+</ul>
+<p>在更新参数的时候，我们训练出来的 actor 偏好出现次数比较多的，即使那个动作并没有比较好。</p>
+<p>譬如去调高 b，actor 的表现也未必好到哪里去；而因为 a 出现得太罕见，所以要最大化的东西对目标的影响也小。</p>
+<p>这个时候，除掉概率就能够消除采样频率不同而造成更新有偏好的影响。</p>
+<h4 id="为什么奖励不能都为正"><a href="#为什么奖励不能都为正" class="headerlink" title="为什么奖励不能都为正"></a>为什么奖励不能都为正</h4><p>打飞机里面确实有可能出现这种情况。</p>
+<p>在理想情况下确实不会出现问题。出现概率大的和小的一起增加，最后由于概率要对预测取 softmax，所以大的会增加比较小，小的会增加比较大。</p>
+<p>但是实际上，我们做的是采样，也就是只会采到部分动作。</p>
+<p><img src="/2-3.png" alt="举到的一个例子"></p>
+<p>譬如上例中，我们只采样到 b 和 c。</p>
+<p>这个时候，我们只会去调高这部分动作的，而 a 的动作没有被采样到，不知道它的 $R(\tau)$ 是多少。然后更新 actor 的时候，我们只会去拉高 b 和 c 的概率，这时 a 的概率就变得更低了，在接下来的与环境互动中 a 更少可能被采样到。</p>
+<p>所以希望 $R(\tau)$ 有正有负：统一减掉一个 bias，让它有正有负。</p>
+<p>$$\nabla \bar{R}<em>{\theta} \approx  \frac{1}{N} \sum</em>{n&#x3D;1}^{N} \sum_{t&#x3D;1}^{T_n}{(R(\tau^n) - b) \nabla \log p(a_t^n|s_t^n,\theta)}$$</p>
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><p>给定 actor 的参数 $\theta$，收集到若干数据（轨迹）：</p>
+<ul>
+<li>$\tau^1: (s_1^1, a_1^1) \to R(\tau^1), (s_2^1, a_2^1) \to R(\tau^1), \ldots$</li>
+<li>$\tau^2: (s_1^2, a_1^2) \to R(\tau^2), (s_2^2, a_2^2) \to R(\tau^2), \ldots$</li>
+<li>$\ldots$</li>
+</ul>
+<p>然后利用策略梯度与梯度上升更新参数，然后继续用更新后的参数去玩游戏……</p>
+<p>但是 $\nabla \log p(a_t^n|s_t^n,\theta)$ 的具体含义是什么？</p>
+<h4 id="回顾分类问题"><a href="#回顾分类问题" class="headerlink" title="回顾分类问题"></a>回顾分类问题</h4><p><img src="/2-4.png" alt="一个栗子"></p>
+<p>这里分类标签都是 one-hot 的，除了一个是 1，其他都是 0。要最小化</p>
+<p>$$-\sum_{i&#x3D;1}^{3}{\hat{y}_i \log y_i}$$</p>
+<p>所以实际上就是在最大化 $\log y_1 &#x3D; \log p(“\mathrm{left}” | s)$</p>
+<p>所以更新的时候也就是在做</p>
+<p>$$\theta \leftarrow \theta + \eta \nabla \log p(“\mathrm{left}” | s)$$</p>
+<p>希望预测结果与目标越接近越好</p>
+<h4 id="回到策略梯度"><a href="#回到策略梯度" class="headerlink" title="回到策略梯度"></a>回到策略梯度</h4><p>式子就是</p>
+<p>$$\nabla \bar{R}<em>{\theta} \approx \frac{1}{N} \sum</em>{n&#x3D;1}^{N} \sum_{t&#x3D;1}^{T_n}{R(\tau^n) \nabla \log p(a_t^n|s_t^n,\theta)}$$</p>
+<p>也就是说，现在采样出 $(s_1^1, a_1^1)$ 之后，如果 $R(\tau^1)$ 为正，那么希望之后 actor 的动作跟 $(s_1^1, a_1^1)$ 越接近越好。</p>
+<p>而且，接近程度根据累积奖励 $R(\tau^1)$ 来决定。换言之，相当于把每个训练数据都乘以权重 $R(\tau^n)$。</p>
+<p>比较花时间：需要更新→采样→更新→采样→……</p>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 已经结束咧 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> Goodbye --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/2023/03/21/reinforcement-learning-hungyi-3/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>李宏毅强化学习个人笔记 - 基于值的方法（学习critic）</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2023/03/21/reinforcement-learning-hungyi-1/">
+        <span>李宏毅强化学习个人笔记 - 概览</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2023/03/21/reinforcement-learning-hungyi-2/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%BD%9C%E4%B8%BA-actor"><span class="toc-number">1.</span> <span class="toc-text">将神经网络作为 actor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9B%B8%E8%BE%83%E4%BA%8E%E6%9F%A5%E8%A1%A8%E7%9A%84%E4%BD%9C%E4%B8%BA-actor-%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-number">1.1.</span> <span class="toc-text">神经网络相较于查表的作为 actor 的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B3%E5%AE%9A-actor-%E7%9A%84%E5%A5%BD%E5%9D%8F"><span class="toc-number">1.2.</span> <span class="toc-text">决定 actor 的好坏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E4%B8%80%E4%B8%AA%E6%9C%80%E5%A5%BD%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%88actor%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">选一个最好的函数（actor）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8A%E9%9D%A2%E5%85%AC%E5%BC%8F%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">上面公式的意义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AF%B9%E6%A6%82%E7%8E%87%E5%8F%96-log"><span class="toc-number">1.3.2.</span> <span class="toc-text">为什么要对概率取 log</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%96%E5%8A%B1%E4%B8%8D%E8%83%BD%E9%83%BD%E4%B8%BA%E6%AD%A3"><span class="toc-number">1.3.3.</span> <span class="toc-text">为什么奖励不能都为正</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%93%8D"><span class="toc-number">1.4.</span> <span class="toc-text">实操</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E9%A1%BE%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.1.</span> <span class="toc-text">回顾分类问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E5%88%B0%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6"><span class="toc-number">1.4.2.</span> <span class="toc-text">回到策略梯度</span></a></li></ol></li></ol></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
+      </div>
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2024 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        ZM-J
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

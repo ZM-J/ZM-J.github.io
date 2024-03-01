@@ -343,11 +343,11 @@
       
       
         <div class="post-header"> 
-  <a class="post-header-title" href="/2022/11/21/python-multiprocessing/">python multiprocessing 多进程踩坑</a>
+  <a class="post-header-title" href="/2023/06/29/reinforcement-learning-hungyi-7/">李宏毅强化学习个人笔记 - 其他姿势</a>
   <div class="post-header-meta">
     <span>
       <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2022-11-21
+      Posted on:&nbsp;2023-06-29
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
@@ -355,7 +355,7 @@
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/%E5%B7%A5%E5%9C%B0%E9%9A%8F%E7%AC%94/">工地随笔</a>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
     </span>
     
   </div>
@@ -366,29 +366,407 @@
 
       
       
-  <div class="post-tags">
-    
-      <i class="iconfont icon-tag">
-        <a rel="tag" href = /tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ >操作系统</a>
-      </i>
-    
-      <i class="iconfont icon-tag">
-        <a rel="tag" href = /tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/ >进程同步</a>
-      </i>
-    
-  </div>
+  <div class="tag-line-space"></div>
 
       
       <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
         <div class="post-abstract mdui-typo ">
           
-            <p>之所以写这个东西，还是因为之前操作系统学了个寂寞，考前背个板混个分数就过了。但是这玩意儿在实际应用的时候，才会体会到某些坑爹的地方~</p>
-<p>众所周知，在 python 中，<strong>I&#x2F;O 密集型任务</strong> 可以用多线程的方式来实现（threading 库）；然而，对于 <strong>计算密集型</strong> 任务，由于 python 中全局锁 GIL 的存在，多线程并不能起到一个加速的作用。所以此时，一般使用多进程的方式实现（multiprocessing 库）。虽然对于多进程，网上资料一搜一大把，但是这并不妨碍实际操作过程中会踩到坑。<...
+            <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<h2 id="Sparse-Reward"><a href="#Sparse-Reward" class="headerlink" title="Sparse Reward"></a>Sparse Reward</h2><p>实际上，用强化学习的算法去学 agent 的时候，多数情况下，agent 都是没办法得到奖励的。经常不获得奖励对 agent 的训练来说非常困难。</p>
+<p>不管 actor 做了什么事情，得到的奖励都是 ...
           
         </div>
         
         <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2022/11/21/python-multiprocessing/">Read More</a>
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/29/reinforcement-learning-hungyi-7/">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-6/">李宏毅强化学习个人笔记 - Actor-Critic</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-06-28
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="tag-line-space"></div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<p>A3C: Asynchronous Advantage Actor-Critic</p>
+<p>A2C: Advantage Actor-Critic</p>
+<h2 id="复习-policy-gradient"><a href="#复习-policy-gradient" class="headerlink" title="复习 policy gradient"></a>复习 policy gradient</h2><p>之前...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/28/reinforcement-learning-hungyi-6/">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-5-3/">李宏毅强化学习个人笔记 - 对于连续动作的 Q-learning</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-06-28
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="tag-line-space"></div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<p>跟 policy gradient 比较起来，Q-learning 比较稳定（policy gradient 玩不起来什么游戏）</p>
+<p>Q-learning 一个比较好训练的理由是：只要你找得到一个比较好的 Q 函数，那么你就有一个比较好的策略；也就是说如果你能恰当估计 Q 函数（其实比较容易，就是一个回归问题，只需要看到 loss 有无下降就能看出模型学得好不好），你就能更新你的策略。</p>
+<p>Q-learnin...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/28/reinforcement-learning-hungyi-5-3/">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-5-2/">李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-06-28
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="tag-line-space"></div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<h2 id="Double-DQN"><a href="#Double-DQN" class="headerlink" title="Double DQN"></a>Double DQN</h2><p>Double DQN 提出的动机：在实际的 Q-learning 中，Q 值是经常被高估的。</p>
+<p><img src="/5-10.png" alt="不同训练方法得到的 Q 值，褐色为 DQN，蓝色为 Double DQN，...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/28/reinforcement-learning-hungyi-5-2/">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-5-1/">李宏毅强化学习个人笔记 - Q-learning 简介</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-06-28
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="tag-line-space"></div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<p>Q-learning 是基于值的方法。我们并不学习策略（Actor），而是学习 Critic。Critic 不直接采取行为，而是评价现在的行为有多好。</p>
+<p>假设现在有一个 actor $\pi$，critic 的工作就是评价这个 actor $\pi$ 做得有多好。</p>
+<p>譬如这个 critic 可以做成是跟状态有关的函数：$V^{\pi}(s)$。它的含义为使用 actor $\pi$ 时，到了状态 $s$ ...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/28/reinforcement-learning-hungyi-5-1/">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2023/04/18/reinforcement-learning-hungyi-4/">李宏毅强化学习个人笔记 - PPO</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-04-18
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="tag-line-space"></div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<p>PPO: Proximal Policy Optimization，该算法为 OpenAI 的默认强化学习算法。</p>
+<h2 id="复习：将神经网络作为-actor"><a href="#复习：将神经网络作为-actor" class="headerlink" title="复习：将神经网络作为 actor"></a>复习：将神经网络作为 actor</h2><ul>
+<li>神经网络擅长拟合函数</li>
+<li>网络输...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/04/18/reinforcement-learning-hungyi-4/">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2023/03/21/reinforcement-learning-hungyi-3/">李宏毅强化学习个人笔记 - 基于值的方法（学习critic）</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-03-21
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="tag-line-space"></div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<p>这里我们不学习 actor，也就是不学习怎么做事，而是学习一个 critic。</p>
+<h2 id="critic-的性质"><a href="#critic-的性质" class="headerlink" title="critic 的性质"></a>critic 的性质</h2><ul>
+<li>critic 本身不决定动作；</li>
+<li>给定 actor，critic 可以评估 actor 的好坏；</li>
+<l...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/03/21/reinforcement-learning-hungyi-3/">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2023/03/21/reinforcement-learning-hungyi-2/">李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-03-21
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="tag-line-space"></div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<p>基于策略的方法，也就是学习 actor。换言之，也就是学习一个策略函数 $\pi$：该函数输入观测，输出动作。</p>
+<p><img src="/2-1.png" alt="一图流"></p>
+<h2 id="将神经网络作为-actor"><a href="#将神经网络作为-actor" class="headerlink" title="将神经网络作为 actor"></a>将神经网络作为 actor</h2><ul>
+<l...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/03/21/reinforcement-learning-hungyi-2/">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2023/03/21/reinforcement-learning-hungyi-1/">李宏毅强化学习个人笔记 - 概览</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-03-21
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="tag-line-space"></div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <p>课程链接：</p>
+<p>【【李宏毅】2020 最新课程 (完整版) 强化学习  - 71.作業十五 ML Lecture 23-1 - Deep Re】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1UE411G78S/?share_source">https://www.bilibili.com/video/BV1UE411G78S/?share_source</a> &#x3D; copy_web</p>
+<p>其他人的笔记：</p>
+<p>强化学习-李宏毅-学习笔记 &lt;总&gt; - 恒大大的文章 - 知乎<br><a href...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/03/21/reinforcement-learning-hungyi-1/">Read More</a>
         </div>
       </div>
     </article>
@@ -397,7 +775,7 @@
 
   <nav style="text-align: center;">
     <div class="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="iconfont icon-angle-right"></i></a>
     </div>
   </nav>
 

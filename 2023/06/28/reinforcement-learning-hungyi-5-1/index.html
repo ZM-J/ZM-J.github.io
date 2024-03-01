@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+    
+        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            李宏毅强化学习个人笔记 - Q-learning 简介 | 春勃
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">春勃</a>
+    <a href="/" class="header-subtitle mdui-typo-headline">반갑습니다</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">tools</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/icons/avatar.jpg"/>
+                
+            </div>
+            <div class="sidebar-author-name">ZM-J</div>
+            <div class="sidebar-description">丧失年轻，勿失年华</div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
+                    <a href="mailto:zhumj7@mail2.sysu.edu.cn" class="mdui-chip-title">E-Mail</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/ZM-J" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://sh1k4ku.github.io/" class="mdui-list-item mdui-ripple">
+                            石卡酷
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://tover.xyz/" class="mdui-list-item mdui-ripple">
+                            套娃
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://jayxv.github.io/" class="mdui-list-item mdui-ripple">
+                            V
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://love-deng-feng.top/" class="mdui-list-item mdui-ripple">
+                            等风
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://github.com/kokifish/CTF-detailed-writeups/" class="mdui-list-item mdui-ripple">
+                            沛公
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-5-1/">李宏毅强化学习个人笔记 - Q-learning 简介</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-06-28
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=李宏毅强化学习个人笔记 - Q-learning 简介&url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-1/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=李宏毅强化学习个人笔记 - Q-learning 简介&url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-1/&via=ZM-J" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-1/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-1/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-1/&title=李宏毅强化学习个人笔记 - Q-learning 简介" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=春勃&title=李宏毅强化学习个人笔记 - Q-learning 简介&summary=丧失年轻，勿失年华&pics=http://example.com/null&url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-1/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-1/&text=李宏毅强化学习个人笔记 - Q-learning 简介" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<p>Q-learning 是基于值的方法。我们并不学习策略（Actor），而是学习 Critic。Critic 不直接采取行为，而是评价现在的行为有多好。</p>
+<p>假设现在有一个 actor $\pi$，critic 的工作就是评价这个 actor $\pi$ 做得有多好。</p>
+<p>譬如这个 critic 可以做成是跟状态有关的函数：$V^{\pi}(s)$。它的含义为使用 actor $\pi$ 时，到了状态 $s$ 之后，可获得的 <strong>期望累积奖励</strong>。</p>
+<p><img src="/3-1.png" alt="基于值的方法"></p>
+<p>例如上图，剩下的怪不多了的时候，$V^{\pi}(s)$ 就会比较小；反之，剩下的怪多的时候，$V^{\pi}(s)$ 就会比较大。</p>
+<p>这里注意：<strong>critic 是必须要绑定一个 actor 的。critic 没办法凭空去评估一个状态的好坏；它评估的东西是给定一个状态，假设接下来跟环境互动的 actor 是 $\pi$，那么会得到多少奖励</strong>。因为就算给同一个状态，给定不同的 $\pi$，得到的奖励也会不一样的。（譬如很叼的玩家会在绝境秀操作，很捞的玩家就只会是个呆头鹅）</p>
+<p>所以 critic 的取值跟状态和 actor 都有关。critic 是用来衡量某一个 actor 的好坏，而不是去一般化地衡量某一个状态的好坏。</p>
+<h2 id="如何估计-critic-V-pi-s"><a href="#如何估计-critic-V-pi-s" class="headerlink" title="如何估计 critic $V^\pi(s)$"></a>如何估计 critic $V^\pi(s)$</h2><p><strong>方法一：蒙特卡洛方法（Monte-Carlo approach, MC）</strong></p>
+<p>critic 看到 actor $\pi$ 在玩游戏。</p>
+<ul>
+<li>假设观察到状态 $s_a$：到这一句游戏结束，累积奖励为 $G_a$</li>
+<li>假设观察到状态 $s_b$：到这一句游戏结束，累积奖励为 $G_b$</li>
+<li>那么希望 $V^\pi(s_a)$ 与 $G_a$ 越接近越好，$V^\pi(s_b)$ 与 $G_b$ 越接近越好</li>
+<li>这就是一个回归问题</li>
+</ul>
+<p><img src="/5-1.png" alt="蒙特卡洛方法"></p>
+<p>要把游戏都玩到底，才能看到累积奖励 $G_a, G_b, \ldots$ 是什么。</p>
+<p><strong>方法二：时序差分方法（Temporal Difference approach, TD）</strong></p>
+<p>critic 看到 actor $\pi$ 在玩游戏。</p>
+<ul>
+<li>看到 actor 在状态 $s_t$ 的时候采取动作 $a_t$，状态跳到 $s_{t+1}$，得到奖励 $r_t$</li>
+<li>$V^\pi(s_t)&#x3D;V^\pi(s_{t+1}) + r_t$</li>
+<li>具体训练如下图：让 $V^\pi(s_t)-V^\pi(s_{t+1})$ 与 $r_t$ 越接近越好</li>
+</ul>
+<p><img src="/3-2.png" alt="时序差分方法一图流"></p>
+<p>好处：可以不玩完游戏就能开始更新网络参数（可能在某些情况下玩完一把游戏耗时太久）</p>
+<h2 id="MC-和-TD-的差别"><a href="#MC-和-TD-的差别" class="headerlink" title="MC 和 TD 的差别"></a>MC 和 TD 的差别</h2><p><strong>MC 会具有较大方差</strong> 累积奖励 $G_a$ 可以被是为一个随机变量。同样走到状态 $s_a$ 的时候，由于游戏本身和策略都具有随机性，$G_a$ 是不一样的。注意到累积奖励 $G_a$ 是多步奖励之和。把某一个变量乘上 $k$ 倍的话，注意到方差的性质：$Var[k X] &#x3D; k^2 Var[X]$，所以此时方差就会变成 $k^2$ 倍。下面的图，上面是 MC，下面是 TD。TD 每次只拟合一个 $r$，而 MC 是把所有的 $r$ 给累积起来拟合。</p>
+<p><strong>TD 不见得估得准 V</strong> 如果 $V^{\pi}(s_{t+1})$ 估得不准的话，那么 $V^{\pi}(s_{t})$ 也会跟着估得不准。</p>
+<p><img src="/5-2.png" alt="上面是 MC 下面是 TD"></p>
+<p>TD 应用较常见，MC 较少应用。</p>
+<p><strong>例子</strong> 下面这个例子，MC 和 TD 会得出不同的 $V^{\pi}(s_a)$ 值。哪一个对？其实都对。</p>
+<p><img src="/5-3.png" alt="MC 和 TD"></p>
+<ul>
+<li>在第一个轨迹中，$s_a$ 得到奖励 0，跳到 $s_b$，得到奖励为 0</li>
+<li>一个可能是 $s_a$ 就是一个霉比状态。只要看到 $s_a$ 之后，在 $s_b$ 就拿不到奖励。也就是说，状态 $s_a$ 会影响 $s_b$</li>
+<li>另一个可能是看到了 $s_a$ 之后看到 $s_b$ 只是一个巧合。只是因为单纯运气的问题，平常看到 $s_b$ 得到的奖励是 3&#x2F;4，只不过在第一个轨迹那次恰好看到 $s_b$ 得到的奖励为 0</li>
+<li>不同的方法，可能考虑到不同的假设，所以会得到不同的运算结果</li>
+</ul>
+<p>上面说的 critic 函数在应用策略 $\pi$ 时，对状态进行评估，形式为 $V^{\pi}(s)$；还有一种 critic 函数，对状态和动作均进行评估，形式为 $Q^{\pi}(s, a)$，称为 Q 函数（Q function）。</p>
+<p>$Q^{\pi}(s, a)$ 的含义就是当 actor 采取 $\pi$ 的时候，在状态 $s$ 时采取动作 $a$ 后，得到的 <strong>期望累积奖励</strong>。</p>
+<p>有一个非常重要的一点：<strong>actor 采取 $\pi$ 的时候，在看到状态 $s$ 时所采取的动作不一定是 $a$<strong>！譬如 actor 可以是一个神经网络，此时看到一个状态 $s$ 之后采取的动作是一个概率分布。$Q^{\pi}(s, a)$ 考虑的是 actor 在见到状态 $s$ 之后，</strong>强制采取动作 $a$，接下来都用 $\pi$ 继续玩下去</strong>。也就是说，只有在状态为 $s$ 时才强制采取动作 $a$，之后让 $\pi$ 接管，自动把游戏玩下去，得到期望累积奖励。</p>
+<p>Q 函数有两种写法：一种是输入状态 $s$ 和动作 $a$，得到一个 $Q^{\pi}(s, a)$ 的值；另一种更常用的是输入状态 $s$，<strong>假设动作 $a$ 是离散的</strong>，Q 函数直接吐出所有动作 $a$ 的对应 $Q^{\pi}(s, a)$。</p>
+<p><img src="/5-4.png" alt="Q 函数的两种写法"></p>
+<h2 id="Q-learning：另一种使用-Critic-的方式"><a href="#Q-learning：另一种使用-Critic-的方式" class="headerlink" title="Q-learning：另一种使用 Critic 的方式"></a>Q-learning：另一种使用 Critic 的方式</h2><p><img src="/5-5.png" alt="一图流"></p>
+<p>实际上，只要有了 Q 函数，我们就能做强化学习！（采取哪一种动作）</p>
+<ul>
+<li>假设初始的 actor 叫作 $\pi$，它与环境互动会得到数据</li>
+<li>衡量 $\pi$ 在某个状态强制采用哪个动作，接下来用 $\pi$ 能得到的累积奖励，即 $\pi$ 这个 actor 的 Q 值</li>
+<li><strong>只要学得出 $\pi$ 的 Q 函数，那么就可以得到一个新的策略 $\pi’$，这个 $\pi’$ 就会比原来的策略 $\pi$ 要好</strong> <em>(什么叫作“好”？)</em></li>
+<li>把原来的 $\pi$ 替代为 $\pi’$，一直循环下去，策略就会越来越好</li>
+</ul>
+<p><strong>什么叫作“好”？</strong> 对于所有（同一）状态 $s$ 而言，$\pi$ 的 value 一定会不大于 $\pi’$ 的 value，即</p>
+<p>$$V^{\pi’}(s) \ge V^{\pi}(s)$$</p>
+<p>这个性质通过 $\pi’$ 的更新式而确定：</p>
+<p>$$\pi’(s) &#x3D; \arg \max_{a} Q^{\pi}(s, a)$$</p>
+<p>对于离散情况，可以这样理解：在某个状态 $s$ 的时候，把每个可能的动作 $a$ 都带入到 $Q^{\pi}$ 中，看看哪个动作 $a$ 对应的 Q 函数 $Q^{\pi}(s, a)$ 取值最大。这一个动作 $a$ 就是 actor $\pi’$ 会采取的动作。</p>
+<blockquote>
+<p>但是，给定状态 $s$，actor $\pi$ 并不一定会采取动作 $a$。Q 函数的定义是让 $\pi$ 在看到状态 $s$ 时，强制采取状态 $a$ 的累积奖励。</p>
+</blockquote>
+<p>所以，没有一个所谓的策略叫作 $\pi’$，$\pi’$ 其实就是用 Q 函数推出来的。</p>
+<p><em>对于状态 $a$ 是连续的情况，这里先留个坑</em></p>
+<p><strong>为什么会更“好”？</strong> 这里给出 $V^{\pi’}(s) \ge V^{\pi’}(s)$ 的证明。</p>
+<p>根据 Q 函数的定义：$V^{\pi}(s)$ 为 $\pi$ 在看到状态 $s$ 之后的累积奖励，而 $\pi$ 在看到状态 $s$ 后会采取动作 $\pi(s)$：</p>
+<p>$V^{\pi}(s) &#x3D; Q^{\pi}(s, \pi(s))$</p>
+<p>这个 Q 值肯定不大于 actor $\pi$ 在看到状态 $s$ 之后，把所有动作 $a$ 都枚举一遍，取得的最大 Q 值：</p>
+<p>$V^{\pi}(s) &#x3D; Q^{\pi}(s, \pi(s)) \le \max_{a} Q^{\pi}(s, a)$</p>
+<p>由于 $\pi’(s) &#x3D; \arg \max_{a} Q^{\pi}(s, a)$，因此 $\max_{a} Q^{\pi}(s, a)$ 又可以写作 $Q^{\pi}(s, \pi’(s))$</p>
+<p>所以连起来，就是 $V^{\pi}(s) \le Q^{\pi}(s, \pi’(s))$</p>
+<p>也就是说，在看到状态 $s$ 之后，如果按照 actor $\pi$ 来作决策，那么得到的奖励一定会不大于，现在这个状态 $s$ 时故意不按照 actor $\pi$ 指示的决策，而是按照 $\pi’$ 的决策采取动作，<strong>但是接下来的动作都按照 $\pi$ 的指示来做</strong>。也就是说，“一步之差”所得到的累积奖励比完全按照 $\pi$ 所得到的累积奖励还可能要更大。</p>
+<p>然后就是总结起来：如果每一步都是按照 $\pi’$ 来做决策，而不是按照 $\pi$ 的话，所得到的累积奖励也会要大于等于之前的累计误差的，所以就可以串起来（用数学式子写出来）：</p>
+<p>$$\begin{aligned}V^{\pi}(s) &amp;\le Q^{\pi}(s, \pi’(s)) \<br>&amp;&#x3D;\mathbb{E}[r_t + V^{\pi}(s_{t+1}) | s_t &#x3D; s, a_t &#x3D; \pi’(s_t)] \<br>&amp;\le \mathbb{E}[r_t + Q^{\pi}(s_{t+1}, \pi’(s_{t+1})) | s_t &#x3D; s, a_t &#x3D; \pi’(s_t)] \<br>&amp;&#x3D;\mathbb{E}[r_t + r_{t+1} + V^{\pi}(s_{t+2}) | \ldots] \<br>&amp;\le \mathbb{E}[r_t + r_{t+1} + Q^{\pi}(s_{t+2}, \pi’(s_{t+2})) | \ldots] \<br>&amp;\le \ldots \le V^{\pi’}(s)\end{aligned}$$</p>
+<p><em>(最要耐烦的其实是这一步，也就是说要展开出期望式)</em></p>
+<ul>
+<li>取期望值：每一次取 $(s_t, a_t)$ 所得到的奖励 $r_t$ 和下一步状态 $s_{t+1}$ 不见得是一样的</li>
+<li>然后又可以将不等式 $V^{\pi}(s) \le Q^{\pi}(s, \pi’(s))$ 应用到 $V^{\pi}(s_{t+1})$ 里面</li>
+</ul>
+<h2 id="Target-Network"><a href="#Target-Network" class="headerlink" title="Target Network"></a>Target Network</h2><p>在学习 Q 函数的时候，也会用到 TD 的概念。</p>
+<p><img src="/5-6.png" alt="target network 一图流"></p>
+<p>假设收集到数据：收集到状态 $s_t$，在该状态的时候采取动作 $a_t$，并且得到奖励 $r_t$，以及看到下一步状态 $s_{t+1}$，那么根据 Q 函数的定义：</p>
+<p>$$Q^{\pi}(s_{t}, a_{t}) &#x3D; r_t + Q^{\pi}(s_{t+1}, \pi(s_{t+1}))$$</p>
+<p>希望在 $(s_{t}, a_{t})$ 时候的 Q 值和在 $(s_{t+1}, \pi(s_{t+1}))$ 时候的 Q 值，它们的差应该是 $r_t$。所以这里就借鉴 TD 的思想，设计了这样的一个训练流程。</p>
+<p>但是这么一般的函数是不好学的：如果把它看成一个回归问题的话，回归目标是一直在动的。这样一来，训练就会不太稳定。所以在实操的时候，往往会把其中一个网络给固定下来：一般选下面这个网络。网络固定之后，下面这个回归的目标就也会是固定的。只调左边的网络参数，就是一个可以把 MSE 作为 loss 的回归问题。</p>
+<p>在左边的网络参数更新 N 次后（譬如 100 次），再用左边网络参数去替换掉右边的网络参数（copy），来进行更新。</p>
+<p><em>（两边不要一起动，一起动结果就会坏掉）</em></p>
+<p>loss 会不会变成 0？其实不太会，因为两边输入的 $(s, a)$ 不一样，而且下面还加了个 $r_t$。</p>
+<h2 id="Exploration"><a href="#Exploration" class="headerlink" title="Exploration"></a>Exploration</h2><p>策略基于 Q 函数：$a &#x3D; \arg \max_{a} Q(s, a)$。</p>
+<p>这和策略梯度不一样：</p>
+<ul>
+<li>在做策略梯度的时候，我们的输出是随机的，也就是说每次学习到的是采取动作的概率分布，每次会在这个分布里面采样，得到具体的动作</li>
+<li>而上述的函数形式所得出的动作是确定的：这不是一个好的收集数据的方式。一定要在状态 $s$ 的时候采取动作 $a$ 之后，才能估出 $Q(s, a)$；换言之，假设没有采取到动作 $a$，$Q(s, a)$ 是估不出的。（这个问题尤其对于查表式策略，对于深度网络式的 Q 可能会好那么一丢丢）具体看下面的图解：</li>
+</ul>
+<p><img src="/5-7.png" alt="初始情形"></p>
+<ul>
+<li>在初始情形，每个动作都没被访问到，所以每个动作的 Q 值都是一个初始值，譬如 0</li>
+</ul>
+<p><img src="/5-8.png" alt="对某个状态更新"></p>
+<ul>
+<li>然后，通过对 $a_2$ 的采样，$Q(s, a_2)$ 的值被更新成一个正值</li>
+<li>由策略式，我们在看到状态 $s$ 时总会采取动作 $a_2$，此时其他的策略都不会被采样到。这样，模型就永远不知道其他动作的 Q 值是多少。</li>
+</ul>
+<p>有两个解决这个问题的方法：</p>
+<p><strong>Epsilon Greedy</strong> 将策略改写成：</p>
+<p>$$a &#x3D; \left{ \begin{aligned}\arg\max_{a} Q(s, a), &amp; \qquad \textrm{with probability } 1 - \varepsilon \<br>\textrm{random}, &amp; \qquad \textrm{otherwise}\end{aligned} \right.$$</p>
+<p>譬如，将 $\varepsilon$ 设为 0.1，那么策略有 0.9 的概率选取最优动作，有 0.1 的概率探索其他动作。</p>
+<p>一般而言，$\varepsilon$ 应随学习的进程而减小：一开始可能我们会花很多精力去探索不同的动作；随着训练次数越来越多，已经确定哪些动作是比较好的，我们就会减少探索，把 $\varepsilon$ 的值变小（这里的设计可以参考模拟退火）</p>
+<p><strong>Boltzmann Exploration</strong> 这里就有点像策略梯度：策略梯度里面网络的输出是一个由 softmax 产生的各动作的概率分布。这里类似，可以根据 $Q(s, a)$ 的值来做一个基于 softmax 产生的概率分布：</p>
+<p>$$P(a | s) &#x3D; \frac{\exp(Q(s, a))}{\sum_{a}\exp(Q(s, a))}$$</p>
+<p>假设某一个动作 $a$，它的 Q 值 $Q(s, a)$ 越大，就代表这个动作越好，采取它的概率就越大；反之，如果有一个动作 $a$ 的 Q 值 $Q(s, a)$ 较小，不代表我们不能试试看这个动作 $a$，看看它究竟好不好用。</p>
+<p>因为 Q 值有正有负，所以用 softmax 来产生概率分布。</p>
+<p><em>（在训练的开始，随机化的 Q 值可能会造成这个分布趋向于均匀分布）</em></p>
+<h2 id="Replay-Buffer"><a href="#Replay-Buffer" class="headerlink" title="Replay Buffer"></a>Replay Buffer</h2><p>现在会有一个策略 $\pi$ 跟环境做互动，收集训练数据。将这些训练数据都存到一个 buffer 里面，buffer 里面每一条数据都是一个经验，包含 $(s_t, a_t, r_t, s_{t+1})$，<strong>这里并不需要采样整个轨迹</strong>。</p>
+<p><img src="/5-9.png" alt="Replay Buffer 一图流"></p>
+<p>注意这个 buffer 里面的数据可能来自于不同的策略。如果 buffer 满了，就把最旧的数据给丢掉。</p>
+<p>有了这个 buffer 以后，训练过程变成：</p>
+<ol>
+<li>随机从这个 buffer 里面挑一个 batch 的数据</li>
+<li>根据这个 batch 的数据，更新 Q 函数</li>
+</ol>
+<p>当我们这样做的时候，变成了一个 off-policy 的做法：我们更新的时候，是更新在 actor $\pi$ 下的 Q 函数，但是数据来源不全是来源于 $\pi$。这样，我们减少了跟环境做互动的次数，而且 batch 内的数据更多样化</p>
+<p>但是我们在关注 $\pi$ 的 Q 函数的时候，引入了一大堆别的 actor 所产生的数据来做更新，有没有关系？</p>
+<p>其实是没有关系的。这并不一定是因为过去的 $\pi$ 和现在的 $\pi$ 很像。个人理解是，如果过去的 $\pi$ 和现在的 $\pi$ 不像的话，那么过去的 $a_t$ 跟现在的 $a_t$ 可能也不太像，这就引入了现在 $\pi$ 可能不那么关注的其他的动作的结果，增加了多样化。</p>
+<h2 id="Q-learning-的算法流程总结"><a href="#Q-learning-的算法流程总结" class="headerlink" title="Q-learning 的算法流程总结"></a>Q-learning 的算法流程总结</h2><ol>
+<li>初始化 Q 函数 $Q$，设目标 Q 函数 $\hat{Q} &#x3D; Q$。</li>
+<li>在每个 episode：拿 agent 跟环境去互动。对于每一步 $t$：<ol>
+<li>给定状态 $s_t$，基于现在的 $Q$，采用探索机制（epsilon greedy，Boltzmann exploration），采取动作 $a_t$</li>
+<li>得到奖励 $r_t$，得到新的状态 $s_{t+1}$。至此得到了一个数据 $(s_t, a_t, r_t, s_{t+1})$</li>
+<li>将这个数据 $(s_t, a_t, r_t, s_{t+1})$ 丢到 buffer 里面（如果 buffer 满了，就把最旧的一个数据丢掉）</li>
+<li>从 buffer 中采样 <strong>一批</strong> 数据 $(s_i, a_i, r_i, s_{i+1})$（刚才放进去的数据可能没被采样到）</li>
+<li>回归目标 $y &#x3D; r_i + \max_{a}{\hat{Q}(s_{i+1}, a)}$（回归目标要用目标网络 $\hat{Q}$ 来算）</li>
+<li>更新 $Q$ 的参数，以使 $Q(s_i, a_i)$ 的值尽可能靠近 $y$（回归问题）</li>
+<li>每 $C$ 次重设 $\hat{Q}$ 的参数 $\hat{Q} &#x3D; Q$</li>
+</ol>
+</li>
+</ol>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 已经结束咧 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> Goodbye --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/2023/06/28/reinforcement-learning-hungyi-5-2/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2023/04/18/reinforcement-learning-hungyi-4/">
+        <span>李宏毅强化学习个人笔记 - PPO</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2023/06/28/reinforcement-learning-hungyi-5-1/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1-critic-V-pi-s"><span class="toc-number">1.</span> <span class="toc-text">如何估计 critic $V^\pi(s)$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MC-%E5%92%8C-TD-%E7%9A%84%E5%B7%AE%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">MC 和 TD 的差别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Q-learning%EF%BC%9A%E5%8F%A6%E4%B8%80%E7%A7%8D%E4%BD%BF%E7%94%A8-Critic-%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">Q-learning：另一种使用 Critic 的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Target-Network"><span class="toc-number">4.</span> <span class="toc-text">Target Network</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploration"><span class="toc-number">5.</span> <span class="toc-text">Exploration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Replay-Buffer"><span class="toc-number">6.</span> <span class="toc-text">Replay Buffer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Q-learning-%E7%9A%84%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">Q-learning 的算法流程总结</span></a></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
+      </div>
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2024 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        ZM-J
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

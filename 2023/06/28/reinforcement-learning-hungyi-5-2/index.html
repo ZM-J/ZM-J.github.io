@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+    
+        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧 | 春勃
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">春勃</a>
+    <a href="/" class="header-subtitle mdui-typo-headline">반갑습니다</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">tools</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/icons/avatar.jpg"/>
+                
+            </div>
+            <div class="sidebar-author-name">ZM-J</div>
+            <div class="sidebar-description">丧失年轻，勿失年华</div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
+                    <a href="mailto:zhumj7@mail2.sysu.edu.cn" class="mdui-chip-title">E-Mail</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/ZM-J" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://sh1k4ku.github.io/" class="mdui-list-item mdui-ripple">
+                            石卡酷
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://tover.xyz/" class="mdui-list-item mdui-ripple">
+                            套娃
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://jayxv.github.io/" class="mdui-list-item mdui-ripple">
+                            V
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://love-deng-feng.top/" class="mdui-list-item mdui-ripple">
+                            等风
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://github.com/kokifish/CTF-detailed-writeups/" class="mdui-list-item mdui-ripple">
+                            沛公
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-5-2/">李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-06-28
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧&url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-2/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧&url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-2/&via=ZM-J" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-2/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-2/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-2/&title=李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=春勃&title=李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧&summary=丧失年轻，勿失年华&pics=http://example.com/null&url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-2/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/2023/06/28/reinforcement-learning-hungyi-5-2/&text=李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
+</ul>
+<h2 id="Double-DQN"><a href="#Double-DQN" class="headerlink" title="Double DQN"></a>Double DQN</h2><p>Double DQN 提出的动机：在实际的 Q-learning 中，Q 值是经常被高估的。</p>
+<p><img src="/5-10.png" alt="不同训练方法得到的 Q 值，褐色为 DQN，蓝色为 Double DQN，横线为 Q 的实际值"></p>
+<p>总体来说，DQN 的 Q 值随着训练的进行逐步上升。Q 函数依赖于策略，在学习的过程中，策略会变得越来越强，Q 值就会越来越大。</p>
+<p>实际值：训练结束后，再和环境互动，得到的真实奖励。（互动多次取期望）</p>
+<p>Double DQN 能让估测值跟实际值更接近，且实际值（真正的累计期望）比原来的 DQN 要更大（模型更强）。</p>
+<p><strong>为什么 DQN 中的 Q 值老是被高估？</strong> 注意到学习时回归问题的形式：</p>
+<p>$$Q(s_t, a_t) \longleftrightarrow r_t + \max_{a}{Q(s_{t+1}, a)}$$</p>
+<p>目标值很容易一不小心就被设太高：在算目标值的时候，看哪一个 $a$ 能得到最大的 $Q$ 值，就把它加上去。假设现在有某个动作 $a$，它得到的 $Q$ 值是被高估的。那么，在回归的时候，总是会选这个被高估的值来作为目标。如下图，本来大家的真实 Q 值都是差不多的，绿色部分表示被高估，那么总会采取被高估的动作对应的 Q 值作为回归目标。</p>
+<p><img src="/5-11.png" alt="第一个动作的 Q 值被高估"></p>
+<p>这样，回归训练出的的结果也会跟着变大。</p>
+<p><strong>Double DQN 的设计</strong> 选动作的 Q 函数（$Q$）和算 Q 值的 Q 函数（$Q’$）是不同的！</p>
+<p>$$Q(s_t, a_t) \longleftrightarrow r_t + Q’(s_{t+1}, \arg \max_{a} Q(s_{t+1}, a))$$</p>
+<ul>
+<li>$Q$：将所有状态 $a$ 都代进 $Q$ 网络中，看看哪一个 Q 值最大</li>
+<li>$Q’$：实际计算 Q 值</li>
+</ul>
+<p>为什么这就能避免 Q 值被高估的问题：假设 $Q$ 高估了动作 $a$，只要 $Q’$ 没有高估动作 $a$ 的 Q 值，那么算出来的 Q 值就还是正常的；反过来，假设 $Q’$ 高估了某个动作 $a$ 的 Q 值，只要 $Q$ 不要选到这个动作，就不会算出那个不正常的 Q 值。（参考三权分立，$Q$ 负责提案，$Q’$ 负责执行）</p>
+<p>所以实际上，我们会拿待更新参数的网络 $Q$ 来选动作，拿更新缓慢的网络 $Q’$ 来算 Q 值。</p>
+<p><em>（这个改动没有增加运算量，基本上改一行代码的事情，易于实现）</em></p>
+<h2 id="Dueling-DQN"><a href="#Dueling-DQN" class="headerlink" title="Dueling DQN"></a>Dueling DQN</h2><p>Dueling DQN 改了 Q 网络的架构</p>
+<p><img src="/5-12.png" alt="Dueling DQN 架构"></p>
+<p>把 $Q(s, a)$ 拆成 $V(s)$ 和 $A(s, a)$。网络结构分成两路运算：</p>
+<ul>
+<li>对于状态 $s$ 的累积奖励估计 $V(s)$，这是一个标量</li>
+<li>对于状态 $s$ 和动作 $a$ 的累积奖励估计 $A(s, a)$，也就是对每一个动作 $a$，都有一个 $A(s, a)$ 的值</li>
+</ul>
+<p>这样拆分的好处：在训练的时候，不能直接去改 Q 值，只能直接去改 V 值和 A 值。对于某一个状态，它的大部分动作的 Q 都要增加的情况，网络会更可能去调大 V 的值。这样，其他那些（可能就没什么机会采样到的）动作的 Q 也会跟着增加了，这样更新就会更高效。</p>
+<p>但是这样拆分可能会有一个退化情况：$V(s) &#x3D; 0, A(s, a) &#x3D; Q(s, a)$，这样就相当于啥都没干。为了避免这个情况，会对 $A(s, a)$ 加一些限制，使得模型对 $A(s, a)$ 的改动变得更麻烦。</p>
+<p>譬如，让 $\sum_{a}{A(s, a)} &#x3D; 0$。这样 $V(s)就变成了$ Q(s, a)$关于动作$ a $的平均值。实操的时候，就让$ A(s, a)$在和$ V(s)$相加前进行一个归一化（减去均值）。</p>
+<h2 id="Prioritized-Replay"><a href="#Prioritized-Replay" class="headerlink" title="Prioritized Replay"></a>Prioritized Replay</h2><p>在从 buffer 中采样的时候，原来我们是对于所有的数据进行均匀采样。</p>
+<p>Prioritized Replay 的核心思想就是：在之前训练中具有更大 TD（回归）误差的数据在之后的训练中有更高的被采样到的概率。</p>
+<p>参数更新的过程也被修改了。</p>
+<h2 id="Multi-step"><a href="#Multi-step" class="headerlink" title="Multi-step"></a>Multi-step</h2><p>结合 MC 和 TD 的采样方法。</p>
+<p>在 TD 里面，只往后采样一步，得到数据 $(s_t, a_t, r_t, s_{t+1})$</p>
+<p>但是，可以往后采样 $N+1$ 步，得到数据 $(s_t, a_t, r_t, \ldots, s_{t+N}, a_{t+N}, r_{t+N}, s_{t+N+1})$</p>
+<p><img src="/5-13.png" alt="Multi-step 示意图"></p>
+<p>于是，训练过程和回归问题就变成上图所示了。</p>
+<p>采样多步，才进行估测，估测部分造成的影响就会比较轻微；但是同样地，把若干步的奖励加起来，方差会较大。调 N 值使得方差增大和 Q 被高估的影响达到一个平衡。</p>
+<h2 id="Noisy-Net"><a href="#Noisy-Net" class="headerlink" title="Noisy Net"></a>Noisy Net</h2><p>在网络参数上引入噪声</p>
+<ul>
+<li>在动作上引入噪声：epsilon greedy</li>
+<li>在网络参数上引入噪声：每次 <strong>在一个 episode 最开始的时候</strong>，将 Q 函数的参数加上高斯噪声，得到 $\tilde{Q}$。此时，动作 $a &#x3D; \arg \max_{a} \tilde{Q}(s, a)$。在同一个 episode，用同一个 $\tilde{Q}$ 和环境互动</li>
+<li>在动作上引入噪声：在同一个状态中，agent 可能采取不同的动作。但是没有策略真的会在现实中这样做（给同样的状态，应该有同样的回应）</li>
+<li>在网络参数上引入噪声：在同一个 episode 里面，网络参数都是固定的。这样，看到相似的状态，agent 会采取相同的动作。这被称为 state-dependent exploration（有系统的尝试）</li>
+</ul>
+<h2 id="Distributional-Q-function"><a href="#Distributional-Q-function" class="headerlink" title="Distributional Q-function"></a>Distributional Q-function</h2><p>实操时比较少人用</p>
+<p><img src="/5-14.png" alt="不同的分布得出相同的期望"></p>
+<ul>
+<li>$Q^{\pi}(s, a)$：状态-动作值函数</li>
+<li>在使用 actor $\pi$ 的时候，看到状态 $s$ 强制采取动作 $a$ 的累积奖励 <strong>期望值</strong></li>
+<li>也就是说，实际上 $Q^{\pi}(s, a)$ 是一个分布，而不同的分布可能会得出相同的期望值。也就是说，<strong>相同的期望值可能对应不同的分布，只关注期望值可能丢失了分布信息</strong></li>
+<li>所以说，尝试对 $Q^{\pi}(s, a)$ 这个分布建模</li>
+<li>但是，很可能 $Q^{\pi}(s, a)$ 是个连续值，无法枚举 → 将 $Q^{\pi}(s, a)$ 的值域进行分桶</li>
+<li>譬如下图，看到状态 $s$ 后，能够采取 3 个动作；对每个动作，各自把 Q 值分成 5 个桶，求出 Q 值在这 5 个桶内的分布。</li>
+<li>选动作：还是选均值最大的动作，但是可以（譬如标准差过大，也就意味着执行该动作的风险很大；为了规避风险，可以尝试选标准差较小的动作去执行）</li>
+<li>具体怎么训练这个网络需要自行了解</li>
+</ul>
+<p><img src="/5-15.png" alt="Distributional Q-function 是"></p>
+<h2 id="Rainbow"><a href="#Rainbow" class="headerlink" title="Rainbow"></a>Rainbow</h2><p>把之前的方法都用起来，大力出奇迹</p>
+<ul>
+<li>DQN（baseline）</li>
+<li>A3C（another baseline）（A3C 中本身就有 multi-step 的策略）</li>
+<li>DDQN</li>
+<li>Prioritized DDQN</li>
+<li>Dueling DDQN</li>
+<li>Distributional DQN</li>
+<li>Noisy DQN</li>
+<li>把前面都弄起来，就是 Rainbow</li>
+</ul>
+<p>然后还有消融实验，结果就是说 distributional Q-function 就是用来防止高估奖励的，所以说把 double DQN 摘了的话，还有 distributional Q-function 来防止高估，所以不会差太多；但是相反，distributional Q-function 可能导致低估奖励，因为分桶的过程可能会裁剪掉极端值。</p>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 已经结束咧 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> Goodbye --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/2023/06/28/reinforcement-learning-hungyi-5-3/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>李宏毅强化学习个人笔记 - 对于连续动作的 Q-learning</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2023/06/28/reinforcement-learning-hungyi-5-1/">
+        <span>李宏毅强化学习个人笔记 - Q-learning 简介</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2023/06/28/reinforcement-learning-hungyi-5-2/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Double-DQN"><span class="toc-number">1.</span> <span class="toc-text">Double DQN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dueling-DQN"><span class="toc-number">2.</span> <span class="toc-text">Dueling DQN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prioritized-Replay"><span class="toc-number">3.</span> <span class="toc-text">Prioritized Replay</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multi-step"><span class="toc-number">4.</span> <span class="toc-text">Multi-step</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Noisy-Net"><span class="toc-number">5.</span> <span class="toc-text">Noisy Net</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Distributional-Q-function"><span class="toc-number">6.</span> <span class="toc-text">Distributional Q-function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rainbow"><span class="toc-number">7.</span> <span class="toc-text">Rainbow</span></a></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
+      </div>
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2024 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        ZM-J
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >
