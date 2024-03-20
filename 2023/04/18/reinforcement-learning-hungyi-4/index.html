@@ -393,8 +393,10 @@
 </ul>
 </li>
 </ol>
-<p><img src="/4-1.png" alt="错误的"></p>
-<p><img src="/4-2.png" alt="正确的"></p>
+<img src="/2023/04/18/reinforcement-learning-hungyi-4/4-1.png" class="" title="错误的">
+
+<img src="/2023/04/18/reinforcement-learning-hungyi-4/4-2.png" class="" title="正确的">
+
 <p>然后 $R(\tau^n)-b$ 这一项可以拿出来，叫成 Advantage Function $A^{\theta}(s_t, a_t)$：如果我们在状态 $s_t$ 时采用动作 $a_t$，相较于其他动作，能够有多好。</p>
 <p>$A^{\theta}(s_t, a_t)$ 可以被 critic 估计出来。</p>
 <h2 id="On-policy-→-Off-policy：不止一次地用到与环境交互的经验"><a href="#On-policy-→-Off-policy：不止一次地用到与环境交互的经验" class="headerlink" title="On-policy → Off-policy：不止一次地用到与环境交互的经验"></a>On-policy → Off-policy：不止一次地用到与环境交互的经验</h2><ul>
@@ -432,7 +434,8 @@
 <p>把这个式子用上面嗯凑的方法凑回去，凑成 $x \sim p$ 形式的期望，有：</p>
 <p>$$Var_{x \sim q}\left[f(x) \frac{p(x)}{q(x)}\right] &#x3D; E_{x \sim p}\left[f(x)^2 \frac{p(x)}{q(x)}\right] - \left(E_{x \sim p}\left[f(x) \right]\right)^2$$</p>
 <p>两项的不一样就体现在第一项中，后者比前者多了一个 $p(x)&#x2F;q(x)$。如果分布 $p$ 和 $q$ 差太大的话，随机变量的方差就会差很多。这时，如果采样的样本数不够多的话，那么差别就会比较大。</p>
-<p><img src="/4-3.png" alt="一图流"></p>
+<img src="/2023/04/18/reinforcement-learning-hungyi-4/4-3.png" class="" title="一图流">
+
 <p>当分布 $p$ 和 $q$ 差距较大的时候，如上图所示：</p>
 <ul>
 <li>我们在 $x \sim p$ 的时候总会采样到 $f(x)$ 为负的点，算出来的期望为负的。</li>
@@ -531,7 +534,7 @@
 <li>如果 $A &gt; 0$，也就是说某个状态和动作 $(s_t, a_t)$ 是好的。我们想要把 $(s_t, a_t)$ 出现的概率调大，也就是说让 $p^{\theta}$ 越大越好；但是 $p^{\theta}$ 和 $p^{\theta^k}$ 的比值不应超过 $1 + \varepsilon$。如果超过了，就没有收益了</li>
 <li>反之，如果 $A &lt; 0$，希望把 $(s_t, a_t)$ 出现的概率调小，但是小到 $p^{\theta}$ 和 $p^{\theta^k}$ 的比值不超过 $1 - \varepsilon$</li>
 </ul>
-<p><img src="/4-4.png" alt="PPO2 的比值示意图"></p>
+<img src="/2023/04/18/reinforcement-learning-hungyi-4/4-4.png" class="" title="PPO2 的比值示意图">
 
   </div>
   <!--文末结束语-->

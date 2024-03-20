@@ -378,7 +378,8 @@
 </li>
 </ul>
 <h2 id="critic-的形式"><a href="#critic-的形式" class="headerlink" title="critic 的形式"></a>critic 的形式</h2><p><strong>关于状态 $V^\pi(s)$</strong> 当 actor 使用 $\pi$ 的时候，在观测到状态 $s$ <strong>后获得的期望累积奖励</strong>。</p>
-<p><img src="/3-1.png" alt="例子"></p>
+<img src="/2023/03/21/reinforcement-learning-hungyi-3/3-1.png" class="" title="例子">
+
 <p>如上图：</p>
 <ul>
 <li>左边的状态，还剩很多飞机可以打，所以 $V^\pi(s)$ 较大；</li>
@@ -397,7 +398,8 @@
 <li>假设观察到状态 $s_b$：到这一句游戏结束，累积奖励为 $G_b$</li>
 <li>那么希望 $V^\pi(s_a)$ 与 $G_a$ 越接近越好，$V^\pi(s_b)$ 与 $G_b$ 越接近越好</li>
 </ul>
-<p><img src="/5-1.png" alt="蒙特卡洛方法一图流"></p>
+
+
 <p><strong>方法二：时序差分方法（Temporal Difference approach, TD）</strong></p>
 <p>critic 看到 actor $\pi$ 在玩游戏。</p>
 <ul>
@@ -405,11 +407,13 @@
 <li>$V^\pi(s_t)&#x3D;V^\pi(s_{t+1}) + r_t$</li>
 <li>具体训练如下图：让 $V^\pi(s_t)-V^\pi(s_{t+1})$ 与 $r_t$ 越接近越好</li>
 </ul>
-<p><img src="/3-2.png" alt="时序差分方法一图流"></p>
+<img src="/2023/03/21/reinforcement-learning-hungyi-3/3-2.png" class="" title="时序差分方法一图流">
+
 <p>好处：可以不玩完游戏就能开始更新网络参数（可能在某些情况下玩完一把游戏耗时太久）</p>
 <p><strong>关于状态和动作 $Q^\pi(s, a)$</strong> 当 actor 使用 $\pi$ 的时候，在观测到状态 $s$ 以及采取动作 $a$ <strong>后获得的期望累积奖励</strong>。</p>
 <p>指定状态，不同动作采取的奖励可能不同。</p>
-<p><img src="/3-3.png" alt="$Q^\pi(s, a)$ 一图流"></p>
+<img src="/2023/03/21/reinforcement-learning-hungyi-3/3-3.png" class="" title="$Q^\pi(s, a)$ 一图流">
+
 <p>上图右边画出了动作 $a$ 可以被穷举的情况。</p>
 <h3 id="Q-Learning-概览"><a href="#Q-Learning-概览" class="headerlink" title="Q-Learning 概览"></a>Q-Learning 概览</h3><ul>
 <li>有一个初始的 actor $\pi$</li>
@@ -425,7 +429,8 @@
 <li>$\pi’$ 没有额外的参数，其仅依赖于 $Q$</li>
 <li>不太适合连续的动作 $a$</li>
 </ul>
-<h3 id="用-TD-来估计-Q-pi-s-a"><a href="#用-TD-来估计-Q-pi-s-a" class="headerlink" title="用 TD 来估计 $Q^{\pi}(s, a)$"></a>用 TD 来估计 $Q^{\pi}(s, a)$</h3><p><img src="/3-4.png" alt="一图流"></p>
+<h3 id="用-TD-来估计-Q-pi-s-a"><a href="#用-TD-来估计-Q-pi-s-a" class="headerlink" title="用 TD 来估计 $Q^{\pi}(s, a)$"></a>用 TD 来估计 $Q^{\pi}(s, a)$</h3><img src="/2023/03/21/reinforcement-learning-hungyi-3/3-4.png" class="" title="一图流">
+
 <h3 id="奇技淫巧"><a href="#奇技淫巧" class="headerlink" title="奇技淫巧"></a>奇技淫巧</h3><p>Google rainbow 这篇 paper。</p>
 <p>包含 Double DQN 和 Dueling DQN。</p>
 

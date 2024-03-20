@@ -308,7 +308,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-02-29
+      Edited on:&nbsp;2024-03-20
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -407,9 +407,11 @@
 <li><code>_msg</code>: 将 <code>_marshal</code> 展平为一维数组，并过滤掉 <code>None</code>，最后用 <code>key</code> 中内容进行循环模 256 加的加密。</li>
 </ol>
 <p>下面是上述第 3 步的解释：如果我们取 <code>w = 3</code>，<code>h = 4</code>，<code>n = 3</code>，<code>msg = &#39;wuhudasim&#39;</code>，那么 <code>arr</code> 如下图，其中 <code>/</code> 表示 <code>None</code>：</p>
-<p><img src="/arr.png" alt="arr 数组示意图"></p>
+<img src="/2023/07/12/cryptoctf-2023-medium-2/arr.png" class="" title="arr 数组示意图">
+
 <p>然后按行打乱得到 <code>_marshal</code>，譬如打乱成</p>
-<p><img src="/marshal.png" alt="_marshal 数组示意图"></p>
+<img src="/2023/07/12/cryptoctf-2023-medium-2/marshal.png" class="" title="_marshal 数组示意图">
+
 <p>然后展平、过滤掉 <code>None</code>，就得到了 <code>udihamwus</code>，然后与 <code>key</code> 中内容进行循环模 256 加的加密。</p>
 <p><strong>第二部分：将密文填入图像</strong></p>
 <p>这里定义了一个 <code>sox</code> 函数，用于控制图像上的 $(x, y)$ 坐标演进。通过代码审计，或是简单的调试，可以看到：</p>
@@ -418,7 +420,8 @@
 <li>对于同奇偶的 $n_1, n_2$，如果 $n_1 &lt; n_2$，那么用 $n_1$ 生成的坐标序列是用 $n_2$ 坐标序列的子序列。</li>
 </ol>
 <p>性质一的直观展示如下：</p>
-<p><img src="/sox.png" alt="n = 4 所生成的路径"></p>
+<img src="/2023/07/12/cryptoctf-2023-medium-2/sox.png" class="" title="n &#x3D; 4 所生成的路径">
+
 <p>性质二的验证代码如下：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sox</span>(<span class="params">n, d</span>):</span><br><span class="line">    x, y, t = <span class="number">0</span>, <span class="number">0</span>, d</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(n - <span class="number">1</span>):</span><br><span class="line">        u = <span class="number">1</span> &amp; (t // <span class="number">2</span>)</span><br><span class="line">        v = (<span class="number">1</span> &amp; t) ^ u</span><br><span class="line">        x, y = spin(<span class="number">2</span>**s, x, y, u, v)</span><br><span class="line">        x += <span class="number">2</span>**s * u</span><br><span class="line">        y += <span class="number">2</span>**s * v</span><br><span class="line">        t = t // <span class="number">4</span></span><br><span class="line">    <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">spin</span>(<span class="params">n, x, y, u, v</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    n: 图像的宽高</span></span><br><span class="line"><span class="string">    x, y: 横纵坐标</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> v == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> u == <span class="number">1</span>:</span><br><span class="line">            x = n - <span class="number">1</span> - x</span><br><span class="line">            y = n - <span class="number">1</span> - y</span><br><span class="line">        x, y = y, x</span><br><span class="line">    <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_path_sequence</span>(<span class="params">n</span>):</span><br><span class="line">    path_sequence = []</span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">range</span>(n**<span class="number">2</span>):</span><br><span class="line">        x, y = sox(n, d)</span><br><span class="line">        path_sequence.append((x, y))</span><br><span class="line">    <span class="keyword">return</span> path_sequence</span><br><span class="line"></span><br><span class="line">p3 = get_path_sequence(<span class="number">3</span>)</span><br><span class="line">p5 = get_path_sequence(<span class="number">5</span>)</span><br><span class="line">p7 = get_path_sequence(<span class="number">7</span>)</span><br><span class="line">p233 = get_path_sequence(<span class="number">233</span>)</span><br><span class="line"><span class="built_in">print</span>(p5[:<span class="built_in">len</span>(p3)] == p3)</span><br><span class="line"><span class="built_in">print</span>(p7[:<span class="built_in">len</span>(p3)] == p3)</span><br><span class="line"><span class="built_in">print</span>(p233[:<span class="built_in">len</span>(p7)] == p7)</span><br></pre></td></tr></table></figure>
 

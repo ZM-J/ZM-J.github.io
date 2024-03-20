@@ -371,7 +371,8 @@
 <p>不管 actor 做了什么事情，得到的奖励都是 0，所以到最后什么都不会学到。</p>
 <p>（譬如训练一个机械臂去开门，因为绝大多数情况下机械臂都在去伸手，在最后把门打开了才能获得一个正的奖励）</p>
 <h3 id="Reward-Shaping"><a href="#Reward-Shaping" class="headerlink" title="Reward Shaping"></a>Reward Shaping</h3><p>环境有一个固定的奖励。为了让 agent 学的东西是我们想要的样子，我们去刻意设计一些奖励去引导 agent。</p>
-<p><img src="/7-1.png" alt="reward shaping"></p>
+<img src="/2023/06/29/reinforcement-learning-hungyi-7/7-1.png" class="" title="reward shaping">
+
 <p>如上图所示，在小鹏与的 Q 函数中</p>
 <ul>
 <li>对于玩的认知是，当前可以获得一个正的奖励，长时间后获得一个负的奖励</li>
@@ -379,17 +380,20 @@
 <li>假设小鹏与的衰减系数设得比较小的话，那么就总会关注短期奖励，从而会去玩，而不是学习</li>
 <li>这个时候，就人为地“给一个棒棒糖”：在采取学习这个动作的时候，将短期奖励也“改”为正的奖励，虽然这个奖励不是环境真正的奖励</li>
 </ul>
-<p><img src="/7-2.png" alt="Facebook 玩 VizDoom 的追加奖励"></p>
+<img src="/2023/06/29/reinforcement-learning-hungyi-7/7-2.png" class="" title="Facebook 玩 VizDoom 的追加奖励">
+
 <p>Facebook 训练去玩 FPS 游戏 VizDoom 的 agent：设计掉血扣分、耗费弹药扣分、捡到补给包加分、捡到弹药加分、呆在原地扣分</p>
 <p>Reward shaping 也会有一定的问题：需要足够好的 domain knowledge。如果追加奖励设计得不恰当，也可能让 agent 误入迷途。</p>
 <p>下面介绍一些能加到强化学习算法里面，一般有用的技巧</p>
 <p><strong>Curiosity</strong></p>
 <p>加上一个新的奖励函数：ICM（intrinsic curiosity module）</p>
-<p><img src="/7-3.png" alt="ICM 示意图"></p>
+<img src="/2023/06/29/reinforcement-learning-hungyi-7/7-3.png" class="" title="ICM 示意图">
+
 <p>ICM 得到的奖励 $r_1^i$ 以 $(s_1, r_1, s_2)$ 这三个东西作为输入</p>
 <p>模型的奖励 $R(\tau)$ 就变成 $\sum_{i&#x3D;1}^T{(r_t + r_t^i)}$</p>
 <p><strong>ICM 具体结构的设计</strong> </p>
-<p><img src="/7-4.png" alt="ICM 网络结构示意图"></p>
+<img src="/2023/06/29/reinforcement-learning-hungyi-7/7-4.png" class="" title="ICM 网络结构示意图">
+
 <ul>
 <li>通过 $(s_t, a_t)$（用一个网络）预测下一步状态 $\hat{s}_{t+1}$</li>
 <li>将预测的状态 $\hat{s}<em>{t+1}$ 跟真实状态 $s</em>{t+1}$ 比较，看看像不像。</li>
@@ -405,7 +409,8 @@
 <p>先从打低速、血少的怪开始练起，再去打高速、血多的怪。</p>
 <p>这样可能会有一个问题：对于不同的任务，都需要事先“精心设计并安排”学习内容。</p>
 <p><strong>Reverse Curriculum Generation</strong></p>
-<p><img src="/7-5.png" alt="Reverse Curriculum Generation 示意图"></p>
+<img src="/2023/06/29/reinforcement-learning-hungyi-7/7-5.png" class="" title="Reverse Curriculum Generation 示意图">
+
 <p>从目标状态开始反推</p>
 <ul>
 <li>给定一个目标状态 $s_g$（譬如机械臂开门，“门被打开”就是目标状态）</li>
@@ -424,7 +429,8 @@
 <li>每一个低级的 agent 以高级 agent 的“愿景”为输入，决定其要产生什么输出</li>
 <li>如果一个 agent 达到了错误的目标，那就 <strong>认为最初的目标就是那个错误的目标</strong>（譬如教授想要研究生发 paper，但是研究生不知道怎么样变成了 up 主……那就把本来的愿景改成“成为 up 主”）</li>
 </ul>
-<p><img src="/7-6.png" alt="Hierarchical Reinforcement Learning 举例"></p>
+<img src="/2023/06/29/reinforcement-learning-hungyi-7/7-6.png" class="" title="Hierarchical Reinforcement Learning 举例">
+
 <p>譬如低级 agent 的目标是要从蓝色点走到黄色的点，高级的 agent 就产生粉色的点，让低级的 agent 逐步到达粉色的点。</p>
 <h2 id="Imitation-Learning"><a href="#Imitation-Learning" class="headerlink" title="Imitation Learning"></a>Imitation Learning</h2><p>又叫作 learning by demonstration, apprenticeship learning</p>
 <p>砖家来描述如何解决问题：</p>
@@ -461,14 +467,16 @@
 </li>
 </ul>
 <h3 id="Inverse-Reinforcement-Learning-IRL"><a href="#Inverse-Reinforcement-Learning-IRL" class="headerlink" title="Inverse Reinforcement Learning (IRL)"></a>Inverse Reinforcement Learning (IRL)</h3><p>又名 inverse optimal control</p>
-<p><img src="/7-7.png" alt="Inverse Reinforcement Learning 示意图"></p>
+<img src="/2023/06/29/reinforcement-learning-hungyi-7/7-7.png" class="" title="Inverse Reinforcement Learning 示意图">
+
 <ul>
 <li>由砖家描述来反推奖励函数是什么</li>
 <li>用得到的奖励函数来找到最优的 actor</li>
 <li>相较于强化学习的好处：也许对奖励建模变得更加简单。简单的奖励函数能导致复杂的策略。</li>
 </ul>
 <p><strong>IRL 的框架</strong></p>
-<p><img src="/7-8.png" alt="Inverse Reinforcement Learning 流程图"></p>
+<img src="/2023/06/29/reinforcement-learning-hungyi-7/7-8.png" class="" title="Inverse Reinforcement Learning 流程图">
+
 <ul>
 <li>砖家 $\hat{\pi}$ 玩游戏，得到 $N$ 个轨迹 ${\hat{\tau}_1, \hat{\tau}_2, \ldots, \hat{\tau}_N}$</li>
 <li>actor $\pi$ 玩游戏，得到 $N$ 个轨迹 ${\tau_1, \tau_2, \ldots, \tau_N}$</li>
@@ -478,7 +486,8 @@
 <li>得到奖励函数 $R$ 后，再基于这个奖励函数更新 actor（利用强化学习），使得这个 actor 能在奖励函数 $R$ 下得到高分</li>
 <li>在这个框架下，actor 就像 GAN 中的 generator，奖励函数 $R$ 就像 GAN 中的 discriminator</li>
 </ul>
-<p><img src="/7-9.png" alt="GAN 和 IRL 对比"></p>
+<img src="/2023/06/29/reinforcement-learning-hungyi-7/7-9.png" class="" title="GAN 和 IRL 对比">
+
 <p><strong>IRL 的应用场景</strong></p>
 <p>自动驾驶：每个人开车的风格不尽相同</p>
 <ul>

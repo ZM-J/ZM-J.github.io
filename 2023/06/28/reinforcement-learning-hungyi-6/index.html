@@ -403,14 +403,16 @@
 <p>$$r_t^n + V^{\pi}(s_{t+1}^n) - V^{\pi}(s_t^{n})$$</p>
 <p>这样就只需要估计 V 值了，但是引入了 $r_t$ 这个随机变量。然而，这只有一步的奖励，标准差较小，所以影响不大（较之前 policy gradient 要算累积奖励而言）。</p>
 <p><em>（另一说原始 A3C 的方法直接大力出奇迹，把所有能试的方法都试了个遍，最后发现这样弄就是最好的）</em></p>
-<p><img src="/6-1.png" alt="Advantage Actor-Critic 示意图"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-6/6-1.png" class="" title="Advantage Actor-Critic 示意图">
+
 <p>所以，先估计 V 值，然后根据式子：</p>
 <p>$$\nabla \bar{R}<em>{\theta} \approx \frac{1}{N} \sum</em>{n&#x3D;1}^{N} \sum_{t&#x3D;1}^{T_n} \left( r_t^n + V^{\pi}(s_{t+1}^n) - V^{\pi}(s_t^{n}) \right) \nabla \log p_{\theta} (a_t^n | s_t^n)$$</p>
 <p>来更新 policy（更新 actor）</p>
 <h3 id="实操的注意事项"><a href="#实操的注意事项" class="headerlink" title="实操的注意事项"></a>实操的注意事项</h3><ul>
 <li>actor $\pi(s)$ 和 critic $V^{\pi}(s)$ 的参数可以共享</li>
 </ul>
-<p><img src="/6-2.png" alt="actor 和 critic 的参数共享"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-6/6-2.png" class="" title="actor 和 critic 的参数共享">
+
 <p>这样做的目的是：</p>
 <ol>
 <li>actor 和 critic 的输入均为状态 $s$</li>
@@ -420,7 +422,8 @@
 <li>需要 exploration 的机制：对 actor $\pi$ 的输出做一个限制：输出分布的熵不应太小，这样在测试的时候才会尝试不同的动作，得到比较好的结果。</li>
 </ul>
 <h2 id="Asynchronous-Advantage-Actor-Critic-A3C"><a href="#Asynchronous-Advantage-Actor-Critic-A3C" class="headerlink" title="Asynchronous Advantage Actor-Critic (A3C)"></a>Asynchronous Advantage Actor-Critic (A3C)</h2><p>参考《火影忍者》里面卡卡西叫鸣人开多重影分身来修炼忍术，这样获取到的经验值翻倍</p>
-<p><img src="/6-3.png" alt="A3C 示意图"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-6/6-3.png" class="" title="A3C 示意图">
+
 <p>开多个 worker（影分身），来跟环境互动。影分身会把所有的经验集合在一起。</p>
 <p>需要多个 CPU。</p>
 <p>一开始有一个 Global Network，参数为 $\theta^1$</p>
@@ -438,7 +441,8 @@
 <p>也就是说，actor 在训练中不同的阶段时，critic 会给出不同的打分。</p>
 <p>Pathwise Derivative Policy Gradient: Critic 直接告诉 actor 什么样的动作是好的。</p>
 <p>回想 Q-learning：动作 $a$ 时连续向量时，$a &#x3D; \arg \max_{a} Q(s, a)$</p>
-<p><img src="/6-4.png" alt="actor 用于解最优化问题"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-6/6-4.png" class="" title="actor 用于解最优化问题">
+
 <ul>
 <li><p>Q-learning 的改进：在 Pathwise Derivative Policy Gradient 时，actor 直接用于解这个最优化问题（被当作是求解这个最优化问题的求解器）：输入一个状态 $s$，输出最优动作 $a$</p>
 </li>
@@ -447,11 +451,13 @@
 </ul>
 <h3 id="实际算法"><a href="#实际算法" class="headerlink" title="实际算法"></a>实际算法</h3><p>假设学了一个 Q 函数 $Q^{\pi}(s, a)$，接下来要学习一个 actor，用来解</p>
 <p>$$\pi’(s) &#x3D; \arg \max_{a} Q^{\pi}(s, a)$$</p>
-<p><img src="/6-5.png" alt="Pathwise Derivative Policy Gradient 示意图"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-6/6-5.png" class="" title="Pathwise Derivative Policy Gradient 示意图">
+
 <p>实际上在训练的时候，就把 Q 和 actor 接起来，变成一个更大的网络。</p>
 <p>把 Q 的参数冻结起来，只调 actor 的参数 $\pi \to \pi’$，来让 actor 对于状态 $s$，输出最优的动作 $a$。</p>
 <p>这下就非常像 GAN 了：actor 就像 generator，Q 就像 discriminator</p>
-<p><img src="/6-6.png" alt="Pathwise Derivative Policy Gradient 训练流程示意图"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-6/6-6.png" class="" title="Pathwise Derivative Policy Gradient 训练流程示意图">
+
 <p>Q-learning 里面所用到的技巧，如 replay buffer、exploration 等，在这里也可以用得上。</p>
 <p>对比 Q-learning 的训练流程，我们也可以写出 Pathwise Derivative Policy Gradient 的训练流程如下：</p>
 <ol>

@@ -368,14 +368,16 @@
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
 </ul>
 <h2 id="Double-DQN"><a href="#Double-DQN" class="headerlink" title="Double DQN"></a>Double DQN</h2><p>Double DQN 提出的动机：在实际的 Q-learning 中，Q 值是经常被高估的。</p>
-<p><img src="/5-10.png" alt="不同训练方法得到的 Q 值，褐色为 DQN，蓝色为 Double DQN，横线为 Q 的实际值"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-5-2/5-10.png" class="" title="不同训练方法得到的 Q 值，褐色为 DQN，蓝色为 Double DQN，横线为 Q 的实际值">
+
 <p>总体来说，DQN 的 Q 值随着训练的进行逐步上升。Q 函数依赖于策略，在学习的过程中，策略会变得越来越强，Q 值就会越来越大。</p>
 <p>实际值：训练结束后，再和环境互动，得到的真实奖励。（互动多次取期望）</p>
 <p>Double DQN 能让估测值跟实际值更接近，且实际值（真正的累计期望）比原来的 DQN 要更大（模型更强）。</p>
 <p><strong>为什么 DQN 中的 Q 值老是被高估？</strong> 注意到学习时回归问题的形式：</p>
 <p>$$Q(s_t, a_t) \longleftrightarrow r_t + \max_{a}{Q(s_{t+1}, a)}$$</p>
 <p>目标值很容易一不小心就被设太高：在算目标值的时候，看哪一个 $a$ 能得到最大的 $Q$ 值，就把它加上去。假设现在有某个动作 $a$，它得到的 $Q$ 值是被高估的。那么，在回归的时候，总是会选这个被高估的值来作为目标。如下图，本来大家的真实 Q 值都是差不多的，绿色部分表示被高估，那么总会采取被高估的动作对应的 Q 值作为回归目标。</p>
-<p><img src="/5-11.png" alt="第一个动作的 Q 值被高估"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-5-2/5-11.png" class="" title="第一个动作的 Q 值被高估">
+
 <p>这样，回归训练出的的结果也会跟着变大。</p>
 <p><strong>Double DQN 的设计</strong> 选动作的 Q 函数（$Q$）和算 Q 值的 Q 函数（$Q’$）是不同的！</p>
 <p>$$Q(s_t, a_t) \longleftrightarrow r_t + Q’(s_{t+1}, \arg \max_{a} Q(s_{t+1}, a))$$</p>
@@ -387,7 +389,8 @@
 <p>所以实际上，我们会拿待更新参数的网络 $Q$ 来选动作，拿更新缓慢的网络 $Q’$ 来算 Q 值。</p>
 <p><em>（这个改动没有增加运算量，基本上改一行代码的事情，易于实现）</em></p>
 <h2 id="Dueling-DQN"><a href="#Dueling-DQN" class="headerlink" title="Dueling DQN"></a>Dueling DQN</h2><p>Dueling DQN 改了 Q 网络的架构</p>
-<p><img src="/5-12.png" alt="Dueling DQN 架构"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-5-2/5-12.png" class="" title="Dueling DQN 架构">
+
 <p>把 $Q(s, a)$ 拆成 $V(s)$ 和 $A(s, a)$。网络结构分成两路运算：</p>
 <ul>
 <li>对于状态 $s$ 的累积奖励估计 $V(s)$，这是一个标量</li>
@@ -402,7 +405,8 @@
 <h2 id="Multi-step"><a href="#Multi-step" class="headerlink" title="Multi-step"></a>Multi-step</h2><p>结合 MC 和 TD 的采样方法。</p>
 <p>在 TD 里面，只往后采样一步，得到数据 $(s_t, a_t, r_t, s_{t+1})$</p>
 <p>但是，可以往后采样 $N+1$ 步，得到数据 $(s_t, a_t, r_t, \ldots, s_{t+N}, a_{t+N}, r_{t+N}, s_{t+N+1})$</p>
-<p><img src="/5-13.png" alt="Multi-step 示意图"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-5-2/5-13.png" class="" title="Multi-step 示意图">
+
 <p>于是，训练过程和回归问题就变成上图所示了。</p>
 <p>采样多步，才进行估测，估测部分造成的影响就会比较轻微；但是同样地，把若干步的奖励加起来，方差会较大。调 N 值使得方差增大和 Q 被高估的影响达到一个平衡。</p>
 <h2 id="Noisy-Net"><a href="#Noisy-Net" class="headerlink" title="Noisy Net"></a>Noisy Net</h2><p>在网络参数上引入噪声</p>
@@ -413,7 +417,8 @@
 <li>在网络参数上引入噪声：在同一个 episode 里面，网络参数都是固定的。这样，看到相似的状态，agent 会采取相同的动作。这被称为 state-dependent exploration（有系统的尝试）</li>
 </ul>
 <h2 id="Distributional-Q-function"><a href="#Distributional-Q-function" class="headerlink" title="Distributional Q-function"></a>Distributional Q-function</h2><p>实操时比较少人用</p>
-<p><img src="/5-14.png" alt="不同的分布得出相同的期望"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-5-2/5-14.png" class="" title="不同的分布得出相同的期望">
+
 <ul>
 <li>$Q^{\pi}(s, a)$：状态-动作值函数</li>
 <li>在使用 actor $\pi$ 的时候，看到状态 $s$ 强制采取动作 $a$ 的累积奖励 <strong>期望值</strong></li>
@@ -424,7 +429,8 @@
 <li>选动作：还是选均值最大的动作，但是可以（譬如标准差过大，也就意味着执行该动作的风险很大；为了规避风险，可以尝试选标准差较小的动作去执行）</li>
 <li>具体怎么训练这个网络需要自行了解</li>
 </ul>
-<p><img src="/5-15.png" alt="Distributional Q-function 是"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-5-2/5-15.png" class="" title="Distributional Q-function">
+
 <h2 id="Rainbow"><a href="#Rainbow" class="headerlink" title="Rainbow"></a>Rainbow</h2><p>把之前的方法都用起来，大力出奇迹</p>
 <ul>
 <li>DQN（baseline）</li>

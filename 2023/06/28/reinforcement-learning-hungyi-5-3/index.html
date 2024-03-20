@@ -379,7 +379,8 @@
 <p>最小化就用梯度下降，最大化就相应地用梯度上升。</p>
 <p>这样做就会碰到陷入局部最优的问题当中，而且因为梯度上升需要逐步迭代，所以计算成本相应地也增大了，训练就更花时间。</p>
 <h2 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h2><p>特别设计 Q 网络的架构，使得解 argmax 最优化问题更加简单。</p>
-<p><img src="/5-16.png" alt="重新设计 Q 网络架构"></p>
+<img src="/2023/06/28/reinforcement-learning-hungyi-5-3/5-16.png" class="" title="重新设计 Q 网络架构">
+
 <p>譬如上图的例子：将 $Q^{\pi}$ 关于 $s$ 的部分拆成 $\mu(s)$、$\Sigma(s)$ 和 $V(s)$。</p>
 <p>然后将 $Q(s, a)$ 写成 $V(s)$ 加上一个二次型：</p>
 <p>$$Q(s, a) &#x3D; -(a - \mu(s))^\top \Sigma(s) (a - \mu(s)) + V(s)$$</p>

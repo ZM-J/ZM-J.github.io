@@ -368,13 +368,15 @@
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
 </ul>
 <p>基于策略的方法，也就是学习 actor。换言之，也就是学习一个策略函数 $\pi$：该函数输入观测，输出动作。</p>
-<p><img src="/2-1.png" alt="一图流"></p>
+<img src="/2023/03/21/reinforcement-learning-hungyi-2/2-1.png" class="" title="一图流">
+
 <h2 id="将神经网络作为-actor"><a href="#将神经网络作为-actor" class="headerlink" title="将神经网络作为 actor"></a>将神经网络作为 actor</h2><ul>
 <li>神经网络擅长拟合函数</li>
 <li>网络输入：机器的观测表示成向量或矩阵；</li>
 <li>网络输出：每个动作对应输出层的一个神经元；</li>
 </ul>
-<p><img src="/2-2.png" alt="一图流"></p>
+<img src="/2023/03/21/reinforcement-learning-hungyi-2/2-2.png" class="" title="一图流">
+
 <h3 id="神经网络相较于查表的作为-actor-的好处"><a href="#神经网络相较于查表的作为-actor-的好处" class="headerlink" title="神经网络相较于查表的作为 actor 的好处"></a>神经网络相较于查表的作为 actor 的好处</h3><ul>
 <li><p>有“采样”的步骤，可以带来更多变的决策。譬如猜拳，会随机出锤子剪刀布。</p>
 </li>
@@ -473,7 +475,8 @@
 <h4 id="为什么奖励不能都为正"><a href="#为什么奖励不能都为正" class="headerlink" title="为什么奖励不能都为正"></a>为什么奖励不能都为正</h4><p>打飞机里面确实有可能出现这种情况。</p>
 <p>在理想情况下确实不会出现问题。出现概率大的和小的一起增加，最后由于概率要对预测取 softmax，所以大的会增加比较小，小的会增加比较大。</p>
 <p>但是实际上，我们做的是采样，也就是只会采到部分动作。</p>
-<p><img src="/2-3.png" alt="举到的一个例子"></p>
+<img src="/2023/03/21/reinforcement-learning-hungyi-2/2-3.png" class="" title="举到的一个例子">
+
 <p>譬如上例中，我们只采样到 b 和 c。</p>
 <p>这个时候，我们只会去调高这部分动作的，而 a 的动作没有被采样到，不知道它的 $R(\tau)$ 是多少。然后更新 actor 的时候，我们只会去拉高 b 和 c 的概率，这时 a 的概率就变得更低了，在接下来的与环境互动中 a 更少可能被采样到。</p>
 <p>所以希望 $R(\tau)$ 有正有负：统一减掉一个 bias，让它有正有负。</p>
@@ -486,7 +489,8 @@
 </ul>
 <p>然后利用策略梯度与梯度上升更新参数，然后继续用更新后的参数去玩游戏……</p>
 <p>但是 $\nabla \log p(a_t^n|s_t^n,\theta)$ 的具体含义是什么？</p>
-<h4 id="回顾分类问题"><a href="#回顾分类问题" class="headerlink" title="回顾分类问题"></a>回顾分类问题</h4><p><img src="/2-4.png" alt="一个栗子"></p>
+<h4 id="回顾分类问题"><a href="#回顾分类问题" class="headerlink" title="回顾分类问题"></a>回顾分类问题</h4><img src="/2023/03/21/reinforcement-learning-hungyi-2/2-4.png" class="" title="一个栗子">
+
 <p>这里分类标签都是 one-hot 的，除了一个是 1，其他都是 0。要最小化</p>
 <p>$$-\sum_{i&#x3D;1}^{3}{\hat{y}_i \log y_i}$$</p>
 <p>所以实际上就是在最大化 $\log y_1 &#x3D; \log p(“\mathrm{left}” | s)$</p>
