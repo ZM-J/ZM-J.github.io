@@ -371,9 +371,8 @@
 <p>A2C: Advantage Actor-Critic</p>
 <h2 id="复习-policy-gradient"><a href="#复习-policy-gradient" class="headerlink" title="复习 policy gradient"></a>复习 policy gradient</h2><p>之前用 policy gradient 去学习 actor 的时候，都是看奖励函数的输出，来决定 actor 要怎么更新，才能得到最大的奖励。</p>
 <p>但是因为互动的过程中有非常大的随机性，所以直接根据互动的过程学可能没有办法学得很好。</p>
-<p>$$\nabla \bar{R}<em>{\theta} \approx \frac{1}{N} \sum</em>{n&#x3D;1}^{N} \sum_{t&#x3D;1}^{T_n} \left( \sum_{t’&#x3D;t}^{T_n} \gamma^{t’-t} r_{t’}^n - b \right) \nabla \log p_{\theta} (a_t^n | s_t^n)$$</p>
-<p>从 $t$ 到 $T_n$ 的奖励加起来，乘上一个随时间减少的衰减因子，再减去一个 bias（baseline）。</p>
-<p>可以记 $G_{t}^n &#x3D; \sum_{t’&#x3D;t}^{T_n} \gamma^{t’-t} r_{t’}^n$，$G_{t}^n$ 可看成一个随机变量。</p>
+<script type="math/tex; mode=display">\nabla \bar{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} \left( \sum_{t'=t}^{T_n} \gamma^{t'-t} r_{t'}^n - b \right) \nabla \log p_{\theta} (a_t^n | s_t^n)</script><p>从 $t$ 到 $T_n$ 的奖励加起来，乘上一个随时间减少的衰减因子，再减去一个 bias（baseline）。</p>
+<p>可以记 $G_{t}^n = \sum_{t’=t}^{T_n} \gamma^{t’-t} r_{t’}^n$，$G_{t}^n$ 可看成一个随机变量。</p>
 <p>在状态 $s$ 后采取动作 $a$，之后的游戏过程是有随机性的，差别可能会很大。</p>
 <p>理论上的假设（大数定律）：在足够采样次数之后，可以近似到 $G$ 的期望值。但是因为标准差很大，所以需要采样过多的次数，难以达到。</p>
 <p>所以说，能否用一个网络来估测 $G$ 的期望值？如果这样可行的话，可以用网络产生的期望值来代替采样得到的值，这样训练就会更加稳定。</p>
@@ -388,31 +387,22 @@
 <li>actor 不跟环境学，而是跟 critic 学</li>
 </ul>
 <p>在 policy gradient 中，$G$ 的期望值究竟是什么？下面这个式子符合 Q 的定义：</p>
-<p>$$\mathbb{E}[G_{t}^{n}]&#x3D;Q^{\pi_\theta}(s_t^n, a_t^n)$$</p>
-<p>先估计 Q 函数，然后再把 Q 函数代在算 $\nabla \bar{R}_{\theta}$ 的式子里面，就结束了。</p>
+<script type="math/tex; mode=display">\mathbb{E}[G_{t}^{n}]=Q^{\pi_\theta}(s_t^n, a_t^n)</script><p>先估计 Q 函数，然后再把 Q 函数代在算 $\nabla \bar{R}_{\theta}$ 的式子里面，就结束了。</p>
 <p>Baseline：直接用 $V^{\pi_\theta}(s_t^{n})$ 就好，也就是说，不考虑在状态 $s_t^n$ 的时候一定要执行哪个动作。$V$ 会是 $Q$ 的期望值。这样，括号里面的东西就会有正有负。也就是：</p>
-<p>$$\nabla \bar{R}<em>{\theta} \approx \frac{1}{N} \sum</em>{n&#x3D;1}^{N} \sum_{t&#x3D;1}^{T_n} \left( Q^{\pi_\theta}(s_t^n, a_t^n) - V^{\pi_\theta}(s_t^{n}) \right) \nabla \log p_{\theta} (a_t^n | s_t^n)$$</p>
-<h2 id="Advantage-Actor-Critic"><a href="#Advantage-Actor-Critic" class="headerlink" title="Advantage Actor-Critic"></a>Advantage Actor-Critic</h2><p>所以 Actor-Critic 的重点就在估计：</p>
-<p>$$Q^{\pi}(s_t^n, a_t^n) - V^{\pi}(s_t^{n})$$</p>
-<p>而事实上，可以仅用一个网络就把 $Q$ 和 $V$ 都估计了，这样会比用两个网络（估不准的）风险更低。</p>
-<p>$$Q^{\pi}(s_t^n, a_t^n) &#x3D; \mathbb{E}(r_t^n + V^{\pi}(s_{t+1}^n))$$</p>
-<p>这里 $r_t$ 是一个随机变量：在状态 $s_t$ 采取动作 $a_t$ 所得到的奖励可能是随机的；以及，跳到的下一个状态 $s_{t+1}$ 也是具有随机性的，为了考虑到随机性，需要加上期望算子。</p>
+<script type="math/tex; mode=display">\nabla \bar{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} \left( Q^{\pi_\theta}(s_t^n, a_t^n) - V^{\pi_\theta}(s_t^{n}) \right) \nabla \log p_{\theta} (a_t^n | s_t^n)</script><h2 id="Advantage-Actor-Critic"><a href="#Advantage-Actor-Critic" class="headerlink" title="Advantage Actor-Critic"></a>Advantage Actor-Critic</h2><p>所以 Actor-Critic 的重点就在估计：</p>
+<script type="math/tex; mode=display">Q^{\pi}(s_t^n, a_t^n) - V^{\pi}(s_t^{n})</script><p>而事实上，可以仅用一个网络就把 $Q$ 和 $V$ 都估计了，这样会比用两个网络（估不准的）风险更低。</p>
+<script type="math/tex; mode=display">Q^{\pi}(s_t^n, a_t^n) = \mathbb{E}(r_t^n + V^{\pi}(s_{t+1}^n))</script><p>这里 $r_t$ 是一个随机变量：在状态 $s_t$ 采取动作 $a_t$ 所得到的奖励可能是随机的；以及，跳到的下一个状态 $s_{t+1}$ 也是具有随机性的，为了考虑到随机性，需要加上期望算子。</p>
 <p>现在我们把期望值给去掉，当作 Q 函数等于 $r$ 加上 V：</p>
-<p>$$Q^{\pi}(s_t^n, a_t^n) &#x3D; r_t^n + V^{\pi}(s_{t+1}^n)$$</p>
-<p>所以待估计的东西就变成了：</p>
-<p>$$r_t^n + V^{\pi}(s_{t+1}^n) - V^{\pi}(s_t^{n})$$</p>
-<p>这样就只需要估计 V 值了，但是引入了 $r_t$ 这个随机变量。然而，这只有一步的奖励，标准差较小，所以影响不大（较之前 policy gradient 要算累积奖励而言）。</p>
+<script type="math/tex; mode=display">Q^{\pi}(s_t^n, a_t^n) = r_t^n + V^{\pi}(s_{t+1}^n)</script><p>所以待估计的东西就变成了：</p>
+<script type="math/tex; mode=display">r_t^n + V^{\pi}(s_{t+1}^n) - V^{\pi}(s_t^{n})</script><p>这样就只需要估计 V 值了，但是引入了 $r_t$ 这个随机变量。然而，这只有一步的奖励，标准差较小，所以影响不大（较之前 policy gradient 要算累积奖励而言）。</p>
 <p><em>（另一说原始 A3C 的方法直接大力出奇迹，把所有能试的方法都试了个遍，最后发现这样弄就是最好的）</em></p>
 <img src="/2023/06/28/reinforcement-learning-hungyi-6/6-1.png" class="" title="Advantage Actor-Critic 示意图">
-
 <p>所以，先估计 V 值，然后根据式子：</p>
-<p>$$\nabla \bar{R}<em>{\theta} \approx \frac{1}{N} \sum</em>{n&#x3D;1}^{N} \sum_{t&#x3D;1}^{T_n} \left( r_t^n + V^{\pi}(s_{t+1}^n) - V^{\pi}(s_t^{n}) \right) \nabla \log p_{\theta} (a_t^n | s_t^n)$$</p>
-<p>来更新 policy（更新 actor）</p>
+<script type="math/tex; mode=display">\nabla \bar{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} \left( r_t^n + V^{\pi}(s_{t+1}^n) - V^{\pi}(s_t^{n}) \right) \nabla \log p_{\theta} (a_t^n | s_t^n)</script><p>来更新 policy（更新 actor）</p>
 <h3 id="实操的注意事项"><a href="#实操的注意事项" class="headerlink" title="实操的注意事项"></a>实操的注意事项</h3><ul>
 <li>actor $\pi(s)$ 和 critic $V^{\pi}(s)$ 的参数可以共享</li>
 </ul>
 <img src="/2023/06/28/reinforcement-learning-hungyi-6/6-2.png" class="" title="actor 和 critic 的参数共享">
-
 <p>这样做的目的是：</p>
 <ol>
 <li>actor 和 critic 的输入均为状态 $s$</li>
@@ -423,7 +413,6 @@
 </ul>
 <h2 id="Asynchronous-Advantage-Actor-Critic-A3C"><a href="#Asynchronous-Advantage-Actor-Critic-A3C" class="headerlink" title="Asynchronous Advantage Actor-Critic (A3C)"></a>Asynchronous Advantage Actor-Critic (A3C)</h2><p>参考《火影忍者》里面卡卡西叫鸣人开多重影分身来修炼忍术，这样获取到的经验值翻倍</p>
 <img src="/2023/06/28/reinforcement-learning-hungyi-6/6-3.png" class="" title="A3C 示意图">
-
 <p>开多个 worker（影分身），来跟环境互动。影分身会把所有的经验集合在一起。</p>
 <p>需要多个 CPU。</p>
 <p>一开始有一个 Global Network，参数为 $\theta^1$</p>
@@ -434,15 +423,13 @@
 <li>计算梯度</li>
 <li>更新全局模型</li>
 </ol>
-<p>$$\theta^2 \leftarrow \theta^1 + \eta \nabla \theta$$</p>
-<p>其他 worker 也会对网络参数进行更新</p>
+<script type="math/tex; mode=display">\theta^2 \leftarrow \theta^1 + \eta \nabla \theta</script><p>其他 worker 也会对网络参数进行更新</p>
 <h2 id="Pathwise-Derivative-Policy-Gradient"><a href="#Pathwise-Derivative-Policy-Gradient" class="headerlink" title="Pathwise Derivative Policy Gradient"></a>Pathwise Derivative Policy Gradient</h2><p>可以看成是一种用 Q-learning 解连续动作空间的方法，也可以看成是一种特别的 Actor-Critic 方法</p>
 <p>《棋魂》中，佐为在进藤光比较菜的时候面对一个局面建议下小飞；而在进藤光棋艺长进之后，面对相同的局面，则是不建议下小飞，而建议下大飞。</p>
 <p>也就是说，actor 在训练中不同的阶段时，critic 会给出不同的打分。</p>
 <p>Pathwise Derivative Policy Gradient: Critic 直接告诉 actor 什么样的动作是好的。</p>
-<p>回想 Q-learning：动作 $a$ 时连续向量时，$a &#x3D; \arg \max_{a} Q(s, a)$</p>
+<p>回想 Q-learning：动作 $a$ 时连续向量时，$a = \arg \max_{a} Q(s, a)$</p>
 <img src="/2023/06/28/reinforcement-learning-hungyi-6/6-4.png" class="" title="actor 用于解最优化问题">
-
 <ul>
 <li><p>Q-learning 的改进：在 Pathwise Derivative Policy Gradient 时，actor 直接用于解这个最优化问题（被当作是求解这个最优化问题的求解器）：输入一个状态 $s$，输出最优动作 $a$</p>
 </li>
@@ -450,28 +437,25 @@
 </li>
 </ul>
 <h3 id="实际算法"><a href="#实际算法" class="headerlink" title="实际算法"></a>实际算法</h3><p>假设学了一个 Q 函数 $Q^{\pi}(s, a)$，接下来要学习一个 actor，用来解</p>
-<p>$$\pi’(s) &#x3D; \arg \max_{a} Q^{\pi}(s, a)$$</p>
-<img src="/2023/06/28/reinforcement-learning-hungyi-6/6-5.png" class="" title="Pathwise Derivative Policy Gradient 示意图">
-
+<script type="math/tex; mode=display">\pi'(s) = \arg \max_{a} Q^{\pi}(s, a)</script><img src="/2023/06/28/reinforcement-learning-hungyi-6/6-5.png" class="" title="Pathwise Derivative Policy Gradient 示意图">
 <p>实际上在训练的时候，就把 Q 和 actor 接起来，变成一个更大的网络。</p>
 <p>把 Q 的参数冻结起来，只调 actor 的参数 $\pi \to \pi’$，来让 actor 对于状态 $s$，输出最优的动作 $a$。</p>
 <p>这下就非常像 GAN 了：actor 就像 generator，Q 就像 discriminator</p>
 <img src="/2023/06/28/reinforcement-learning-hungyi-6/6-6.png" class="" title="Pathwise Derivative Policy Gradient 训练流程示意图">
-
 <p>Q-learning 里面所用到的技巧，如 replay buffer、exploration 等，在这里也可以用得上。</p>
 <p>对比 Q-learning 的训练流程，我们也可以写出 Pathwise Derivative Policy Gradient 的训练流程如下：</p>
 <ol>
-<li>初始化 Q 函数 $Q$ 以及 actor $\pi$，设目标 Q 函数 $\hat{Q} &#x3D; Q$ 以及 actor $\hat{\pi} &#x3D; \pi$。</li>
+<li>初始化 Q 函数 $Q$ 以及 actor $\pi$，设目标 Q 函数 $\hat{Q} = Q$ 以及 actor $\hat{\pi} = \pi$。</li>
 <li>在每个 episode：拿 agent 跟环境去互动。对于每一步 $t$：<ol>
 <li>给定状态 $s_t$，基于现在的 $\pi$，采用探索机制（epsilon greedy，Boltzmann exploration），采取动作 $a_t$</li>
 <li>得到奖励 $r_t$，得到新的状态 $s_{t+1}$。至此得到了一个数据 $(s_t, a_t, r_t, s_{t+1})$</li>
 <li>将这个数据 $(s_t, a_t, r_t, s_{t+1})$ 丢到 buffer 里面（如果 buffer 满了，就把最旧的一个数据丢掉）</li>
 <li>从 buffer 中采样 <strong>一批</strong> 数据 $(s_i, a_i, r_i, s_{i+1})$（刚才放进去的数据可能没被采样到）</li>
-<li>回归目标 $y &#x3D; r_i + \hat{Q}(s_{i+1}, \hat{\pi}(s_{i+1}))$（回归目标要用目标网络 $\hat{Q}$ 来算）</li>
+<li>回归目标 $y = r_i + \hat{Q}(s_{i+1}, \hat{\pi}(s_{i+1}))$（回归目标要用目标网络 $\hat{Q}$ 来算）</li>
 <li>更新 $Q$ 的参数，以使 $Q(s_i, a_i)$ 的值尽可能靠近 $y$（回归问题）</li>
 <li>更新 $\pi$ 的参数，以最大化 $Q(s_i, \pi(s_i))$</li>
-<li>每 $C$ 次重设 $\hat{Q}$ 的参数 $\hat{Q} &#x3D; Q$</li>
-<li>每 $C$ 次重设 $\hat{\pi}$ 的参数 $\hat{\pi} &#x3D; \pi$</li>
+<li>每 $C$ 次重设 $\hat{Q}$ 的参数 $\hat{Q} = Q$</li>
+<li>每 $C$ 次重设 $\hat{\pi}$ 的参数 $\hat{\pi} = \pi$</li>
 </ol>
 </li>
 </ol>

@@ -308,7 +308,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-03-20
+      Edited on:&nbsp;2024-03-21
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -375,12 +375,10 @@
 </ul>
 <p>$p(s_{t+1}|s_t, a_t)$ 不能控制，由环境来决定，我们只能控制 $p_{\theta}(a_t|s_t)$。</p>
 <p>任务是要最大化期望累积奖励 $\bar{R}_{\theta}$</p>
-<p>$$\bar{R}<em>{\theta}&#x3D;\sum</em>{\tau}R(\tau) p_{\theta}(\tau)&#x3D;E_{\tau \sim p_{\theta}(\tau)}[R(\tau)]$$</p>
-<p>（注意到 $R_{\theta}$ 是一个随机变量）</p>
+<script type="math/tex; mode=display">\bar{R}_{\theta}=\sum_{\tau}R(\tau) p_{\theta}(\tau)=E_{\tau \sim p_{\theta}(\tau)}[R(\tau)]</script><p>（注意到 $R_{\theta}$ 是一个随机变量）</p>
 <p>也就是说，在 $p_{\theta}(\tau)$ 这个分布里面采样轨迹 $\tau$，计算 $R(\tau)$ 的期望值。</p>
 <p>然后 $R(\tau)$ 这一项不需要可微。上一次讲到策略梯度（Policy Gradient）可以推出：</p>
-<p>$$\begin{align*}\nabla \bar{R}<em>{\theta} &amp; \approx \frac{1}{N} \sum</em>{n&#x3D;1}^{N} \sum_{t&#x3D;1}^{T_n}{R(\tau^n) \nabla \log p(a_t^n|s_t^n,\theta)}\end{align*}$$</p>
-<p>这样就需要拿 actor $\pi_{\theta}$ 和环境互动，采集数据，得到游戏记录。</p>
+<script type="math/tex; mode=display">\begin{align*}\nabla \bar{R}_{\theta} & \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n}{R(\tau^n) \nabla \log p(a_t^n|s_t^n,\theta)}\end{align*}</script><p>这样就需要拿 actor $\pi_{\theta}$ 和环境互动，采集数据，得到游戏记录。</p>
 <p>在一般分类问题的实现基础上分别乘以每个轨迹的累积奖励 $R(\tau)$。</p>
 <ol>
 <li>加一个 baseline（偏置）：前面提过的“如果都是正奖励……”</li>
@@ -394,9 +392,7 @@
 </li>
 </ol>
 <img src="/2023/04/18/reinforcement-learning-hungyi-4/4-1.png" class="" title="错误的">
-
 <img src="/2023/04/18/reinforcement-learning-hungyi-4/4-2.png" class="" title="正确的">
-
 <p>然后 $R(\tau^n)-b$ 这一项可以拿出来，叫成 Advantage Function $A^{\theta}(s_t, a_t)$：如果我们在状态 $s_t$ 时采用动作 $a_t$，相较于其他动作，能够有多好。</p>
 <p>$A^{\theta}(s_t, a_t)$ 可以被 critic 估计出来。</p>
 <h2 id="On-policy-→-Off-policy：不止一次地用到与环境交互的经验"><a href="#On-policy-→-Off-policy：不止一次地用到与环境交互的经验" class="headerlink" title="On-policy → Off-policy：不止一次地用到与环境交互的经验"></a>On-policy → Off-policy：不止一次地用到与环境交互的经验</h2><ul>
@@ -408,59 +404,48 @@
 <li>自己下棋：on-policy</li>
 <li>别人下棋，自己在旁边看：off-policy</li>
 </ul>
-<h3 id="On-policy-的做法"><a href="#On-policy-的做法" class="headerlink" title="On-policy 的做法"></a>On-policy 的做法</h3><p>$$\nabla \bar{R}<em>{\theta}&#x3D;E</em>{\tau \sim p_{\theta}(\tau)}[R(\tau) \nabla \log p_{\theta}(\tau)]$$</p>
-<p>这里，我们用 $\pi_\theta$ 来和环境互动，收集数据。更新 $\theta$ 时，我们不得不再次采样，获得训练数据。（因为 $\theta$ 更新之后，$p_{\theta}(\tau)$ 这个概率就不对了，之前采样的数据就不能用了）</p>
+<h3 id="On-policy-的做法"><a href="#On-policy-的做法" class="headerlink" title="On-policy 的做法"></a>On-policy 的做法</h3><script type="math/tex; mode=display">\nabla \bar{R}_{\theta}=E_{\tau \sim p_{\theta}(\tau)}[R(\tau) \nabla \log p_{\theta}(\tau)]</script><p>这里，我们用 $\pi_\theta$ 来和环境互动，收集数据。更新 $\theta$ 时，我们不得不再次采样，获得训练数据。（因为 $\theta$ 更新之后，$p_{\theta}(\tau)$ 这个概率就不对了，之前采样的数据就不能用了）</p>
 <p>所以，我们想用另外一个固定的参数 $\theta’$，用基于此参数的 actor $\pi_{\theta’}$ 跟环境做互动，这样我们就能复用之前采样到的训练数据。</p>
 <h3 id="重要性采样（Importance-Sampling）"><a href="#重要性采样（Importance-Sampling）" class="headerlink" title="重要性采样（Importance Sampling）"></a>重要性采样（Importance Sampling）</h3><p>该方法也可以被用在 RL 之外的领域中。</p>
 <p>假设有一个 $f(x)$。要想计算 $E_{x \sim p}[f(x)]$，但是没有办法直接对 $p$ 这个分布做积分。</p>
 <ul>
-<li>可以从 $p$ 这个分布里面采样出一些样本 $x^i$，则有 $E_{x \sim p}[f(x)] \approx 1&#x2F;N \sum_{i&#x3D;1}^{N}{f(x^i)}$</li>
+<li>可以从 $p$ 这个分布里面采样出一些样本 $x^i$，则有 $E_{x \sim p}[f(x)] \approx 1/N \sum_{i=1}^{N}{f(x^i)}$</li>
 <li>现如今，我们没办法从 $p(x)$ 这个分布里面采样出样本，但是可以从另外一个分布 $q(x)$ 里面采样出样本 $x^i$，其中 $q$ 几乎可以是任意的分布。</li>
 <li>那么此时算期望就没办法直接套用上面那个采样的近似式</li>
 <li>所以就尝试做一个修正（嗯凑）</li>
 </ul>
-<p>$$\begin{aligned} E_{x \sim p}[f(x)] &amp;&#x3D; \int f(x) p(x) \mathrm{d} x \<br>&amp;&#x3D;\int f(x) \frac{p(x)}{q(x)} q(x) \mathrm{d} x \<br>&amp;&#x3D; E_{x \sim q}\left [f(x) \frac{p(x)}{q(x)}\right] \end{aligned}$$</p>
-<p>这样就把“从 $p$ 里面采样算期望值”变成了“从 $q$ 里面采样算期望值”。因为分布被改变了，所以需要乘上一个修正项 $p(x) &#x2F; q(x)$。（只是说 $q(x) &#x3D; 0$ 的时候如果 $p(x) \ne 0$ 的话就会爆掉。换言之 $q(x) &#x3D; 0$ 的时候，$p(x)$ 也应为 $0$）</p>
+<script type="math/tex; mode=display">\begin{aligned} E_{x \sim p}[f(x)] &= \int f(x) p(x) \mathrm{d} x \\
+&=\int f(x) \frac{p(x)}{q(x)} q(x) \mathrm{d} x \\
+&= E_{x \sim q}\left [f(x) \frac{p(x)}{q(x)}\right] \end{aligned}</script><p>这样就把“从 $p$ 里面采样算期望值”变成了“从 $q$ 里面采样算期望值”。因为分布被改变了，所以需要乘上一个修正项 $p(x) / q(x)$。（只是说 $q(x) = 0$ 的时候如果 $p(x) \ne 0$ 的话就会爆掉。换言之 $q(x) = 0$ 的时候，$p(x)$ 也应为 $0$）</p>
 <h3 id="实操中的问题：两分布-p-和-q-不能差太大"><a href="#实操中的问题：两分布-p-和-q-不能差太大" class="headerlink" title="实操中的问题：两分布 $p$ 和 $q$ 不能差太大"></a>实操中的问题：两分布 $p$ 和 $q$ 不能差太大</h3><p>这是因为，如果我们算方差，而非期望：</p>
-<p>$$Var_{x \sim p}[f(x)]$$</p>
-<p>和</p>
-<p>$$Var_{x \sim q}\left[f(x) \frac{p(x)}{q(x)}\right]$$</p>
-<p>是不一样的。（两随机变量的均值一样，但是方差不见得是一样的）</p>
+<script type="math/tex; mode=display">Var_{x \sim p}[f(x)]</script><p>和</p>
+<script type="math/tex; mode=display">Var_{x \sim q}\left[f(x) \frac{p(x)}{q(x)}\right]</script><p>是不一样的。（两随机变量的均值一样，但是方差不见得是一样的）</p>
 <p>注意到方差的计算公式：</p>
-<p>$$Var[X] &#x3D; E[X^2] - (E[X])^2$$</p>
-<p>把这个公式往上面的式里面一代入：</p>
-<p>$$Var_{x \sim p}[f(x)] &#x3D; E_{x \sim p}[f(x)^2] - (E_{x \sim p}[f(x)])^2$$</p>
-<p>$$Var_{x \sim q}\left[f(x) \frac{p(x)}{q(x)}\right] &#x3D; E_{x \sim q}\left[f(x)^2 \frac{p(x)^2}{q(x)^2}\right] - \left(E_{x \sim q}\left[f(x) \frac{p(x)}{q(x)}\right]\right)^2$$</p>
-<p>把这个式子用上面嗯凑的方法凑回去，凑成 $x \sim p$ 形式的期望，有：</p>
-<p>$$Var_{x \sim q}\left[f(x) \frac{p(x)}{q(x)}\right] &#x3D; E_{x \sim p}\left[f(x)^2 \frac{p(x)}{q(x)}\right] - \left(E_{x \sim p}\left[f(x) \right]\right)^2$$</p>
-<p>两项的不一样就体现在第一项中，后者比前者多了一个 $p(x)&#x2F;q(x)$。如果分布 $p$ 和 $q$ 差太大的话，随机变量的方差就会差很多。这时，如果采样的样本数不够多的话，那么差别就会比较大。</p>
+<script type="math/tex; mode=display">Var[X] = E[X^2] - (E[X])^2</script><p>把这个公式往上面的式里面一代入：</p>
+<script type="math/tex; mode=display">Var_{x \sim p}[f(x)] = E_{x \sim p}[f(x)^2] - (E_{x \sim p}[f(x)])^2</script><script type="math/tex; mode=display">Var_{x \sim q}\left[f(x) \frac{p(x)}{q(x)}\right] = E_{x \sim q}\left[f(x)^2 \frac{p(x)^2}{q(x)^2}\right] - \left(E_{x \sim q}\left[f(x) \frac{p(x)}{q(x)}\right]\right)^2</script><p>把这个式子用上面嗯凑的方法凑回去，凑成 $x \sim p$ 形式的期望，有：</p>
+<script type="math/tex; mode=display">Var_{x \sim q}\left[f(x) \frac{p(x)}{q(x)}\right] = E_{x \sim p}\left[f(x)^2 \frac{p(x)}{q(x)}\right] - \left(E_{x \sim p}\left[f(x) \right]\right)^2</script><p>两项的不一样就体现在第一项中，后者比前者多了一个 $p(x)/q(x)$。如果分布 $p$ 和 $q$ 差太大的话，随机变量的方差就会差很多。这时，如果采样的样本数不够多的话，那么差别就会比较大。</p>
 <img src="/2023/04/18/reinforcement-learning-hungyi-4/4-3.png" class="" title="一图流">
-
 <p>当分布 $p$ 和 $q$ 差距较大的时候，如上图所示：</p>
 <ul>
 <li>我们在 $x \sim p$ 的时候总会采样到 $f(x)$ 为负的点，算出来的期望为负的。</li>
 <li>如果我们把分布从 $p$ 换到 $q$ 的话，我们总会采样到 $f(x)$ 为正的点，算出来的期望为正的。</li>
 </ul>
 <h3 id="强化学习的算法从-On-policy-迁移到-Off-policy"><a href="#强化学习的算法从-On-policy-迁移到-Off-policy" class="headerlink" title="强化学习的算法从 On-policy 迁移到 Off-policy"></a>强化学习的算法从 On-policy 迁移到 Off-policy</h3><p>回顾之前的 On-policy 算法：</p>
-<p>$$\nabla \bar{R}<em>{\theta}&#x3D;E</em>{\tau \sim p_{\theta}(\tau)}[R(\tau) \nabla \log p_{\theta}(\tau)]$$</p>
-<p>现在到 Off-policy 之后：</p>
-<p>$$\nabla \bar{R}<em>{\theta}&#x3D;E</em>{\tau \sim p_{\theta’}(\tau)}\left[\frac{p_{\theta}(\tau)}{p_{\theta’}(\tau)} R(\tau) \nabla \log p_{\theta}(\tau)\right]$$</p>
-<p>可以把 $\theta$ 换成另外一个 $\theta’$，不过求的期望内容要补上一个 weight 修正。</p>
+<script type="math/tex; mode=display">\nabla \bar{R}_{\theta}=E_{\tau \sim p_{\theta}(\tau)}[R(\tau) \nabla \log p_{\theta}(\tau)]</script><p>现在到 Off-policy 之后：</p>
+<script type="math/tex; mode=display">\nabla \bar{R}_{\theta}=E_{\tau \sim p_{\theta'}(\tau)}\left[\frac{p_{\theta}(\tau)}{p_{\theta'}(\tau)} R(\tau) \nabla \log p_{\theta}(\tau)\right]</script><p>可以把 $\theta$ 换成另外一个 $\theta’$，不过求的期望内容要补上一个 weight 修正。</p>
 <p>也就是说：</p>
 <ul>
 <li>用参数为 $\theta’$ 的 actor 进行采样；</li>
 <li>用采样得到的数据多次训练 $\theta$。</li>
 </ul>
 <p>回顾之前，我们实际上可能不把一局游戏玩完，也就是得不到一整个轨迹 $\tau$。也就是说，通过把 $\nabla \log p_\theta(\tau)$ 乘开之后，可以把更新化成这样：</p>
-<p>$$\nabla \bar{R}<em>{\theta} &#x3D; E</em>{(s_t, a_t) \sim \pi_\theta}\left[A^{\theta}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right]$$</p>
-<p>用 $\theta$ 采样出 $(s_t, a_t)$，并计算 advantage，也就是 $(s_t, a_t)$ 有多好。</p>
+<script type="math/tex; mode=display">\nabla \bar{R}_{\theta} = E_{(s_t, a_t) \sim \pi_\theta}\left[A^{\theta}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right]</script><p>用 $\theta$ 采样出 $(s_t, a_t)$，并计算 advantage，也就是 $(s_t, a_t)$ 有多好。</p>
 <p>$A^{\theta}(s_t, a_t)$ 是估测出来的，在状态 $s_t$ 时采取动作 $a_t$ 有多好。如果该项是正的，那么概率 $p_\theta(a_t^n | s_t^n)$ 需要增加；如果该项是负的，那么概率 $p_\theta(a_t^n | s_t^n)$ 需要减少。</p>
 <p>现在把带有 advantage function 的上式化成 off-policy 的：</p>
-<p>$$\begin{aligned}\nabla \bar{R}<em>{\theta} &amp;&#x3D; E</em>{(s_t, a_t) \sim \pi_\theta}\left[A^{\theta}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right] \<br>&amp;&#x3D; E_{(s_t, a_t) \sim \pi_{\theta’}}\left [\frac{P^{\theta}(s_t, a_t)}{P^{\theta’}(s_t, a_t)} A^{\theta}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right]\end{aligned}$$</p>
-<p>变换方式（推导过程）跟之前的化成积分式“硬凑”的方法一致。</p>
+<script type="math/tex; mode=display">\begin{aligned}\nabla \bar{R}_{\theta} &= E_{(s_t, a_t) \sim \pi_\theta}\left[A^{\theta}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right] \\
+&= E_{(s_t, a_t) \sim \pi_{\theta'}}\left [\frac{P^{\theta}(s_t, a_t)}{P^{\theta'}(s_t, a_t)} A^{\theta}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right]\end{aligned}</script><p>变换方式（推导过程）跟之前的化成积分式“硬凑”的方法一致。</p>
 <p>上式的 $A^{\theta}(s_t, a_t)$ 在我们将参数 $\theta$ 换成 $\theta’$ 的时候，应该改成 $\theta’$，也就是说上式应该写成：</p>
-<p>$$\nabla \bar{R}<em>{\theta} &#x3D; E</em>{(s_t, a_t) \sim \pi_{\theta’}}\left[\frac{P^{\theta}(s_t, a_t)}{P^{\theta’}(s_t, a_t)} {\color{red}A^{\theta’}(s_t, a_t)} \nabla \log p_\theta(a_t^n | s_t^n)\right]$$</p>
-<p>这是因为：</p>
+<script type="math/tex; mode=display">\nabla \bar{R}_{\theta} = E_{(s_t, a_t) \sim \pi_{\theta'}}\left[\frac{P^{\theta}(s_t, a_t)}{P^{\theta'}(s_t, a_t)} {\color{red}A^{\theta'}(s_t, a_t)} \nabla \log p_\theta(a_t^n | s_t^n)\right]</script><p>这是因为：</p>
 <ul>
 <li>$A$ 这一项是想要估测在某一个状态 $s_t$ 采取某一个动作 $a_t$，接下来会得到累计奖励的值减掉 baseline。</li>
 <li>之前是 $\theta$ 在跟环境做互动，所以这里观察到的是 $\theta$ 得到的奖励；</li>
@@ -468,21 +453,17 @@
 <li><del>先假设这两项 $A^{\theta}(s_t, a_t)$ 和 $A^{\theta’}(s_t, a_t)$ 是差不多的</del></li>
 </ul>
 <p>然后进一步将联合概率 $P^{\theta}(s_t, a_t)$ 拆解成条件概率 $p^{\theta}(a_t | s_t) p^{\theta}(s_t)$ 之后，上式变为：</p>
-<p>$$\nabla \bar{R}<em>{\theta} &#x3D; E</em>{(s_t, a_t) \sim \pi_{\theta’}}\left[\frac{p^{\theta}(a_t | s_t)}{p^{\theta’}(a_t | s_t)}\frac{p^{\theta}(s_t)}{p^{\theta’}(s_t)} A^{\theta’}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right]$$</p>
-<p>然后假设模型在参数为 $\theta$ 时看到状态 $s_t$ 的概率 $p^{\theta}(s_t)$，和在参数为 $\theta’$ 时看到状态 $s_t$ 的概率 $p^{\theta’}(s_t)$ 是 <strong>近似相等</strong> 的。可以找个理由：</p>
+<script type="math/tex; mode=display">\nabla \bar{R}_{\theta} = E_{(s_t, a_t) \sim \pi_{\theta'}}\left[\frac{p^{\theta}(a_t | s_t)}{p^{\theta'}(a_t | s_t)}\frac{p^{\theta}(s_t)}{p^{\theta'}(s_t)} A^{\theta'}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right]</script><p>然后假设模型在参数为 $\theta$ 时看到状态 $s_t$ 的概率 $p^{\theta}(s_t)$，和在参数为 $\theta’$ 时看到状态 $s_t$ 的概率 $p^{\theta’}(s_t)$ 是 <strong>近似相等</strong> 的。可以找个理由：</p>
 <ul>
 <li>看到什么状态往往跟采取什么动作往往是没什么关系的；</li>
 <li>实际上这一项 $p^{\theta}(s_t)$ 根本就 <strong>不太可能去算</strong>……拿参数为 $\theta$ 的模型跟环境互动，太难算出 $p^{\theta}(s_t)$ 了；</li>
 <li>但是算条件概率 $p^{\theta}(a_t | s_t)$ 是不难的：只需要把状态 $s_t$ 代入到模型的网络中，模型就会吐出在状态 $s_t$ 时会采取动作 $a_t$ 的概率 $p^{\theta}(a_t | s_t)$。</li>
 </ul>
 <p>所以上式就变成这样：</p>
-<p>$$\nabla \bar{R}<em>{\theta} &#x3D; E</em>{(s_t, a_t) \sim \pi_{\theta’}}\left[\frac{p^{\theta}(a_t | s_t)}{p^{\theta’}(a_t | s_t)} A^{\theta’}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right]$$</p>
-<p>从梯度反推回原来的目标函数：</p>
-<p>$$J^{\theta’}(\theta) &#x3D; E_{(s_t, a_t) \sim \pi_{\theta’}}\left[\frac{p^{\theta}(a_t | s_t)}{p^{\theta’}(a_t | s_t)} A^{\theta’}(s_t, a_t) \right]$$</p>
-<p>这个反推需要注意到公式：$\nabla f(x) &#x3D; f(x) \nabla \log f(x)$</p>
+<script type="math/tex; mode=display">\nabla \bar{R}_{\theta} = E_{(s_t, a_t) \sim \pi_{\theta'}}\left[\frac{p^{\theta}(a_t | s_t)}{p^{\theta'}(a_t | s_t)} A^{\theta'}(s_t, a_t) \nabla \log p_\theta(a_t^n | s_t^n)\right]</script><p>从梯度反推回原来的目标函数：</p>
+<script type="math/tex; mode=display">J^{\theta'}(\theta) = E_{(s_t, a_t) \sim \pi_{\theta'}}\left[\frac{p^{\theta}(a_t | s_t)}{p^{\theta'}(a_t | s_t)} A^{\theta'}(s_t, a_t) \right]</script><p>这个反推需要注意到公式：$\nabla f(x) = f(x) \nabla \log f(x)$</p>
 <p>把 $p_{\theta}(a_t | s_t)$ 当作是 $f(x)$，跟上面的分母合起来就变成 $\nabla p_{\theta}(a_t | s_t)$，也就是</p>
-<p>$$\nabla J^{\theta’}(\theta) &#x3D; E_{(s_t, a_t) \sim \pi_{\theta’}}\left[\frac{\nabla p^{\theta}(a_t | s_t)}{p^{\theta’}(a_t | s_t)} A^{\theta’}(s_t, a_t) \right]$$</p>
-<p>要还原求梯度之前的样子，也就是还原出 $J^{\theta’}(\theta)$ 的形式，也就是把右侧的梯度算子 $\nabla$ 给拿掉即可。</p>
+<script type="math/tex; mode=display">\nabla J^{\theta'}(\theta) = E_{(s_t, a_t) \sim \pi_{\theta'}}\left[\frac{\nabla p^{\theta}(a_t | s_t)}{p^{\theta'}(a_t | s_t)} A^{\theta'}(s_t, a_t) \right]</script><p>要还原求梯度之前的样子，也就是还原出 $J^{\theta’}(\theta)$ 的形式，也就是把右侧的梯度算子 $\nabla$ 给拿掉即可。</p>
 <p>上面这个 $J^{\theta’}(\theta)$ 符号的含义：</p>
 <ul>
 <li>括号里面的 $\theta$ 表示我们需要优化的参数</li>
@@ -492,13 +473,11 @@
 <li>（这里留了一个坑：如此更新，何时终止？）</li>
 </ul>
 <p>这样，我们就能用 off-policy 来替换 on-policy。</p>
-<h3 id="PPO-TRPO"><a href="#PPO-TRPO" class="headerlink" title="PPO &#x2F; TRPO"></a>PPO &#x2F; TRPO</h3><p>回顾之前我们说到我们从一个概率分布变到另一个分布的时候，可以利用重要性采样的手法。但是这两个分布不能差太多。如何避免两分布差太多的问题？</p>
+<h3 id="PPO-TRPO"><a href="#PPO-TRPO" class="headerlink" title="PPO / TRPO"></a>PPO / TRPO</h3><p>回顾之前我们说到我们从一个概率分布变到另一个分布的时候，可以利用重要性采样的手法。但是这两个分布不能差太多。如何避免两分布差太多的问题？</p>
 <p>PPO 的优化式如下：</p>
-<p>$$J_{\mathrm{PPO}}^{\theta’}(\theta) &#x3D; J^{\theta’}(\theta) - \beta \mathrm{KL}(\theta, \theta’)$$</p>
-<p>也就是说，在训练的时候加一个限制，使得和环境互动的 $\theta’$ 与更新的参数 $\theta$ 差别不要太大。该限制为 $\theta$ 和 $\theta’$ 的 KL 散度，像一个正则化一样，也就是说让 $\theta$ 与 $\theta’$ 越像越好。</p>
+<script type="math/tex; mode=display">J_{\mathrm{PPO}}^{\theta'}(\theta) = J^{\theta'}(\theta) - \beta \mathrm{KL}(\theta, \theta')</script><p>也就是说，在训练的时候加一个限制，使得和环境互动的 $\theta’$ 与更新的参数 $\theta$ 差别不要太大。该限制为 $\theta$ 和 $\theta’$ 的 KL 散度，像一个正则化一样，也就是说让 $\theta$ 与 $\theta’$ 越像越好。</p>
 <p>PPO 的前身 TRPO 的优化式如下：</p>
-<p>$$\begin{aligned}J_{\mathrm{TRPO}}^{\theta’}(\theta) &#x3D;&amp; J^{\theta’}(\theta), \ s.t. \quad &amp;\mathrm{KL}(\theta, \theta’) &lt; \delta\end{aligned}$$</p>
-<p>也就是说，对 KL 散度的限制所放的位置不一样。</p>
+<script type="math/tex; mode=display">\begin{aligned}J_{\mathrm{TRPO}}^{\theta'}(\theta) =& J^{\theta'}(\theta), \\ s.t. \quad &\mathrm{KL}(\theta, \theta') < \delta\end{aligned}</script><p>也就是说，对 KL 散度的限制所放的位置不一样。</p>
 <ul>
 <li>PPO 直接把 KL 散度丢到了优化式里面，直接利用梯度上升即可训练。</li>
 <li>TRPO 把 KL 散度当成一个限制，希望小于一个值 $\delta$，比较难处理。</li>
@@ -514,22 +493,21 @@
 <li>初始化策略参数 $\theta^0$</li>
 <li>在每轮迭代中：<ol>
 <li>用 $\theta^k$ 来跟环境交互，从而采样到状态和动作 $(s_t, a_t)$，以及计算 advantage $A^{\theta^k}(s_t, a_t)$</li>
-<li>用 $J_{\mathrm{PPO}}(\theta)$ 来优化 $\theta$：<br>$$J_{\mathrm{PPO}}^{\theta^k}(\theta) &#x3D; J^{\theta^k}(\theta) - \beta \mathrm{KL}(\theta, \theta^k)$$</li>
+<li>用 $J_{\mathrm{PPO}}(\theta)$ 来优化 $\theta$：<script type="math/tex; mode=display">J_{\mathrm{PPO}}^{\theta^k}(\theta) = J^{\theta^k}(\theta) - \beta \mathrm{KL}(\theta, \theta^k)</script></li>
 <li>更新很多次的参数 $\theta$</li>
 <li>如果 $\mathrm{KL}(\theta, \theta’) &gt; \mathrm{KL}_{\max}$，则增大 $\beta$ 的值</li>
 <li>如果 $\mathrm{KL}(\theta, \theta’) &lt; \mathrm{KL}_{\min}$，则减小 $\beta$ 的值</li>
 </ol>
 </li>
 </ol>
-<p>其中上面的 4.和 5.是自适应动态调整参数 $\beta$（自适应 KL 惩罚项），需要设置能接受的最大 KL 散度 $\mathrm{KL}<em>{\max}$ 和最小 KL 散度 $\mathrm{KL}</em>{\min}$。d.表示 KL 散度的惩罚没太发挥作用；e.表示 KL 散度的惩罚太强了，影响了对目标函数 $J^{\theta^k}(\theta)$ 的优化。</p>
+<p>其中上面的 4.和 5.是自适应动态调整参数 $\beta$（自适应 KL 惩罚项），需要设置能接受的最大 KL 散度 $\mathrm{KL}_{\max}$ 和最小 KL 散度 $\mathrm{KL}_{\min}$。d.表示 KL 散度的惩罚没太发挥作用；e.表示 KL 散度的惩罚太强了，影响了对目标函数 $J^{\theta^k}(\theta)$ 的优化。</p>
 <h3 id="PPO2"><a href="#PPO2" class="headerlink" title="PPO2"></a>PPO2</h3><p>PPO 的加强版。PPO2 的整个目标函数如下：</p>
-<p>$$J_{\mathrm{PPO2}}^{\theta^k}(\theta) \approx \sum_{(s_t, a_t)} \min\left(\frac{p^{\theta}(a_t | s_t)}{p^{\theta^k}(a_t | s_t)} A^{\theta^k}(s_t, a_t), \mathrm{clip}\left(\frac{p^{\theta}(a_t | s_t)}{p^{\theta^k}(a_t | s_t)}, 1-\varepsilon, 1+\varepsilon\right) A^{\theta^k}(s_t, a_t) \right)$$</p>
-<ul>
+<script type="math/tex; mode=display">J_{\mathrm{PPO2}}^{\theta^k}(\theta) \approx \sum_{(s_t, a_t)} \min\left(\frac{p^{\theta}(a_t | s_t)}{p^{\theta^k}(a_t | s_t)} A^{\theta^k}(s_t, a_t), \mathrm{clip}\left(\frac{p^{\theta}(a_t | s_t)}{p^{\theta^k}(a_t | s_t)}, 1-\varepsilon, 1+\varepsilon\right) A^{\theta^k}(s_t, a_t) \right)</script><ul>
 <li>首先是对 $(s_t, a_t)$ 中两项较小的求和</li>
 <li>$\varepsilon$ 是一个需要调的超参数</li>
 <li>第一项就是 PPO 中的 $J^{\theta^k}(\theta)$</li>
 <li>第二项先把两个概率之商限制到 $(1 - \varepsilon, 1 + \varepsilon)$ 之内</li>
-<li>见下图，分为 $A &gt; 0$ 和 $A &lt; 0$ 两种情形，横轴为 $p^{\theta}(a_t | s_t) &#x2F; p^{\theta^k}(a_t | s_t)$，第一项对应绿色的线，第二项对应蓝色的线，取较小之后变成红色的线</li>
+<li>见下图，分为 $A &gt; 0$ 和 $A &lt; 0$ 两种情形，横轴为 $p^{\theta}(a_t | s_t) / p^{\theta^k}(a_t | s_t)$，第一项对应绿色的线，第二项对应蓝色的线，取较小之后变成红色的线</li>
 <li><strong>希望 $p^{\theta}$ 和 $p^{\theta^k}$ 不要差距太大</strong></li>
 <li>如果 $A &gt; 0$，也就是说某个状态和动作 $(s_t, a_t)$ 是好的。我们想要把 $(s_t, a_t)$ 出现的概率调大，也就是说让 $p^{\theta}$ 越大越好；但是 $p^{\theta}$ 和 $p^{\theta^k}$ 的比值不应超过 $1 + \varepsilon$。如果超过了，就没有收益了</li>
 <li>反之，如果 $A &lt; 0$，希望把 $(s_t, a_t)$ 出现的概率调小，但是小到 $p^{\theta}$ 和 $p^{\theta^k}$ 的比值不超过 $1 - \varepsilon$</li>

@@ -334,7 +334,6 @@
 <li>智能体的目标：最大化累积奖励（cumulative reward）或最大化期望奖励（expected reward）</li>
 </ul>
 <img src="/2023/03/21/reinforcement-learning-hungyi-1/1-1.png" class="" title="经典案例">
-
 <p>如上图，智能体从环境中观测到水洒了，就去拖干净，这个时候得到了一个正向的 reward；假设智能体把水洒到地上了，就得到一个负向的 reward。</p>
 <h3 id="与监督学习的比较"><a href="#与监督学习的比较" class="headerlink" title="与监督学习的比较"></a>与监督学习的比较</h3><p>监督学习 <strong>直接拟合标签</strong>（learning from teacher），而强化学习更加注重多阶段动作后的 <strong>累积奖励</strong>（learning from experience），两者可以结合使用（如初版 AlphaGo 就是监督学习+强化学习）。监督学习需要有标签的训练样本，而强化学习可以直接从环境的反馈学，甚至可以像 AlphaGo 那样左右互搏。</p>
 <p>譬如对话机器人，可以通过某些规则去评价对话质量的好坏。</p>

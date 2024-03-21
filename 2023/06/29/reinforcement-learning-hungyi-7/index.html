@@ -372,7 +372,6 @@
 <p>（譬如训练一个机械臂去开门，因为绝大多数情况下机械臂都在去伸手，在最后把门打开了才能获得一个正的奖励）</p>
 <h3 id="Reward-Shaping"><a href="#Reward-Shaping" class="headerlink" title="Reward Shaping"></a>Reward Shaping</h3><p>环境有一个固定的奖励。为了让 agent 学的东西是我们想要的样子，我们去刻意设计一些奖励去引导 agent。</p>
 <img src="/2023/06/29/reinforcement-learning-hungyi-7/7-1.png" class="" title="reward shaping">
-
 <p>如上图所示，在小鹏与的 Q 函数中</p>
 <ul>
 <li>对于玩的认知是，当前可以获得一个正的奖励，长时间后获得一个负的奖励</li>
@@ -381,22 +380,19 @@
 <li>这个时候，就人为地“给一个棒棒糖”：在采取学习这个动作的时候，将短期奖励也“改”为正的奖励，虽然这个奖励不是环境真正的奖励</li>
 </ul>
 <img src="/2023/06/29/reinforcement-learning-hungyi-7/7-2.png" class="" title="Facebook 玩 VizDoom 的追加奖励">
-
 <p>Facebook 训练去玩 FPS 游戏 VizDoom 的 agent：设计掉血扣分、耗费弹药扣分、捡到补给包加分、捡到弹药加分、呆在原地扣分</p>
 <p>Reward shaping 也会有一定的问题：需要足够好的 domain knowledge。如果追加奖励设计得不恰当，也可能让 agent 误入迷途。</p>
 <p>下面介绍一些能加到强化学习算法里面，一般有用的技巧</p>
 <p><strong>Curiosity</strong></p>
 <p>加上一个新的奖励函数：ICM（intrinsic curiosity module）</p>
 <img src="/2023/06/29/reinforcement-learning-hungyi-7/7-3.png" class="" title="ICM 示意图">
-
 <p>ICM 得到的奖励 $r_1^i$ 以 $(s_1, r_1, s_2)$ 这三个东西作为输入</p>
-<p>模型的奖励 $R(\tau)$ 就变成 $\sum_{i&#x3D;1}^T{(r_t + r_t^i)}$</p>
+<p>模型的奖励 $R(\tau)$ 就变成 $\sum_{i=1}^T{(r_t + r_t^i)}$</p>
 <p><strong>ICM 具体结构的设计</strong> </p>
 <img src="/2023/06/29/reinforcement-learning-hungyi-7/7-4.png" class="" title="ICM 网络结构示意图">
-
 <ul>
 <li>通过 $(s_t, a_t)$（用一个网络）预测下一步状态 $\hat{s}_{t+1}$</li>
-<li>将预测的状态 $\hat{s}<em>{t+1}$ 跟真实状态 $s</em>{t+1}$ 比较，看看像不像。</li>
+<li>将预测的状态 $\hat{s}_{t+1}$ 跟真实状态 $s_{t+1}$ 比较，看看像不像。</li>
 <li>如果两个状态越不像，即下一步状态 $s_{t+1}$ 越难被预测准，则奖励 $r_t^i$ 越大。</li>
 <li>鼓励冒险（喜欢采取风险比较大的动作）</li>
 <li>$(s_t, a_t) \to \hat{s}_{t+1}$ 这个用于预测下一步状态的网络（Network 1）另外学习</li>
@@ -410,7 +406,6 @@
 <p>这样可能会有一个问题：对于不同的任务，都需要事先“精心设计并安排”学习内容。</p>
 <p><strong>Reverse Curriculum Generation</strong></p>
 <img src="/2023/06/29/reinforcement-learning-hungyi-7/7-5.png" class="" title="Reverse Curriculum Generation 示意图">
-
 <p>从目标状态开始反推</p>
 <ul>
 <li>给定一个目标状态 $s_g$（譬如机械臂开门，“门被打开”就是目标状态）</li>
@@ -430,7 +425,6 @@
 <li>如果一个 agent 达到了错误的目标，那就 <strong>认为最初的目标就是那个错误的目标</strong>（譬如教授想要研究生发 paper，但是研究生不知道怎么样变成了 up 主……那就把本来的愿景改成“成为 up 主”）</li>
 </ul>
 <img src="/2023/06/29/reinforcement-learning-hungyi-7/7-6.png" class="" title="Hierarchical Reinforcement Learning 举例">
-
 <p>譬如低级 agent 的目标是要从蓝色点走到黄色的点，高级的 agent 就产生粉色的点，让低级的 agent 逐步到达粉色的点。</p>
 <h2 id="Imitation-Learning"><a href="#Imitation-Learning" class="headerlink" title="Imitation Learning"></a>Imitation Learning</h2><p>又叫作 learning by demonstration, apprenticeship learning</p>
 <p>砖家来描述如何解决问题：</p>
@@ -461,14 +455,13 @@
 </ul>
 </li>
 <li>在测试时：$(s’, a’) \sim \pi^{*}$（克隆了砖家的 actor）<ul>
-<li>如果 $\hat{\pi} &#x3D; \pi^*$，那么 $(s, a)$ 和 $(s’, a’)$ 是来自同一分布的</li>
+<li>如果 $\hat{\pi} = \pi^*$，那么 $(s, a)$ 和 $(s’, a’)$ 是来自同一分布的</li>
 <li>如果 $\hat{\pi}$ 与 $\pi^*$ 有差异，那么 $s$ 和 $s’$ 可能非常不同（接下来看到的状态受到比较大的影响）</li>
 </ul>
 </li>
 </ul>
 <h3 id="Inverse-Reinforcement-Learning-IRL"><a href="#Inverse-Reinforcement-Learning-IRL" class="headerlink" title="Inverse Reinforcement Learning (IRL)"></a>Inverse Reinforcement Learning (IRL)</h3><p>又名 inverse optimal control</p>
 <img src="/2023/06/29/reinforcement-learning-hungyi-7/7-7.png" class="" title="Inverse Reinforcement Learning 示意图">
-
 <ul>
 <li>由砖家描述来反推奖励函数是什么</li>
 <li>用得到的奖励函数来找到最优的 actor</li>
@@ -476,18 +469,16 @@
 </ul>
 <p><strong>IRL 的框架</strong></p>
 <img src="/2023/06/29/reinforcement-learning-hungyi-7/7-8.png" class="" title="Inverse Reinforcement Learning 流程图">
-
 <ul>
-<li>砖家 $\hat{\pi}$ 玩游戏，得到 $N$ 个轨迹 ${\hat{\tau}_1, \hat{\tau}_2, \ldots, \hat{\tau}_N}$</li>
-<li>actor $\pi$ 玩游戏，得到 $N$ 个轨迹 ${\tau_1, \tau_2, \ldots, \tau_N}$</li>
+<li>砖家 $\hat{\pi}$ 玩游戏，得到 $N$ 个轨迹 $\{\hat{\tau}_1, \hat{\tau}_2, \ldots, \hat{\tau}_N\}$</li>
+<li>actor $\pi$ 玩游戏，得到 $N$ 个轨迹 $\{\tau_1, \tau_2, \ldots, \tau_N\}$</li>
 <li>拿这两组轨迹去弄到奖励函数 $R$</li>
 <li>原则：<strong>砖家永远是最棒的</strong>（先射箭再画靶）</li>
-<li>所以就要找奖励函数 $R$，使得 $\sum_{n&#x3D;1}^{N}{R(\hat{\tau}<em>n)} &gt; \sum</em>{n&#x3D;1}^{N}{R(\tau_n)}$</li>
+<li>所以就要找奖励函数 $R$，使得 $\sum_{n=1}^{N}{R(\hat{\tau}_n)} &gt; \sum_{n=1}^{N}{R(\tau_n)}$</li>
 <li>得到奖励函数 $R$ 后，再基于这个奖励函数更新 actor（利用强化学习），使得这个 actor 能在奖励函数 $R$ 下得到高分</li>
 <li>在这个框架下，actor 就像 GAN 中的 generator，奖励函数 $R$ 就像 GAN 中的 discriminator</li>
 </ul>
 <img src="/2023/06/29/reinforcement-learning-hungyi-7/7-9.png" class="" title="GAN 和 IRL 对比">
-
 <p><strong>IRL 的应用场景</strong></p>
 <p>自动驾驶：每个人开车的风格不尽相同</p>
 <ul>
