@@ -326,7 +326,7 @@
   <div class="mdui-card-content mdui-typo mdui-p-x-4">
     <p>众所周知，在 AI 模型落地的时候，我们不仅仅关注模型的准确率，同样也会关注模型的性能。</p>
 <p>在使用 VSCode 等 IDE 开发 C++、C# 应用的时候，我们就会去开启 debug 模式，通过可视化工具分析应用的热点与瓶颈在哪里，这个过程一般叫做 profiling。当然，在 linux 上，我们也有 valgrind 等工具可以方便我们分析。</p>
-<p>那么具体到 tensorflow 的模型中，我们也想要进行类似的分析。好在 Google 官方提供了 tensorflow profiler 以及<a target="_blank" rel="noopener" href="https://tensorflow.google.cn/tensorboard/tensorboard_profiling_keras">官方教程</a>，我们可以 follow 这个教程来分析。</p>
+<p>那么具体到 tensorflow 的模型中，我们也想要进行类似的分析。好在 Google 官方提供了 tensorflow profiler 以及<a target="_blank" rel="noopener" href="https://tensorflow.google.cn/tensorboard/tensorboard_profiling_keras">官方教程</a>，我们可以 follow 这个教程来分析。此外，也有其他人写过<a target="_blank" rel="noopener" href="https://ehsanyousefzadehasl.medium.com/profiling-with-tensorflow-9eaa283e8c3">博客</a>来介绍 tensorflow profiler 的使用。</p>
 <p>当然 Google 在知乎中也发表过一篇<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/283468373">介绍文</a>。</p>
 <p>但是这玩意儿它坑就坑在在自己机器上作分析的话，这些东西要自己装。那么要装这些东西就会踩到一些坑。</p>
 <p>_甚至用 Google Colab 都不可避免地会踩到一些坑_</p>
@@ -351,7 +351,15 @@
 <p>猜想就是可能这种插件性质的包更新速度不如 tensorflow 和 tensorboard 更新得频繁，可能 <code>tensorflow=2.8.0</code> 的下一次更新就直接到了 <code>tensorflow=2.11.1</code>，所以我们选择装 <code>2.8.0</code> 版本的 <code>tensorboard_plugin_profile</code>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorboard_plugin_profile==2.8.0</span><br></pre></td></tr></table></figure>
 <p>然后重新捕捉训练的记录，结果 tensorboard 就能正常显示 profile 信息了。</p>
-<h2 id="CUPTI-DLL-缺失"><a href="#CUPTI-DLL-缺失" class="headerlink" title="CUPTI DLL 缺失"></a>CUPTI DLL 缺失</h2>
+<h2 id="CUPTI-DLL-缺失"><a href="#CUPTI-DLL-缺失" class="headerlink" title="CUPTI DLL 缺失"></a>CUPTI DLL 缺失</h2><p>在捕捉训练记录的过程中，会看到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CUPTI error: CUPTI could not be loaded or symbol could not be found.</span><br></pre></td></tr></table></figure>
+<p>然后其实主要就是：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/101398340">复制 DLL</a>：将 <code>CUDA\v11.6\extras\CUPTI\lib64\cupti64_2022.1.1.dll</code> 移动到 <code>CUDA\v11.6\bin</code> 目录下</li>
+<li><a target="_blank" rel="noopener" href="https://icode.best/i/02241457262307">改名</a>：CUPTI 新版 DLL 的命名规则发生了改变，需要遵循旧版的命名法则，手动改成 <code>cupti64_112.dll</code>。这里需要特别注意，虽然我本地的 CUDA 版本已经是 11.6，但是因为 tensorflow 只认 <code>cupti64_112.dll</code> 这个文件名，所以就改成这个一模一样的文件名就好</li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/61877915/could-not-load-dynamic-library-cupti64-101-dll-dlerror-cupti64-101-dll-not-f">再次确认环境变量</a>：确保 CUDA 的 bin 目录和 CUPTI 目录在 PATH 环境变量下</li>
+</ul>
+
   </div>
   <!--文末结束语-->
   
