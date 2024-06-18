@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+    
+        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
+
+
+    
+    
+    <title>
+        
+            CryptoCTF 2024 medium 分类 团队解题 writeup 之四 | 春勃
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">春勃</a>
+    <a href="/" class="header-subtitle mdui-typo-headline">반갑습니다</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">tools</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+                
+                <a href="/links/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">links</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/icons/avatar.jpg"/>
+                
+            </div>
+            <div class="sidebar-author-name">ZM-J</div>
+            <div class="sidebar-description">丧失年轻，勿失年华</div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
+                    <a href="mailto:zhumj7@mail2.sysu.edu.cn" class="mdui-chip-title">E-Mail</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/ZM-J" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-zhihu"></i></span>
+                    <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/ZM_________J/posts" class="mdui-chip-title">Zhihu</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://sh1k4ku.github.io/" class="mdui-list-item mdui-ripple">
+                            石卡酷
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://tover.xyz/" class="mdui-list-item mdui-ripple">
+                            套娃
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://jayxv.github.io/" class="mdui-list-item mdui-ripple">
+                            V
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://love-deng-feng.top/" class="mdui-list-item mdui-ripple">
+                            等风
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://github.com/kokifish/CTF-detailed-writeups/" class="mdui-list-item mdui-ripple">
+                            沛公
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2024/06/18/cryptoctf-2024-medium-4/">CryptoCTF 2024 medium 分类 团队解题 writeup 之四</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2024-06-18
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-06-18
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=CryptoCTF 2024 medium 分类 团队解题 writeup 之四&url=http://example.com/2024/06/18/cryptoctf-2024-medium-4/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=CryptoCTF 2024 medium 分类 团队解题 writeup 之四&url=http://example.com/2024/06/18/cryptoctf-2024-medium-4/&via=ZM-J" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2024/06/18/cryptoctf-2024-medium-4/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/2024/06/18/cryptoctf-2024-medium-4/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2024/06/18/cryptoctf-2024-medium-4/&title=CryptoCTF 2024 medium 分类 团队解题 writeup 之四" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=春勃&title=CryptoCTF 2024 medium 分类 团队解题 writeup 之四&summary=丧失年轻，勿失年华&pics=http://example.com/null&url=http://example.com/2024/06/18/cryptoctf-2024-medium-4/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/2024/06/18/cryptoctf-2024-medium-4/&text=CryptoCTF 2024 medium 分类 团队解题 writeup 之四" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/CTF/ >CTF</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/Crypto/ >Crypto</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <p>这次 medium 分类题量还是最多的，结果一开始里面很多题都不可解，甚至比赛结束了还 TMD 有一道零解。</p>
+<p><del>我去年买了个表</del></p>
+<h2 id="RM2"><a href="#RM2" class="headerlink" title="RM2"></a>RM2</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目需要我们和远程服务器交互：</p>
+<ol>
+<li>我们需要提供 1024bit 的两个素数 $p, q$，而且 $p \ne q$</li>
+<li>服务器提供 $e = 65537$，计算 $n = pq$</li>
+<li>服务器生成一个随机的 256byte 可打印字符串 $s$，<code>bytes_to_long</code> 之后就是 $m$，且保证 $m &lt; 4n$</li>
+<li>将 $s$ 从中间劈两半成 $s_1, s_2$，分别 <code>bytes_to_long</code> 之后就是 $m1, m2$</li>
+<li>计算 $c_1 = m_1^e \bmod (p-1)(q-1)$</li>
+<li>计算 $c_2 = m_2^e \bmod (2p+1)(2q+1)$</li>
+<li>已知 $c_1, c_2$，求 $s$；$s$ <strong>的两部分必须同时求出来，不能一次只求一边</strong>。</li>
+</ol>
+<h3 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h3><p>首先可打印字符串是我们需要利用的一个判别条件。</p>
+<p>然后因为有两个 $n_1 = (p-1)(q-1)$ 和 $n_2 = (2p+1)(2q+1)$，我们希望这两个玩意儿都能分解。所以我们为了方便构造：</p>
+<script type="math/tex; mode=display">\left\{\begin{aligned}p &= 2p_1 + 1 \\
+p_2 &= 2 p + 1\end{aligned}\right.</script><p>看看有没有机会使得 $p, p_1, p_2$ 均为素数。然后这个拼人品过程还是比较折磨的，所以接下来会给出纯 python 和 sagemath 版本的拼人品代码：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> multiprocessing <span class="keyword">as</span> mp</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">foo</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        p1 = getPrime(<span class="number">1023</span>)</span><br><span class="line">        p = <span class="number">2</span> * p1 + <span class="number">1</span></span><br><span class="line">        p2 = <span class="number">2</span> * p + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> isPrime(p) <span class="keyword">and</span> isPrime(p2):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;AOLIGEI!!!&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;p = &#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ ==<span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    cores=<span class="number">200</span></span><br><span class="line">    threads=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,cores):</span><br><span class="line">        threads.append(mp.Process(target=foo,args=()))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,cores):</span><br><span class="line">        threads[i].start()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,cores):</span><br><span class="line">       threads[i].join()</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> multiprocessing <span class="keyword">as</span> mp</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">foo</span>(<span class="params">i</span>):</span><br><span class="line">    set_random_seed(i)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        p1 = random_prime(<span class="number">2</span>^<span class="number">1023</span>-<span class="number">1</span>, <span class="literal">False</span>, <span class="number">2</span>^<span class="number">1022</span>)</span><br><span class="line">        p = <span class="number">2</span> * p1 + <span class="number">1</span></span><br><span class="line">        p2 = <span class="number">2</span> * p + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> is_prime(p) <span class="keyword">and</span> is_prime(p2):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;AOLIGEI!!!&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;p = &#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ ==<span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    cores=<span class="number">16</span></span><br><span class="line">    threads=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,cores):</span><br><span class="line">        threads.append(mp.Process(target=foo,args=(i,)))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,cores):</span><br><span class="line">        threads[i].start()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,cores):</span><br><span class="line">       threads[i].join()</span><br></pre></td></tr></table></figure>
+<p>需要注意 sagemath 是需要在每个进程单独设置随机种子的，不然的话大家的随机种子都一样，随机的过程也完全一样，就没有利用到多进程的优势了。这里为了避免大家受折磨，我也给出一些可用的结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p = 110598963128206029146765005567976400551252821326820761634842705844231553162227632664548054666497796622794062169070761269846059674983300718897806207809316445501660744576082811632826051521981392774109347485625137377414804884956968844657911576950879481134837170517406967712375212664629606155737787366417228920479</span><br><span class="line">p = 125834462937515514677952736351086477723189729376609237064972472894555759877882476569437044272175628959389274769857516194048130275708221472338605048821258868578062704405546439911796474901862378213766360589621269578212699588653799137952968362066454793101495940157317172250788360259833809994814260032964280454279</span><br><span class="line">p = 100901414083041935147565989244623721954379094110518159236755177583163984200889793113587729459559520404983625806167856159967860770505185684577116986060782555274476108602462759564999450628547960715880426418276206531296054104831649681935990743078827088355146864761100183036677309515622196184065072999258123805239</span><br><span class="line">p = 146496675022473012211857165143712747843246040874368584905858010585448843220035648485403137716275826156399518871757281036627660955362913708683959326736269351823871633144933008767581852850465282804501453322937241886850655418311690001221505594362048575315000371530770930693400115574470709373629360789754857606423</span><br><span class="line">p = 153444654371502759312369957861806438560869346201934408107090630860121077971217342534491164144300657682724587336411469313073980007519090429493425313057960273105930550206028662533909546955123308145793269974880422767558196767811472521559229803064323084233643777404514878684631500363639829028720434718377936413723</span><br><span class="line">p = 151938210068739317119037902475523471283351855826895709268281779606178616041813782684483513203011655045886298899315081189952485123708781999276530762477397662483246705057837976284722750121815117376779839692622348687715083607434723618196689363562394123094927732413453290261021832723310278894402025717298262583199</span><br></pre></td></tr></table></figure>
+<p>然后就是朴实无华的互动与解密了，代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># self.conn = process([&#x27;python3&#x27;, &#x27;another.py&#x27;])</span></span><br><span class="line">        self.conn = remote(<span class="string">&#x27;00.cr.yp.toc.tf&#x27;</span>, <span class="string">&#x27;13371&#x27;</span>)</span><br><span class="line">        self.p = </span><br><span class="line">        self.q = </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_primes</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;p, q:&#x27;</span>, <span class="string">f&#x27;<span class="subst">&#123;self.p&#125;</span>,<span class="subst">&#123;self.q&#125;</span>&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">recv_num</span>(<span class="params">self, num_name</span>):</span><br><span class="line">        self.conn.recvuntil(<span class="string">f&#x27;<span class="subst">&#123;num_name&#125;</span> = &#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">int</span>(self.conn.recvline())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">solve_prob_one</span>(<span class="params">self, c, p</span>):</span><br><span class="line">        e = <span class="number">65537</span></span><br><span class="line">        d = inverse_mod(e, euler_phi(p))</span><br><span class="line">        m = <span class="built_in">pow</span>(c, d, p)</span><br><span class="line">        <span class="keyword">return</span> ZZ(m)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">solve_prob</span>(<span class="params">self, c, p, q</span>):</span><br><span class="line">        mp = self.solve_prob_one(c, p)</span><br><span class="line">        mq = self.solve_prob_one(c, q)</span><br><span class="line">        m = crt([mp, mq], [p, q])</span><br><span class="line">        <span class="keyword">return</span> long_to_bytes(<span class="built_in">int</span>(m))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        self.send_primes()</span><br><span class="line">        c1 = self.recv_num(<span class="string">&#x27;c1&#x27;</span>)</span><br><span class="line">        c2 = self.recv_num(<span class="string">&#x27;c2&#x27;</span>)</span><br><span class="line">        m1 = self.solve_prob(c1, self.p - <span class="number">1</span>, self.q - <span class="number">1</span>)</span><br><span class="line">        m2 = self.solve_prob(c2, <span class="number">2</span> * self.p + <span class="number">1</span>, <span class="number">2</span> * self.q + <span class="number">1</span>)</span><br><span class="line">        m = m1 + m2</span><br><span class="line">        self.conn.sendline(m)</span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    g = Gao()</span><br><span class="line">    g.gao()</span><br></pre></td></tr></table></figure>
+<p>得到 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;i_l0v3_5UpeR_S4fE_Pr1m3s!!&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Soufia"><a href="#Soufia" class="headerlink" title="Soufia"></a>Soufia</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>解函数方程 $f: \mathbb{Z} \to \mathbb{Z}$ 满足：对一个常整数 $t$，有 $\forall x, y \in \mathbb{Z}$，我们有</p>
+<script type="math/tex; mode=display">f(tx) + tf(x) = f(f(x+y))</script><p>并且知道 $f(x_1) = y_1$，$f(x_2) = y_2$，求 $f(x)$。</p>
+<h3 id="我的解答-1"><a href="#我的解答-1" class="headerlink" title="我的解答"></a>我的解答</h3><p>没活儿了，已经偷题偷到 IMO 上了，脸都不要了。</p>
+<p>对解题过程有兴趣的话可以参考 <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv3096890/">这里</a></p>
+<p>不是你偷题目都能偷歪来？几把玩意儿你看看你自己写的是什么东西？原题不是</p>
+<script type="math/tex; mode=display">f(2a) + 2f(b) = f(f(a+b))</script><p>¿</p>
+<p>太闹弹了，推导又没法考，只能整出这种烂活儿，对着抄都抄不明白，建议以后在开始出题之前先去检查一下自己智商有没有问题。</p>
+<p>所以 $f(x)$ 只能是线性函数，这下就不用说了，剩下的就是把 $f(x)$ 的系数求出来，再挨个算一下就完事儿。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn = remote(<span class="string">&#x27;00.cr.yp.toc.tf&#x27;</span>, <span class="number">13377</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_1</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.recvuntil(<span class="string">&#x27;send the &#x27;</span>)</span><br><span class="line">        s = self.conn.recvline().decode()</span><br><span class="line">        mat = re.search(<span class="string">r&#x27;f\((.+?)\)&#x27;</span>, s)</span><br><span class="line">        x = <span class="built_in">int</span>(mat.group(<span class="number">1</span>))</span><br><span class="line">        y = self.k * x + self.b</span><br><span class="line">        self.conn.sendline(<span class="built_in">str</span>(y))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_xy</span>(<span class="params">self, begin, end</span>):</span><br><span class="line">        self.conn.recvuntil(begin)</span><br><span class="line">        s = self.conn.recvline().decode()</span><br><span class="line">        mat = re.search(<span class="string">r&#x27;f\((.+?)\) = (.+?)&#x27;</span> + end, s)</span><br><span class="line">        x, y = <span class="built_in">map</span>(<span class="built_in">int</span>, [mat.group(i+<span class="number">1</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)])</span><br><span class="line">        <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        x0, y0 = self.gao_xy(<span class="string">&#x27;Also,&#x27;</span>, <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        x1, y1 = self.gao_xy(<span class="string">&#x27;and &#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        self.k = (y1 - y0) // (x1 - x0)</span><br><span class="line">        self.b = y0 - self.k * x0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>):</span><br><span class="line">            self.gao_1()</span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    g = Gao()</span><br><span class="line">    g.gao()</span><br></pre></td></tr></table></figure>
+<p>得到 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;A_funCti0nal_3qu4tiOn_iZ_4_7yPe_oF_EquAtioN_tHaT_inv0lVe5_an_unKnOwn_funCt!on_r4tH3r_thAn_juS7_vArIabl3s!!&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Vantuk"><a href="#Vantuk" class="headerlink" title="Vantuk"></a>Vantuk</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>先定义两个函数 $u(a, x, y)$ 和 $v(a, x, y)$：</p>
+<script type="math/tex; mode=display">u(a, x, y) = x + \frac{ax - y}{x^2 + y^2}</script><script type="math/tex; mode=display">v(a, x, y) = y - \frac{x + ay}{x^2 + y^2}</script><p>然后有 $m_1, m_2, a \in \mathbb{Z}$ 且</p>
+<script type="math/tex; mode=display">\left\{\begin{aligned}A &= u(5, a, 4a) \\
+U &= u(a, m_1, m_2) \\
+V &= v(a, m_1, m_2)\end{aligned}\right.</script><p>已知 $A, U, V$，求 $m_1, m_2$。</p>
+<h3 id="我的解答-2"><a href="#我的解答-2" class="headerlink" title="我的解答"></a>我的解答</h3><p>AUV，巴黎倍儿甜！</p>
+<p>朴实无华的解方程题目。需要注意 $m_1, m_2, a \in \mathbb{Z}$。所以先解 $a$：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A = </span><br><span class="line"></span><br><span class="line">PR.&lt;t&gt; = PolynomialRing(QQ)</span><br><span class="line">a, x, y = <span class="number">5</span>, t, <span class="number">4</span>*t</span><br><span class="line"></span><br><span class="line">f = (x - A) * ((x ** <span class="number">2</span> + y ** <span class="number">2</span>)) + (a * x - y)</span><br><span class="line"><span class="built_in">print</span>(f.roots())</span><br></pre></td></tr></table></figure>
+<p>会得到几个解，但是只有那个非零整数才是真正的 $a$。然后就是已知 $a$ 求 $u, v$，单走一个 variety：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = </span><br><span class="line"></span><br><span class="line">U = </span><br><span class="line">V = </span><br><span class="line"></span><br><span class="line">PR.&lt;x, y&gt; = PolynomialRing(QQ)</span><br><span class="line"></span><br><span class="line">f = x * (x^<span class="number">2</span>+y^<span class="number">2</span>) + (a * x - y) - U * (x^<span class="number">2</span>+y^<span class="number">2</span>)</span><br><span class="line">g = y * (x^<span class="number">2</span>+y^<span class="number">2</span>) - (x + a * y) - V * (x^<span class="number">2</span>+y^<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(Ideal([f, g]).variety())</span><br></pre></td></tr></table></figure>
+<p>还是找到那一组唯一的非零整数解即可，然后打印出结果：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">m1 = </span><br><span class="line">m2 = </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m1)+long_to_bytes(m2))</span><br></pre></td></tr></table></figure>
+<p>看到 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;d!D_y0U_5oLv3_7HiS_eQu4T!On_wItH_uSing_c0mPlEx_Num8erS!!?&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="赛后反思"><a href="#赛后反思" class="headerlink" title="赛后反思"></a>赛后反思</h3><p>flag 中所谓的复数视角，就是：</p>
+<script type="math/tex; mode=display">\begin{aligned}U + V i &= x + y i + \frac{(a-i)x - (1 + ai) y}{x^2 + y^2} \\
+&= x + yi + \frac{(a-i)(x - y i)}{x^2 + y^2} \\
+&= x + yi + \frac{(a-i)}{x + y i}\end{aligned}</script><p>令 $z = x + y i$，$W = U + V i$ 就可以解得关于 $z$ 的二次方程：</p>
+<script type="math/tex; mode=display">z^2 - wz + a - i = 0</script><p>直接套求根公式就可以求出 $z$ 来。</p>
+<p>然而 sagemath 的复数域和实数域都只支持双精度和任意精度的，如果想嗯出可以用任意精度的大力出奇迹：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">a = </span><br><span class="line"></span><br><span class="line">U = </span><br><span class="line">V = </span><br><span class="line"></span><br><span class="line">CC = ComplexField(<span class="number">1234</span>)</span><br><span class="line"></span><br><span class="line">W = U + V * i</span><br><span class="line"></span><br><span class="line">b = -W</span><br><span class="line">c = a - i</span><br><span class="line">delta_sqrt = (b^<span class="number">2</span> - <span class="number">4</span> * c).sqrt()</span><br><span class="line">x1 = (- b + delta_sqrt) / <span class="number">2</span></span><br><span class="line">x2 = (b + delta_sqrt) / <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">x = x1</span><br><span class="line">m1 = long_to_bytes(<span class="built_in">int</span>(x.real()))</span><br><span class="line">m2 = long_to_bytes(<span class="built_in">int</span>(x.imag()))</span><br><span class="line"><span class="built_in">print</span>(m1 + m2)</span><br></pre></td></tr></table></figure>
+<p>这样也能解得 flag。</p>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 已经结束咧 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> Goodbye --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/2024/06/18/cryptoctf-2024-medium-3/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>CryptoCTF 2024 medium 分类 团队解题 writeup 之三</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2024/04/19/tensorflow-profile-issues/">
+        <span>Tensorflow Profiler 踩坑记</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2024/06/18/cryptoctf-2024-medium-4/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RM2"><span class="toc-number">1.</span> <span class="toc-text">RM2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94"><span class="toc-number">1.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Soufia"><span class="toc-number">2.</span> <span class="toc-text">Soufia</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-1"><span class="toc-number">2.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vantuk"><span class="toc-number">3.</span> <span class="toc-text">Vantuk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-2"><span class="toc-number">3.2.</span> <span class="toc-text">我的解答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%9B%E5%90%8E%E5%8F%8D%E6%80%9D"><span class="toc-number">3.3.</span> <span class="toc-text">赛后反思</span></a></li></ol></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
+      </div>
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2024 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        ZM-J
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

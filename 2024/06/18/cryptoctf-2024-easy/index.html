@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+    
+        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
+
+
+    
+    
+    <title>
+        
+            CryptoCTF 2024 easy 分类 团队解题 writeup | 春勃
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">春勃</a>
+    <a href="/" class="header-subtitle mdui-typo-headline">반갑습니다</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">tools</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+                
+                <a href="/links/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">links</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/icons/avatar.jpg"/>
+                
+            </div>
+            <div class="sidebar-author-name">ZM-J</div>
+            <div class="sidebar-description">丧失年轻，勿失年华</div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
+                    <a href="mailto:zhumj7@mail2.sysu.edu.cn" class="mdui-chip-title">E-Mail</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/ZM-J" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-zhihu"></i></span>
+                    <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/ZM_________J/posts" class="mdui-chip-title">Zhihu</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://sh1k4ku.github.io/" class="mdui-list-item mdui-ripple">
+                            石卡酷
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://tover.xyz/" class="mdui-list-item mdui-ripple">
+                            套娃
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://jayxv.github.io/" class="mdui-list-item mdui-ripple">
+                            V
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://love-deng-feng.top/" class="mdui-list-item mdui-ripple">
+                            等风
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://github.com/kokifish/CTF-detailed-writeups/" class="mdui-list-item mdui-ripple">
+                            沛公
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2024/06/18/cryptoctf-2024-easy/">CryptoCTF 2024 easy 分类 团队解题 writeup</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2024-06-18
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-06-18
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=CryptoCTF 2024 easy 分类 团队解题 writeup&url=http://example.com/2024/06/18/cryptoctf-2024-easy/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=CryptoCTF 2024 easy 分类 团队解题 writeup&url=http://example.com/2024/06/18/cryptoctf-2024-easy/&via=ZM-J" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2024/06/18/cryptoctf-2024-easy/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/2024/06/18/cryptoctf-2024-easy/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2024/06/18/cryptoctf-2024-easy/&title=CryptoCTF 2024 easy 分类 团队解题 writeup" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=春勃&title=CryptoCTF 2024 easy 分类 团队解题 writeup&summary=丧失年轻，勿失年华&pics=http://example.com/null&url=http://example.com/2024/06/18/cryptoctf-2024-easy/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/2024/06/18/cryptoctf-2024-easy/&text=CryptoCTF 2024 easy 分类 团队解题 writeup" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/CTF/ >CTF</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/Crypto/ >Crypto</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <p>这次 easy 分类比赛的时候我当时看了一道 MD5 的，结果感觉很谜语，就没去仔细看了。要懂得把球传给队友</p>
+<p>那么赛后就复盘一下</p>
+<h2 id="Alibos"><a href="#Alibos" class="headerlink" title="Alibos"></a>Alibos</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>私钥 $s_k$ 为 $d_s$ 位十进制数，公钥 $p_k$ 可被写成如下形式：</p>
+<script type="math/tex; mode=display">p_k = \lfloor 10^{d_s} \left( \sqrt{s_k} - \lfloor \sqrt{s_k} \rfloor \right) \rfloor</script><p>记 $p_k$ 为 $d_p$ 位十进制数</p>
+<p>加密算法：</p>
+<ol>
+<li>在 $m$ 的十进制表示中在右边加上很多个 1，使其成为 $d_p$ 位十进制数；</li>
+<li>计算 <script type="math/tex; mode=display">c = \left( p_k + d_p^2 m \right) \bmod 10^{d_p}</script></li>
+</ol>
+<p>给出 $p_k$ 和 $c$，试求 $m$。</p>
+<h3 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h3><p>首先可以求出 $d_p$ 的值，然后直接求出 $m$ 的值即可：</p>
+<script type="math/tex; mode=display">m = \left( c - p_k \right) d_p^{-2} \bmod 10^{d_p}</script><p>代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">pkey = <span class="number">8582435512564229286688465405009040056856016872134514945016805951785759509953023638490767572236748566493023965794194297026085882082781147026501124183913218900918532638964014591302221504335115379744625749001902791287122243760312557423006862735120339132655680911213722073949690947638446354528576541717311700749946777</span></span><br><span class="line">enc  = <span class="number">6314597738211377086770535291073179315279171595861180001679392971498929017818237394074266448467963648845725270238638741470530326527225591470945568628357663345362977083408459035746665948779559824189070193446347235731566688204757001867451307179564783577100125355658166518394135392082890798973020986161756145194380336</span></span><br><span class="line"></span><br><span class="line">d_p = <span class="built_in">len</span>(<span class="built_in">str</span>(pkey))</span><br><span class="line">m = (enc - pkey) * inverse(d_p**<span class="number">2</span>, <span class="number">10</span>**d_p) % <span class="number">10</span>**d_p</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(d_p):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;#<span class="subst">&#123;i&#125;</span>: <span class="subst">&#123;long_to_bytes(m // <span class="number">10</span>**i)&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>得到 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;h0M3_m4De_cRyp70_5ySTeM_1N_CryptoCTF!!!&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Beheaded"><a href="#Beheaded" class="headerlink" title="Beheaded"></a>Beheaded</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目给了一个加密的 shell 脚本，以及一个加密后的文件。</p>
+<p>注意运行题目所给定的 shell 脚本需要使用 imagemagick 7 版本，6 版本会报错，详见：</p>
+<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/1315603/where-is-the-magick-command-of-imagemagick">https://askubuntu.com/questions/1315603/where-is-the-magick-command-of-imagemagick</a></p>
+<p>然后 <code>apt install imagemagick</code> 好像默认安装的是 6 版本的，很烦，可以通过 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/74951619/how-to-install-imagemagick-7-on-ubuntu-image">这里</a> 的安装步骤安装 imagemagick 7</p>
+<p>首先题目在一个 ppm 文件里面画了一个 flag，然后将这个 ppm 文件的前 3 行丢掉，最后把剩下的内容用一个密钥，以 AES-256 ECB 的方式进行加密。</p>
+<p>然后注意最后的加密命令是追加写，但是密钥内容不会变。</p>
+<h3 id="我的解答-1"><a href="#我的解答-1" class="headerlink" title="我的解答"></a>我的解答</h3><p>ppm 文件的构成形式可以参考 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/4101576/importing-ppm-images-with-python-and-pil-module">这里</a>。譬如在一个 <code>X=777, Y=200</code> 的画布上画上 <code>CCTF&#123;AOLIGEI!!!&#125;</code>，那么画出来的东西大概长这样：</p>
+<img src="/2024/06/18/cryptoctf-2024-easy/beheaded_1.png" class="" title="我们遇到什么困难都不要怕">
+<p>然后注意到是 AES-256 的 <code>block_size</code> 是 16，加上加密方式为 ECB，所以应该是通过密文块内容反推回明文块的内容。只是说我们需要更多地了解一下 ppm 的文件格式：</p>
+<img src="/2024/06/18/cryptoctf-2024-easy/beheaded_ppm.png" class="" title="can can need">
+<p>所以应该是 bitmap 存储，只不过这里用 2 字节来表示一个灰度值。</p>
+<p>这样的话，我们有理由相信，<strong>密文块频数最高的块是背景颜色加密之后的结果</strong>！所以我们就做一个简易的二分类：统计密文块的频数，最高频数的密文块就认为其对应明文为背景，其他密文块就认为其对应明文为前景。</p>
+<p>然后有个坑点，因为加密的命令是追加写，所以可能有同样大小、不同内容的加密块垛在一起，所以可能需要先枚举有多少个加密快，然后根据这个去得到密文块可能的大小。其中密文块的大小为：</p>
+<ul>
+<li>将 3 <em> 2 </em> <code>X</code> * <code>Y</code> pad 成 16 的倍数</li>
+<li>3 为图像通道数（RGB 图像为 3）</li>
+<li>2 为位深度（题目中的位深度为 65536，也就是一个灰度值占 2 个字节）</li>
+<li><code>X</code> 和 <code>Y</code> 分别就是宽高</li>
+</ul>
+<p>所以枚举的策略就是：</p>
+<ol>
+<li>先枚举有多少个图像（即多少个加密块，必为文件大小的约数）</li>
+<li>再枚举密文大小（即 3 <em> 2 </em> <code>X</code> * <code>Y</code>）的值</li>
+<li>枚举高 <code>Y</code>（必为密文大小的约数）</li>
+</ol>
+<p>代码如下（因为没有用 sagemath，所以获得因数那里实现比较土味）：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">filename = <span class="string">&#x27;../all_flags.enc&#x27;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read()</span><br><span class="line"></span><br><span class="line">BLOCK_SIZE = <span class="number">16</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_blocks</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="keyword">return</span> [s[BLOCK_SIZE*i:BLOCK_SIZE*(i+<span class="number">1</span>)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s) // BLOCK_SIZE)]</span><br><span class="line"></span><br><span class="line">cblocks = get_blocks(s)</span><br><span class="line">probably_white = Counter(cblocks).most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">MBLOCKS = <span class="string">b&#x27;&#x27;</span>.join([<span class="string">b&#x27;\xFF&#x27;</span> * BLOCK_SIZE <span class="keyword">if</span> cblock == probably_white <span class="keyword">else</span> <span class="string">b&#x27;\x00&#x27;</span> * BLOCK_SIZE \</span><br><span class="line">                    <span class="keyword">for</span> cblock <span class="keyword">in</span> cblocks])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_real_size_list</span>(<span class="params">size</span>):</span><br><span class="line">    real_size_list = []</span><br><span class="line">    <span class="keyword">for</span> SIZE_OFFSET <span class="keyword">in</span> <span class="built_in">range</span>(BLOCK_SIZE):</span><br><span class="line">        real_size = size - SIZE_OFFSET - <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> (real_size % <span class="number">6</span> == <span class="number">0</span>):</span><br><span class="line">            real_size_list.append(real_size)</span><br><span class="line">    <span class="keyword">return</span> real_size_list</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_factors</span>(<span class="params">x, L, R</span>):</span><br><span class="line">    results = []</span><br><span class="line">    t = L</span><br><span class="line">    <span class="keyword">while</span> t * t &lt;= x <span class="keyword">and</span> t &lt;= R:</span><br><span class="line">        <span class="keyword">if</span> x % t == <span class="number">0</span>:</span><br><span class="line">            results.append(t)</span><br><span class="line">        t += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> results</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num_pics <span class="keyword">in</span> get_factors(<span class="built_in">len</span>(s), <span class="number">1</span>, <span class="number">100</span>):</span><br><span class="line">    one_pic_size = <span class="built_in">len</span>(s) // num_pics</span><br><span class="line">    <span class="keyword">for</span> pic_id <span class="keyword">in</span> <span class="built_in">range</span>(num_pics):</span><br><span class="line">        <span class="keyword">for</span> real_size <span class="keyword">in</span> get_real_size_list(one_pic_size):</span><br><span class="line">            <span class="keyword">for</span> Y <span class="keyword">in</span> get_factors(real_size // <span class="number">6</span>, <span class="number">100</span>, <span class="number">500</span>):</span><br><span class="line">                X = real_size // (<span class="number">6</span> * Y)</span><br><span class="line">                PPM_HEAD = <span class="string">f&#x27;P6\n<span class="subst">&#123;X&#125;</span> <span class="subst">&#123;Y&#125;</span>\n65535\n&#x27;</span></span><br><span class="line">                PPM_BYTES = PPM_HEAD.encode() + MBLOCKS[pic_id*one_pic_size:(pic_id+<span class="number">1</span>)*one_pic_size]</span><br><span class="line">                PPM_FILENAME = <span class="string">f&#x27;results/ppm/<span class="subst">&#123;real_size&#125;</span>_<span class="subst">&#123;Y&#125;</span>_<span class="subst">&#123;pic_id&#125;</span>.ppm&#x27;</span></span><br><span class="line">                PNG_FILENAME = <span class="string">f&#x27;results/png/<span class="subst">&#123;real_size&#125;</span>_<span class="subst">&#123;Y&#125;</span>_<span class="subst">&#123;pic_id&#125;</span>.png&#x27;</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&#x27;PNG: <span class="subst">&#123;PNG_FILENAME&#125;</span>, <span class="subst">&#123;one_pic_size = &#125;</span>, <span class="subst">&#123;<span class="built_in">len</span>(PPM_BYTES) = &#125;</span>, <span class="subst">&#123;num_pics = &#125;</span>&#x27;</span>)</span><br><span class="line">                <span class="keyword">with</span> <span class="built_in">open</span>(PPM_FILENAME, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                    f.write(PPM_BYTES)</span><br><span class="line">                img = cv2.imread(PPM_FILENAME)</span><br><span class="line">                cv2.imwrite(PNG_FILENAME, img)</span><br></pre></td></tr></table></figure>
+<p>枚举一下，然后看生成出的图像是否有文字，结果还真就发现了一组 <code>2288430_235_0.png</code>：</p>
+<img src="/2024/06/18/cryptoctf-2024-easy/2288430_235_0.png" class="" title="哟！">
+<p>耐心点翻一下这一组的结果，发现 <code>2288430_235_16.png</code> 就包含 flag：</p>
+<img src="/2024/06/18/cryptoctf-2024-easy/2288430_235_16.png" class="" title="奥力给！！！">
+<p>得到 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;i_L0v3_7He_3C8_cRypTo__PnNgu1n!!&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Mashy"><a href="#Mashy" class="headerlink" title="Mashy"></a>Mashy</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>需要提供 8 组 bytes 对 <code>(x1, x2)</code>，使得：</p>
+<ul>
+<li><code>md5(hex(x1) xor hex(x2))</code> <strong>不为</strong> <code>ae09d7510659ca40eda3e45ca70e9606</code></li>
+<li><code>md5(x1) xor md5(x2) xor md5(salt)</code> <strong>为</strong> <code>a483b30944cbf762d4a3afc154aad825</code></li>
+</ul>
+<p>其中 <code>salt</code> 为一个 <strong>未知</strong> 固定值。</p>
+<h3 id="我的解答-2"><a href="#我的解答-2" class="headerlink" title="我的解答"></a>我的解答</h3><p>当时反查了一下这两个 md5 值的原像，发现：</p>
+<ul>
+<li><code>ae09d7510659ca40eda3e45ca70e9606</code> 查不出</li>
+<li><code>a483b30944cbf762d4a3afc154aad825</code> 为 <code>emelinjulca</code></li>
+</ul>
+<p><em>这里要点名批评一下 <a target="_blank" rel="noopener" href="https://www.cmd5.com/">cmd5</a>，下面那条记录居然 tmd 要付费，劳资在看这道题目的时候是黑曼巴时间凌晨 4 点，试问这个时候你家会员找哪里去借？最后还是去了 <a target="_blank" rel="noopener" href="https://crackstation.net/">crackstation</a>，结果一下子就破开了，日</em></p>
+<p>然后未央居然跟我说第一个的原像是 <code>b&#39;\x00&#39; * 256</code>，我嘞个雷啊，怎么试出来的啊……anyway，第一个好像不重要，主要是第二个，他奶奶的这个 <code>salt</code> 的值又不知道是啥，这不硬猜？</p>
+<p>好在又是未央，莽猜了一波 <code>salt</code> 的值就是那个 md5 值的原像 <code>emelinjulca</code>，那是真的牛皮啊，这出题的脑子是不是被驴踢了？你要是问什么哈希长度扩展攻击的话这种值不告诉也就算了，这尼玛币不告诉让猜，多少沾点闹弹了。这波啊，这波未央立血吗天功！</p>
+<blockquote>
+<p>未央：看到那么多个 solve，往简单的方向猜（</p>
+</blockquote>
+<p>所以这粑粑题实际上也就变成了：提供 8 组 bytes 对 <code>(x1, x2)</code>，使得：</p>
+<ul>
+<li><code>hex(x1) xor hex(x2)</code> <strong>不为</strong> <code>b&#39;\x00&#39; * 256</code></li>
+<li><code>md5(x1)</code> 等于 <code>md5(x2)</code></li>
+</ul>
+<p>那这不就是碰撞出 8 对 bytes 使得值不相等且 md5 值相等，直接 <a target="_blank" rel="noopener" href="https://github.com/cr-marcstevens/hashclash">fastcoll</a> 一把梭拉几把倒了，出题人快点滚回家玩儿蛋去吧。</p>
+<p>至于 <code>fastcoll</code> 的使用：</p>
+<ul>
+<li>先生成一个前缀：<code>echo &quot;caonima&quot; &gt; pref.txt</code></li>
+<li>然后运行 ⑨ 次：<code>./md5_fastcoll pref.txt</code></li>
+<li>就可以得到 ⑨ 组共同以 <code>caonima</code> 开头的碰撞对了</li>
+</ul>
+<p>然后提交代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.conn = remote(<span class="string">&#x27;01.cr.yp.toc.tf&#x27;</span>, <span class="string">&#x27;13771&#x27;</span>)</span><br><span class="line">        self.path = <span class="string">&#x27;/mnt/d/Tools/hashclash-static-release-v1.2b/bin&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_1</span>(<span class="params">self, i</span>):</span><br><span class="line">        part_1_path = os.path.join(self.path, <span class="string">f&#x27;pref_msg1_<span class="subst">&#123;i+<span class="number">1</span>&#125;</span>.txt&#x27;</span>)</span><br><span class="line">        part_2_path = os.path.join(self.path, <span class="string">f&#x27;pref_msg2_<span class="subst">&#123;i+<span class="number">1</span>&#125;</span>.txt&#x27;</span>)</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(part_1_path, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            part_1 = f.read()</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(part_2_path, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            part_2 = f.read()</span><br><span class="line">        self.conn.sendline(part_1.<span class="built_in">hex</span>())</span><br><span class="line">        self.conn.sendline(part_2.<span class="built_in">hex</span>())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">            self.gao_1(i)</span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    g = Gao()</span><br><span class="line">    g.gao()</span><br></pre></td></tr></table></figure>
+<p>得到 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;mD5_h4Sh_cOlL!Si0N_CrYp7o_ch41lEnGe!!!&#125;</span><br></pre></td></tr></table></figure>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 已经结束咧 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> Goodbye --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/2024/06/18/cryptoctf-2024-summary/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>CryptoCTF 2024 战果速报</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2024/06/18/cryptoctf-2024-hard-1/">
+        <span>CryptoCTF 2024 hard 分类 团队解题 writeup 之一</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2024/06/18/cryptoctf-2024-easy/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Alibos"><span class="toc-number">1.</span> <span class="toc-text">Alibos</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94"><span class="toc-number">1.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Beheaded"><span class="toc-number">2.</span> <span class="toc-text">Beheaded</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-1"><span class="toc-number">2.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mashy"><span class="toc-number">3.</span> <span class="toc-text">Mashy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-2"><span class="toc-number">3.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
+      </div>
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2024 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        ZM-J
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

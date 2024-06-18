@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+    
+        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
+
+
+    
+    
+    <title>
+        
+            CryptoCTF 2024 hard 分类 团队解题 writeup 之一 | 春勃
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">春勃</a>
+    <a href="/" class="header-subtitle mdui-typo-headline">반갑습니다</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">tools</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+                
+                <a href="/links/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">links</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/icons/avatar.jpg"/>
+                
+            </div>
+            <div class="sidebar-author-name">ZM-J</div>
+            <div class="sidebar-description">丧失年轻，勿失年华</div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
+                    <a href="mailto:zhumj7@mail2.sysu.edu.cn" class="mdui-chip-title">E-Mail</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/ZM-J" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-zhihu"></i></span>
+                    <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/ZM_________J/posts" class="mdui-chip-title">Zhihu</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://sh1k4ku.github.io/" class="mdui-list-item mdui-ripple">
+                            石卡酷
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://tover.xyz/" class="mdui-list-item mdui-ripple">
+                            套娃
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://jayxv.github.io/" class="mdui-list-item mdui-ripple">
+                            V
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://love-deng-feng.top/" class="mdui-list-item mdui-ripple">
+                            等风
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://github.com/kokifish/CTF-detailed-writeups/" class="mdui-list-item mdui-ripple">
+                            沛公
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2024/06/18/cryptoctf-2024-hard-1/">CryptoCTF 2024 hard 分类 团队解题 writeup 之一</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2024-06-18
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-06-18
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=CryptoCTF 2024 hard 分类 团队解题 writeup 之一&url=http://example.com/2024/06/18/cryptoctf-2024-hard-1/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=CryptoCTF 2024 hard 分类 团队解题 writeup 之一&url=http://example.com/2024/06/18/cryptoctf-2024-hard-1/&via=ZM-J" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2024/06/18/cryptoctf-2024-hard-1/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/2024/06/18/cryptoctf-2024-hard-1/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2024/06/18/cryptoctf-2024-hard-1/&title=CryptoCTF 2024 hard 分类 团队解题 writeup 之一" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=春勃&title=CryptoCTF 2024 hard 分类 团队解题 writeup 之一&summary=丧失年轻，勿失年华&pics=http://example.com/null&url=http://example.com/2024/06/18/cryptoctf-2024-hard-1/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/2024/06/18/cryptoctf-2024-hard-1/&text=CryptoCTF 2024 hard 分类 团队解题 writeup 之一" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/CTF/ >CTF</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/Crypto/ >Crypto</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <p>这次 hard 分类的题目难道是碳基生物能整出来的活儿？？？</p>
+<h2 id="Chochol"><a href="#Chochol" class="headerlink" title="Chochol"></a>Chochol</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目基于 ECC：</p>
+<script type="math/tex; mode=display">E: y^2 = x^3 + ax + b</script><p>128bit 素数 $p$ 和 $q$ 均满足 $p \equiv q \equiv 3 \pmod{4}$，$a$ 取随机，$b = 0$。</p>
+<p>$E_p$ 和 $E_q$ 分别是 $E$ 在 $GF(p)$ 和 $GF(q)$ 下的情形。</p>
+<p>生成元 $G_p$ 和 $G_q$ 的横坐标均为 2024。(MAN！)</p>
+<p>然后有一个未知的 $s$，$H_p = s G_p$，$H_q = s G_q$</p>
+<p>题目对明文的加密采用 RSA：</p>
+<script type="math/tex; mode=display">n = pq</script><script type="math/tex; mode=display">c = m^s \bmod n</script><p>已知 $G_p, H_p, G_q, H_q, c$，求 $m$</p>
+<h3 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h3><p>首先是求出 $a, p, q$ 这三个值。以 $p$ 为例，将 $G_p(x_1, y_1)$ 和 $H_p(x_2, y_2)$ 代入椭圆曲线方程：</p>
+<script type="math/tex; mode=display">\left\{\begin{aligned}y_1^2 = x_1^3 + a x_1 \\
+y_2^2 = x_2^3 + a x_2\end{aligned}\right.</script><p>可以消去 $a$：$(y_1^2 - x_1^3) x_2 - (y_2^2 - x_2^3) x_1 = 0$</p>
+<p>注意到这些运算都是在模 $p$ 意义下进行的，所以上面这个等式的实际含义就是 $p$ 要整除左边那一坨。类似地，$q$ 也要整除由 $G_q$ 和 $H_q$ 产生的那一坨。</p>
+<p>所以就是要把这两坨进行分解，分解出一个 128bit 的素因子出来，就是对应的 $p$ 或者 $q$。</p>
+<p>结果这个分解没有那么简单，我们都只知道用 <a target="_blank" rel="noopener" href="https://sourceforge.net/projects/yafu/">yafu</a> 硬挂，结果套娃用 <a target="_blank" rel="noopener" href="https://cado-nfs.gitlabpages.inria.fr/">cado-nfs</a> 一下子就跑出来了，我的发：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p = 243678574849421895808521345944938402807</span><br><span class="line">q = 278451262698064898668334196027031252819</span><br><span class="line">a = 127671661251150651301269745259748083900</span><br></pre></td></tr></table></figure>
+<p>然后就是求那个 ECDLP，先简单看一下阶：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Gp = (<span class="number">2024</span>, <span class="number">77522466419731346352388161327659294096</span>)</span><br><span class="line">Hp = (<span class="number">187001239996895215821259450553198409012</span>, <span class="number">158495938026527642884038157170741730943</span>)</span><br><span class="line">Gq = (<span class="number">2024</span>, <span class="number">92609909821520263487623088269239797003</span>)</span><br><span class="line">Hq = (<span class="number">191534442430060308634251661645421139195</span>, <span class="number">102273233384427938890774177710170123915</span>)</span><br><span class="line">c  = <span class="number">15084463560924811262750235394027264639346464192638172940901706702947534963652</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">kkp_modulus</span>(<span class="params">G, H</span>):</span><br><span class="line">    x1, y1 = G</span><br><span class="line">    x2, y2 = H</span><br><span class="line">    ps = x2 * (y1^<span class="number">2</span> - x1^<span class="number">3</span>) - x1 * (y2^<span class="number">2</span> - x2^<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">return</span> ps</span><br><span class="line"></span><br><span class="line">ps = kkp_modulus(Gp, Hp)</span><br><span class="line">qs = kkp_modulus(Gq, Hq)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">kkp_a</span>(<span class="params">G, p</span>):</span><br><span class="line">    x, y = G</span><br><span class="line">    <span class="keyword">return</span> (y^<span class="number">2</span> - x^<span class="number">3</span>) * inverse_mod(x, p)</span><br><span class="line"></span><br><span class="line">a_p = kkp_a(Gp, p)</span><br><span class="line">a_q = kkp_a(Gq, q)</span><br><span class="line">a = crt([a_p, a_q], [p, q])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;a = &#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p = <span class="number">243678574849421895808521345944938402807</span></span><br><span class="line">q = <span class="number">278451262698064898668334196027031252819</span></span><br><span class="line">a = <span class="number">127671661251150651301269745259748083900</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Ep = EllipticCurve(Zmod(p), [a, <span class="number">0</span>])</span><br><span class="line">Eq = EllipticCurve(Zmod(q), [a, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">Gp, Hp = <span class="built_in">map</span>(Ep, (Gp, Hp))</span><br><span class="line">Gq, Hq = <span class="built_in">map</span>(Eq, (Gq, Hq))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;Gp.order() = &#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;Ep.order() = &#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;p = &#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;Gq.order() = &#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;Eq.order() = &#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;q = &#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>然后发现这两根曲线的阶都是素数的值加上一，感觉是跟这个曲线的形式有关。</p>
+<p>那还说啥呢，MOV attack 直接一把梭吧：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">p = <span class="number">243678574849421895808521345944938402807</span></span><br><span class="line">a = <span class="number">127671661251150651301269745259748083900</span></span><br><span class="line">b = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">k = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">F1 = GF(p)</span><br><span class="line">E1 = EllipticCurve(F1, [a, b])</span><br><span class="line">F2 = GF(p^k, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">phi = Hom(F1, F2)(F1.gen().minpoly().roots(F2)[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">E2 = EllipticCurve(F2, [a, b])</span><br><span class="line"></span><br><span class="line">P1 = E1(<span class="number">2024</span>, <span class="number">77522466419731346352388161327659294096</span>)</span><br><span class="line">R1 = E1(<span class="number">187001239996895215821259450553198409012</span>, <span class="number">158495938026527642884038157170741730943</span>)</span><br><span class="line"></span><br><span class="line">n = P1.order()</span><br><span class="line"></span><br><span class="line">P2 = E2(phi(P1.xy()[<span class="number">0</span>]), phi(P1.xy()[<span class="number">1</span>]))</span><br><span class="line">R2 = E2(phi(R1.xy()[<span class="number">0</span>]), phi(R1.xy()[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">cn1 = E2.gens()[<span class="number">0</span>].order()</span><br><span class="line">coeff = ZZ(cn1 // n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    Q = coeff * E2.random_point()</span><br><span class="line">    <span class="keyword">if</span> (Q.order() == n):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">alpha = P2.weil_pairing(Q, n)</span><br><span class="line">beta = R2.weil_pairing(Q, n)</span><br><span class="line">d = beta.log(alpha)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(d)</span><br></pre></td></tr></table></figure>
+<p>求出离散对数之后，RSA 解密，需要注意 $e$ 和 $p-1$（$q-1$）不互素，且最大公约数为 2：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">p = <span class="number">243678574849421895808521345944938402807</span></span><br><span class="line">q = <span class="number">278451262698064898668334196027031252819</span></span><br><span class="line">s = <span class="number">172134561985710786674839705035313724070</span></span><br><span class="line"></span><br><span class="line">c  = <span class="number">15084463560924811262750235394027264639346464192638172940901706702947534963652</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">p, e, c</span>):</span><br><span class="line">    g = gcd(e, p-<span class="number">1</span>)</span><br><span class="line">    d = inverse_mod(e // g, p-<span class="number">1</span>)</span><br><span class="line">    m0 = <span class="built_in">pow</span>(c, d, p)</span><br><span class="line">    <span class="built_in">print</span>(m0)</span><br><span class="line">    <span class="built_in">print</span>(g)</span><br><span class="line">    m = Zmod(p)(m0).nth_root(g, <span class="built_in">all</span>=<span class="literal">True</span>)</span><br><span class="line">    <span class="built_in">print</span>(m)</span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">pow</span>(m[<span class="number">0</span>], e, p) == c</span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line"></span><br><span class="line">mp = decrypt(p, s, c)</span><br><span class="line">mq = decrypt(q, s, c)</span><br><span class="line"><span class="keyword">for</span> mpi, mqi <span class="keyword">in</span> itertools.product(mp, mq):</span><br><span class="line">    m = crt([ZZ(mpi), ZZ(mqi)], [p, q])</span><br><span class="line">    msg = long_to_bytes(<span class="built_in">int</span>(m))</span><br><span class="line">    <span class="built_in">print</span>(msg)</span><br></pre></td></tr></table></figure>
+<p>得到 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;m1X!n9__3cC__&amp;_R54_!&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>关于为什么这样生成的曲线的阶满足 $#E(\mathrm{F}_p) = p + 1$，可以看看 <a target="_blank" rel="noopener" href="https://yujinhkim.github.io/data/orders-elliptic-curves.pdf">这篇 paper</a> 的 3.2 节，之后也能看到类似的生成方法就不用验证也能一眼丁真（</p>
+<h2 id="Imen"><a href="#Imen" class="headerlink" title="Imen"></a>Imen</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定 $GL(p, k)$ 中的 $n$ 个矩阵 $A_1, A_2, \ldots, A_n$，这些矩阵的行列式均非零，每个元素 $x$ 均满足 $0 \le x \le B$，其中 $k, B$ 均较小。</p>
+<p>生成 $i_1, i_2, \ldots, i_n$ 为 $1, 2, \ldots, n$ 的一个排列，并且计算</p>
+<script type="math/tex; mode=display">M = \prod_{k = 1}^{n}A_{i_{k}}</script><p>已知 $A_1, A_2, \ldots, A_n, M$，求排列 $i_1, i_2, \ldots, i_n$。</p>
+<h3 id="我的解答-1"><a href="#我的解答-1" class="headerlink" title="我的解答"></a>我的解答</h3><p>题目背景详见 <a target="_blank" rel="noopener" href="https://eprint.iacr.org/2023/1745">这篇 paper</a>。</p>
+<p>其实这个问题就是上面那篇 paper 的 intuition，可以直接用他的那个 decompose algorithm 来解就行了。注意到他在第 4 页中的第 3 段中定义了矩阵之间的小于号比较。</p>
+<p>可以看看他那个第 5 页最末尾的 Example 1 来辅助理解。</p>
+<p>所以只需要实现以下他的这个 decompose algorithm 就行了。</p>
+<p>因为当时是先做的也是关于这个背景的另一道题 Jonon，所以就直接对着 Jonon 的求解代码改一改就出来了。</p>
+<p>注意到在这个问题里面，<strong>模数 $p$ 是未知的</strong>。这里介绍两个解决方法：</p>
+<ol>
+<li>随机生成一个大素数 $p$：假设能 decompose 的话，成功 decompose 的情形和 $p$ 的具体取值无关；</li>
+<li>直接不管，在 $\mathbb{Q}$ 上去求逆去做。成功 decompose 的情形肯定能算出所有元素都是 $\mathbb{Z}$ 内的。</li>
+</ol>
+<p>在实现的时候我选用了方法 2。貌似在他这个情境下面，decompose algorithm 不是时时刻刻都能 work 的，可能需要拼人品。然后是因为这个求解代码是根据 Jonon 的求解代码改的，所以第一层会采用一个枚举的操作，保证第一层 decompose 不会挂。代码如下： </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn = remote(<span class="string">&#x27;00.cr.yp.toc.tf&#x27;</span>, <span class="string">&#x27;31117&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decompose</span>(<span class="params">self, A, index_list, M</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(A) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">len</span>(A) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> M != A[<span class="number">0</span>]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> [index_list[<span class="number">0</span>]]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> i, Ai <span class="keyword">in</span> <span class="built_in">enumerate</span>(A):</span><br><span class="line">                M_ = Ai^-<span class="number">1</span> * M</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    MZ = M.change_ring(ZZ).<span class="built_in">list</span>()</span><br><span class="line">                    MZ_ = M_.change_ring(ZZ).<span class="built_in">list</span>()</span><br><span class="line">                    <span class="keyword">if</span> (<span class="built_in">all</span>(MZi_ &lt; MZi <span class="keyword">for</span> MZi, MZi_ <span class="keyword">in</span> <span class="built_in">zip</span>(MZ, MZ_))):</span><br><span class="line">                        A_ = A[:i] + A[i+<span class="number">1</span>:]</span><br><span class="line">                        index_list_ = index_list[:i] + index_list[i+<span class="number">1</span>:]</span><br><span class="line">                        res = self.decompose(A_, index_list_, M_)</span><br><span class="line">                        <span class="keyword">if</span> res:</span><br><span class="line">                            <span class="keyword">return</span> [index_list[i]] + res</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">self, As, M</span>):</span><br><span class="line">        T = M</span><br><span class="line">        <span class="comment"># CAONIMA, exceed</span></span><br><span class="line">        index_list = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(As)))</span><br><span class="line">        <span class="keyword">for</span> i, Ai <span class="keyword">in</span> <span class="built_in">enumerate</span>(As):</span><br><span class="line">            A_ = As[:i] + As[i+<span class="number">1</span>:]</span><br><span class="line">            index_list_ = index_list[:i] + index_list[i+<span class="number">1</span>:]</span><br><span class="line">            T_ = Ai^-<span class="number">1</span> * T</span><br><span class="line">            S = self.decompose(A_, index_list_, T_)</span><br><span class="line">            <span class="keyword">if</span> S:</span><br><span class="line">                <span class="keyword">return</span> [i] + S</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_matrices</span>(<span class="params">self, k, l</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit&#x27;</span>, <span class="string">&#x27;G&#x27;</span>)</span><br><span class="line">        matrices = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l):</span><br><span class="line">            mat = []</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">                self.conn.recvuntil(<span class="string">b&#x27;[&#x27;</span>)</span><br><span class="line">                row = self.conn.recvuntil(<span class="string">b&#x27;]&#x27;</span>)[:-<span class="number">1</span>].decode().split()</span><br><span class="line">                mat.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, row)))</span><br><span class="line">            matrices.append(matrix(ZZ, mat))</span><br><span class="line">        <span class="keyword">return</span> matrices</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_product</span>(<span class="params">self, k</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit&#x27;</span>, <span class="string">&#x27;P&#x27;</span>)</span><br><span class="line">        product = []</span><br><span class="line">        self.conn.recvuntil(<span class="string">b&#x27;M = &#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">            self.conn.recvuntil(<span class="string">b&#x27;[&#x27;</span>)</span><br><span class="line">            row = self.conn.recvuntil(<span class="string">b&#x27;]&#x27;</span>)[:-<span class="number">1</span>].decode().split()</span><br><span class="line">            product.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, row)))</span><br><span class="line">        <span class="keyword">return</span> matrix(ZZ, product)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">submit_answer</span>(<span class="params">self, ans</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit&#x27;</span>, <span class="string">&#x27;S&#x27;</span>)</span><br><span class="line">        msg = <span class="string">&#x27;,&#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, ans))</span><br><span class="line">        self.conn.sendline(msg)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_1</span>(<span class="params">self, k, l</span>):</span><br><span class="line">        As = self.get_matrices(k, l)</span><br><span class="line">        M = self.get_product(k)</span><br><span class="line">        ans = self.decrypt(As, M)</span><br><span class="line">        <span class="keyword">if</span> ans:</span><br><span class="line">            self.submit_answer(ans)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        nbit, step = <span class="number">128</span>, <span class="number">12</span></span><br><span class="line">        <span class="keyword">for</span> level <span class="keyword">in</span> <span class="built_in">range</span>(step):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;level = &#125;</span>&#x27;</span>)</span><br><span class="line">            k, l, B = <span class="number">3</span>, <span class="number">12</span> + level, <span class="number">14</span> + (level + <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> self.gao_1(k, l):</span><br><span class="line">                self.conn.close()</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        g = Gao()</span><br><span class="line">        g.gao()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>感觉 <code>get_matrices</code> 方法的接受矩阵过程还有优化的空间（一次收完慢慢切）</li>
+<li>成功率貌似有丶感人，可以考虑土味多进程挂机</li>
+</ul>
+<p>获取 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;c4N_y0U_3fF1c!En7lY_rEc0v3Re_tH3_0rD3R_of_M4tR1x_PrODuC7S?&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>这里也给出随机生成一个大素数 $p$ 的代码实现：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn = remote(<span class="string">&#x27;00.cr.yp.toc.tf&#x27;</span>, <span class="string">&#x27;31117&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decompose</span>(<span class="params">self, A, index_list, M</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(A) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">len</span>(A) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> M != A[<span class="number">0</span>]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> [index_list[<span class="number">0</span>]]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> i, Ai <span class="keyword">in</span> <span class="built_in">enumerate</span>(A):</span><br><span class="line">                M_ = Ai^-<span class="number">1</span> * M</span><br><span class="line">                MZ = M.change_ring(ZZ).<span class="built_in">list</span>()</span><br><span class="line">                MZ_ = M_.change_ring(ZZ).<span class="built_in">list</span>()</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">all</span>(MZi_ &lt; MZi <span class="keyword">for</span> MZi, MZi_ <span class="keyword">in</span> <span class="built_in">zip</span>(MZ, MZ_))):</span><br><span class="line">                    A_ = A[:i] + A[i+<span class="number">1</span>:]</span><br><span class="line">                    index_list_ = index_list[:i] + index_list[i+<span class="number">1</span>:]</span><br><span class="line">                    res = self.decompose(A_, index_list_, M_)</span><br><span class="line">                    <span class="keyword">if</span> res:</span><br><span class="line">                        <span class="keyword">return</span> [index_list[i]] + res</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">self, As, M</span>):</span><br><span class="line">        T = M</span><br><span class="line">        <span class="comment"># CAONIMA, exceed</span></span><br><span class="line">        index_list = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(As)))</span><br><span class="line">        <span class="keyword">for</span> i, Ai <span class="keyword">in</span> <span class="built_in">enumerate</span>(As):</span><br><span class="line">            A_ = As[:i] + As[i+<span class="number">1</span>:]</span><br><span class="line">            index_list_ = index_list[:i] + index_list[i+<span class="number">1</span>:]</span><br><span class="line">            T_ = Ai^-<span class="number">1</span> * T</span><br><span class="line">            S = self.decompose(A_, index_list_, T_)</span><br><span class="line">            <span class="keyword">if</span> S:</span><br><span class="line">                <span class="keyword">return</span> [i] + S</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_matrices</span>(<span class="params">self, k, l</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit&#x27;</span>, <span class="string">&#x27;G&#x27;</span>)</span><br><span class="line">        matrices = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l):</span><br><span class="line">            mat = []</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">                self.conn.recvuntil(<span class="string">b&#x27;[&#x27;</span>)</span><br><span class="line">                row = self.conn.recvuntil(<span class="string">b&#x27;]&#x27;</span>)[:-<span class="number">1</span>].decode().split()</span><br><span class="line">                mat.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, row)))</span><br><span class="line">            matrices.append(matrix(ZZ, mat))</span><br><span class="line">        <span class="keyword">return</span> matrices</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_product</span>(<span class="params">self, k</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit&#x27;</span>, <span class="string">&#x27;P&#x27;</span>)</span><br><span class="line">        product = []</span><br><span class="line">        self.conn.recvuntil(<span class="string">b&#x27;M = &#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">            self.conn.recvuntil(<span class="string">b&#x27;[&#x27;</span>)</span><br><span class="line">            row = self.conn.recvuntil(<span class="string">b&#x27;]&#x27;</span>)[:-<span class="number">1</span>].decode().split()</span><br><span class="line">            product.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, row)))</span><br><span class="line">        <span class="keyword">return</span> matrix(ZZ, product)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">submit_answer</span>(<span class="params">self, ans</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit&#x27;</span>, <span class="string">&#x27;S&#x27;</span>)</span><br><span class="line">        msg = <span class="string">&#x27;,&#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, ans))</span><br><span class="line">        self.conn.sendline(msg)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_1</span>(<span class="params">self, k, l, B</span>):</span><br><span class="line">        p_l = (k * l) ** B * <span class="number">2</span>^<span class="number">5</span></span><br><span class="line">        p = random_prime(<span class="number">2</span>*p_l, proof=<span class="literal">False</span>, lbound=p_l)</span><br><span class="line">        Zp = Zmod(p)</span><br><span class="line">        As = self.get_matrices(k, l)</span><br><span class="line">        M = self.get_product(k)</span><br><span class="line">        As = [Ai.change_ring(Zp) <span class="keyword">for</span> Ai <span class="keyword">in</span> As]</span><br><span class="line">        M = M.change_ring(Zp)</span><br><span class="line">        ans = self.decrypt(As, M)</span><br><span class="line">        <span class="keyword">if</span> ans:</span><br><span class="line">            self.submit_answer(ans)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        nbit, step = <span class="number">128</span>, <span class="number">12</span></span><br><span class="line">        <span class="keyword">for</span> level <span class="keyword">in</span> <span class="built_in">range</span>(step):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;level = &#125;</span>&#x27;</span>)</span><br><span class="line">            k, l, B = <span class="number">3</span>, <span class="number">12</span> + level, <span class="number">14</span> + (level + <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> self.gao_1(k, l, B):</span><br><span class="line">                self.conn.close()</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        g = Gao()</span><br><span class="line">        g.gao()</span><br></pre></td></tr></table></figure>
+<p>也是存在失败率的</p>
+<h2 id="Latifa"><a href="#Latifa" class="headerlink" title="Latifa"></a>Latifa</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>记明文为 $m$，题目设计了一个加密算法：</p>
+<script type="math/tex; mode=display">S = \sum_{i=1}^{m}{\frac{bg}{g^{2i/m}+g}}</script><p>其中参数 $b, g$ 未知。</p>
+<p>给定 $S$，求 $m$。</p>
+<h3 id="我的解答-2"><a href="#我的解答-2" class="headerlink" title="我的解答"></a>我的解答</h3><p>首先分子中的 $b$ 可以提出来。</p>
+<p>然后就是求和式</p>
+<script type="math/tex; mode=display">\sum_{i=0}^{m-1}{\frac{g}{g^{2i/m}+g}}</script><p>也就是</p>
+<script type="math/tex; mode=display">\sum_{i=0}^{m-1}{\frac{1}{g^{(2i-m)/m}+1}}</script><p>然后还有就是注意到 $m$ 是个比较大的数。记上式为 $f(m)$。</p>
+<p>因为当时只需要把题目解出来就行了，所以直接去看了 $g$ 为比较小值的时候，上式的值：</p>
+<ul>
+<li>$g=2$ 的时候： $f(m)=1/6 + m/2$</li>
+<li>$g=3$ 的时候： $f(m)=1/4 + m/2$</li>
+<li>$g=4$ 的时候： $f(m)=3/10 + m/2$</li>
+</ul>
+<p>找灵感的代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> trange</span><br><span class="line"></span><br><span class="line">g = <span class="number">4</span></span><br><span class="line"></span><br><span class="line">s = <span class="number">0</span></span><br><span class="line">m = <span class="number">12345</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> trange(m):</span><br><span class="line">    s += n(<span class="number">1</span> / (g^((<span class="number">2</span>*i-m)/m) + <span class="number">1</span>), prec=<span class="number">12345</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="number">20</span> * s)</span><br></pre></td></tr></table></figure>
+<p>所以就可以认为 $S \approx bm/2$，也就是说，$m \mid 2S$。</p>
+<p>所以也就是说把 $2S$ 的所有因数拿出来看一下，看看符不符合消息的格式。</p>
+<p>然后注意，因为消息是可打印字符串，所以最后一个 byte 的值是小于 128 的，也就是 $m$ 的素因数分解中，2 的幂次至多为 6。</p>
+<p>这里之前做题的时候有点狗屎运了，没注意到题目是把 <code>CCTF&#123;&#125;</code> 的包裹都丢掉了，就以为 $m$ 一定以 <code>&#125;</code> 结尾，为奇数（实际上不是这样的）。结果他的消息也正好是奇数，瞎猫碰上死耗子了算是。代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"></span><br><span class="line">pi = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">379</span>, <span class="number">39719</span>, <span class="number">8959787</span>, <span class="number">891059823255825019255461632769683</span>]</span><br><span class="line">ai = [<span class="number">1</span>, <span class="number">1</span> + <span class="number">11954</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">ri = [<span class="built_in">range</span>(aii+<span class="number">1</span>) <span class="keyword">for</span> aii <span class="keyword">in</span> ai]</span><br><span class="line"><span class="keyword">for</span> ai_ <span class="keyword">in</span> tqdm(itertools.product(*ri)):</span><br><span class="line">    m = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> p, a <span class="keyword">in</span> <span class="built_in">zip</span>(pi, ai_):</span><br><span class="line">        m *= p**a</span><br><span class="line">    msg_ = long_to_bytes(m)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">all</span>(<span class="number">32</span> &lt;= x &lt; <span class="number">128</span> <span class="keyword">for</span> x <span class="keyword">in</span> msg_):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;AOLIGEI!!!&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(msg_)</span><br></pre></td></tr></table></figure>
+<p>解得 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;h4Lf_7UrN_5ym3Try!&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>然后我们来求一下那个和式。</p>
+<p>因为 $m$ 较大，所以可以用积分</p>
+<script type="math/tex; mode=display">I = \int_{0}^{m}{ {\frac{1}{g^{(2x-m)/m}+1}}\mathrm{d}x}</script><p>估计和式的值。作换元 $x = um$，有</p>
+<script type="math/tex; mode=display">I = m \int_{0}^{1}{ {\frac{1}{g^{(2u-1)}+1}}\mathrm{d}u}</script><p>再作换元 $v = 2 u - 1$，有</p>
+<script type="math/tex; mode=display">I = \frac{m}{2} \int_{-1}^{1}{ {\frac{1}{g^{v}+1}}\mathrm{d}v}</script><p>然后问题就转换为求定积分</p>
+<script type="math/tex; mode=display">\int_{-1}^{1}{ {\frac{1}{g^{v}+1}}\mathrm{d}v}</script><p>的值。</p>
+<p><em>求这个定积分对于大学生来说小菜一碟，但是对于我这种工友来说还是需要花点心思</em></p>
+<p>考虑不定积分</p>
+<script type="math/tex; mode=display">I_0(x) = \int{ {\frac{1}{g^{x}+1}}\mathrm{d}x}</script><p>首先直接求这个被积函数的积分有丶困难，所以我们想办法要在分母中凑出一个 $g^x$ 来，这样就可以配凑出分母的形式来。分母出 $g^x$ 的方式很简单：</p>
+<script type="math/tex; mode=display">\begin{aligned}I_0(x) &= \int{ {\left(1 - \frac{g^x}{g^{x}+1}\right)}\mathrm{d}x} \\
+&= x - \int{ {\frac{g^x}{g^{x}+1}}\mathrm{d}x}\end{aligned}</script><p>然后再想办法塞到微分算子里面去：</p>
+<script type="math/tex; mode=display">\begin{aligned}I_0(x) &= x - \frac{1}{\ln{g}}\int{ {\frac{\mathrm{d}(g^x+1)}{g^{x}+1}}} \\
+&= x - \frac{\ln(g^x + 1)}{\ln{g}}\end{aligned}</script><p>回到原问题，当 $g$ 大的时候，我们前面待求的定积分也就是</p>
+<script type="math/tex; mode=display">\begin{aligned}I_0(1) - I_0(-1) &= 2 - \frac{\ln g + 1}{\ln g} + \frac{\ln g^{-1} + 1}{\ln g}\\
+&\approx 2 - \frac{\ln g}{\ln g} + \frac{1}{\ln g} \\
+&= 1 \end{aligned}</script><p>所以有 $I \approx m/2$，也就是我们前面通过验证 $g$ 较小的时候得出的结论。</p>
+<p><del>但是那个直接算求和式得到的常数项还是不知道是哪里来的</del></p>
+<p>再试了多几组，发现</p>
+<script type="math/tex; mode=display">f(m) = \frac{m-1}{2} + \frac{g}{g+1}</script><p>虽然还是不知道常数项怎么出来的，很烦</p>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 已经结束咧 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> Goodbye --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/2024/06/18/cryptoctf-2024-easy/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>CryptoCTF 2024 easy 分类 团队解题 writeup</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2024/06/18/cryptoctf-2024-hard-2/">
+        <span>CryptoCTF 2024 hard 分类 团队解题 writeup 之二</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2024/06/18/cryptoctf-2024-hard-1/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chochol"><span class="toc-number">1.</span> <span class="toc-text">Chochol</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94"><span class="toc-number">1.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Imen"><span class="toc-number">2.</span> <span class="toc-text">Imen</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-1"><span class="toc-number">2.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Latifa"><span class="toc-number">3.</span> <span class="toc-text">Latifa</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-2"><span class="toc-number">3.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
+      </div>
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2024 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        ZM-J
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+    
+        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            CryptoCTF 2024 tough 分类 团队解题 writeup | 春勃
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">春勃</a>
+    <a href="/" class="header-subtitle mdui-typo-headline">반갑습니다</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">tools</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+                
+                <a href="/links/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">links</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/icons/avatar.jpg"/>
+                
+            </div>
+            <div class="sidebar-author-name">ZM-J</div>
+            <div class="sidebar-description">丧失年轻，勿失年华</div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
+                    <a href="mailto:zhumj7@mail2.sysu.edu.cn" class="mdui-chip-title">E-Mail</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/ZM-J" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-zhihu"></i></span>
+                    <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/ZM_________J/posts" class="mdui-chip-title">Zhihu</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://sh1k4ku.github.io/" class="mdui-list-item mdui-ripple">
+                            石卡酷
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://tover.xyz/" class="mdui-list-item mdui-ripple">
+                            套娃
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://jayxv.github.io/" class="mdui-list-item mdui-ripple">
+                            V
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://love-deng-feng.top/" class="mdui-list-item mdui-ripple">
+                            等风
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://github.com/kokifish/CTF-detailed-writeups/" class="mdui-list-item mdui-ripple">
+                            沛公
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2024/06/18/cryptoctf-2024-tough/">CryptoCTF 2024 tough 分类 团队解题 writeup</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2024-06-18
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-06-18
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=CryptoCTF 2024 tough 分类 团队解题 writeup&url=http://example.com/2024/06/18/cryptoctf-2024-tough/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=CryptoCTF 2024 tough 分类 团队解题 writeup&url=http://example.com/2024/06/18/cryptoctf-2024-tough/&via=ZM-J" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2024/06/18/cryptoctf-2024-tough/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/2024/06/18/cryptoctf-2024-tough/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2024/06/18/cryptoctf-2024-tough/&title=CryptoCTF 2024 tough 分类 团队解题 writeup" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=春勃&title=CryptoCTF 2024 tough 分类 团队解题 writeup&summary=丧失年轻，勿失年华&pics=http://example.com/null&url=http://example.com/2024/06/18/cryptoctf-2024-tough/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/2024/06/18/cryptoctf-2024-tough/&text=CryptoCTF 2024 tough 分类 团队解题 writeup" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <p>这次 tough 分类配合得不是很好，最后一个解方程的题目想复杂了，被他的题目设置有点弄晕了，所以到结束的时候都没有做出来。配合得不是很好~</p>
+<h2 id="Capac"><a href="#Capac" class="headerlink" title="Capac"></a>Capac</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目基于某一种神奇的曲线：</p>
+<script type="math/tex; mode=display">x^3 + c y^3 + c^2 z^3 - 3 c x y z = 1</script><p>其中，如果 $z=0$ 的话（也就是题目的生成点 $G$ 满足的条件），$c = (1-x^3) / y^3$。</p>
+<p><em>事实上，上面那个结论就是把 $z=0$ 代入到曲线定义式上面化简得到</em></p>
+<p>然后定义点 $P(x_1, y_1, z_1)$ 和 $Q(x_2, y_2, z_2)$ 的加法：记 $R(x_3, y_3, z_3)=P+Q$，则</p>
+<script type="math/tex; mode=display">x_3 = x_1x_2 + c (y_1z_2 + y_2 z_1)</script><script type="math/tex; mode=display">y_3 = x_2y_1 + x_1y_2 + cz_1z_2</script><script type="math/tex; mode=display">z_3 = y_1y_2 + x_2z_1 + x_1z_2</script><p>已知 $n = p^4 q^6$，$P(m_1, m_2, 0)$，计算 $Q=eP$。已知点 $Q$ 的坐标以及 $e$ 的值，求 $m_1, m_2$。</p>
+<h3 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h3><p>所以关键在于，求出该曲线的阶。</p>
+<p>经过一些尝试，得到该曲线的阶为 $p^3 q^5 (p^3-1)(q^3-1)$</p>
+<p>然后就需要得到 $n=p^4 q^6$ 的分解。首先可以开个根号得到 $p^2 q^3$ 的值，但是仅此而已。</p>
+<p>一开始想着是得到一些阶的约数的倍数的值，使得点 $Q$ 的倍点某个分量能出一些 $p$ 或者 $q$ 的倍数。这个技巧可以参考 <a target="_blank" rel="noopener" href="https://github.com/maple3142/My-CTF-Challenges/tree/master/ImaginaryCTF%202023/Sus">sus</a> 这道题目的手法，本质上是对 Pollard’s p-1 以及 William’s p+1 的一个原理上的应用。但是事与愿违，在尝试的过程中只是对各分量加加减减，并没有找到传说中的子群。</p>
+<p>结果沛公当时用 <a target="_blank" rel="noopener" href="https://sourceforge.net/projects/yafu/">yafu</a> 硬挂，结果把 $n$ 的分解给挂出来了，WTF：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = 242195390295637766135570468161415180323</span><br><span class="line">q = 171955359080932502551172606124599656543</span><br></pre></td></tr></table></figure>
+<p>然后就很简单了：在 $\mathbb{F}_{p^4}$ 和 $\mathbb{F}_{q^6}$ 下分别求出 $c$ 的值，再用中国剩余定理算出模 $n$ 的 $c$ 值，再算出阶，根据阶算出解密倍数，然后算出 $P$ 点坐标就行了。代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">p = </span><br><span class="line">q = </span><br><span class="line">o = p^<span class="number">3</span> * q^<span class="number">5</span> * (p^<span class="number">2</span>+p+<span class="number">1</span>)*(q^<span class="number">2</span>+q+<span class="number">1</span>)*(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">n = p^<span class="number">4</span> * q^<span class="number">6</span></span><br><span class="line">pubkey = </span><br><span class="line">enc = </span><br><span class="line">n_, e = pubkey</span><br><span class="line"><span class="keyword">assert</span> n == n_</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">P, Q, c, n</span>):</span><br><span class="line">	<span class="comment"># Add two points P and Q on curve x^3 + c*y^3 + c^2*z^3 - 3*c*x*y*z = 1 in Zmod(n) </span></span><br><span class="line">	(x1, y1, z1) = P</span><br><span class="line">	(x2, y2, z2) = Q</span><br><span class="line">	x3 = (x1*x2 + c*(y2*z1	+ y1*z2))	% n</span><br><span class="line">	y3 = (x2*y1 + x1*y2		+ c*z1*z2)	% n</span><br><span class="line">	z3 = (y1*y2 + x2*z1		+ x1*z2)	% n</span><br><span class="line">	<span class="keyword">return</span> (x3, y3, z3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mul</span>(<span class="params">P, g, c, n</span>):</span><br><span class="line">	<span class="comment"># Scalar multiplication on curve</span></span><br><span class="line">	(x1, y1, z1) = P</span><br><span class="line">	(x2, y2, z2) = (<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">	<span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">bin</span>(g)[<span class="number">2</span>:]:</span><br><span class="line">		(x2, y2, z2) = add((x2, y2, z2), (x2, y2, z2), c, n)</span><br><span class="line">		<span class="keyword">if</span> b == <span class="string">&#x27;1&#x27;</span>: </span><br><span class="line">			(x2, y2, z2) = add((x2, y2, z2), (x1, y1, z1), c, n)</span><br><span class="line">	<span class="keyword">return</span> (x2, y2, z2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">lift</span>(<span class="params">f, p, k, previous</span>):</span><br><span class="line">    result = []</span><br><span class="line">    df = diff(f)</span><br><span class="line">    <span class="keyword">for</span> lower_solution <span class="keyword">in</span> previous:</span><br><span class="line">        dfr = Integer(df(lower_solution))</span><br><span class="line">        fr = Integer(f(lower_solution))</span><br><span class="line">        <span class="keyword">if</span> dfr % p != <span class="number">0</span>:</span><br><span class="line">            t = ZZ((-(xgcd(dfr, p)[<span class="number">1</span>]) * <span class="built_in">int</span>(fr // p ** (k - <span class="number">1</span>))) % p)</span><br><span class="line">            x_ = lower_solution + t * p ** (k - <span class="number">1</span>)</span><br><span class="line">            result.append(x_)</span><br><span class="line">        <span class="keyword">if</span> dfr % p == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> fr % p ** k == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, p):</span><br><span class="line">                    x_ = lower_solution + t * p ** (k - <span class="number">1</span>)</span><br><span class="line">                    result.append(x_)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hensel_lifting</span>(<span class="params">f, p, k, base_solution</span>):</span><br><span class="line">    solution = base_solution</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, k + <span class="number">1</span>):</span><br><span class="line">        solution = lift(f, p, i, solution)</span><br><span class="line">    <span class="keyword">return</span> solution</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_c</span>(<span class="params">P, p, k</span>):</span><br><span class="line">    x, y, z = P</span><br><span class="line">    PR.&lt;c&gt; = PolynomialRing(Zmod(p))</span><br><span class="line">    f = x^<span class="number">3</span> + c*y^<span class="number">3</span> + c^<span class="number">2</span>*z^<span class="number">3</span> - <span class="number">3</span>*c*x*y*z - <span class="number">1</span></span><br><span class="line">    c_list = [ZZ(x) <span class="keyword">for</span> x, rep <span class="keyword">in</span> f.roots()]</span><br><span class="line">    </span><br><span class="line">    PR.&lt;c&gt; = PolynomialRing(Zmod(p^k))</span><br><span class="line">    f = x^<span class="number">3</span> + c*y^<span class="number">3</span> + c^<span class="number">2</span>*z^<span class="number">3</span> - <span class="number">3</span>*c*x*y*z - <span class="number">1</span></span><br><span class="line">    c_list = hensel_lifting(f, p, k, c_list)</span><br><span class="line">    c = ZZ(c_list[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">return</span> c_list</span><br><span class="line"></span><br><span class="line">cp_list = get_c(enc, p, <span class="number">4</span>)</span><br><span class="line">cq_list = get_c(enc, q, <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">d = inverse_mod(e, o)</span><br><span class="line"><span class="keyword">for</span> cp, cq <span class="keyword">in</span> itertools.product(cp_list, cq_list):</span><br><span class="line">    c = crt([ZZ(cp), ZZ(cq)], [p^<span class="number">4</span>, q^<span class="number">6</span>])</span><br><span class="line">    m = mul(enc, d, c, n)</span><br><span class="line">    x, y, z = m</span><br><span class="line">    msg = long_to_bytes(<span class="built_in">int</span>(m[<span class="number">0</span>])) + long_to_bytes(<span class="built_in">int</span>(m[<span class="number">1</span>]))</span><br><span class="line">    <span class="built_in">print</span>(msg)</span><br></pre></td></tr></table></figure>
+<p>得到 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;n3W_Publ1c_k3Y_crYp70sy5T3m_8a5Ed_ON_7h3_cBb!c_Pell_curV3s!!!&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="赛后复盘"><a href="#赛后复盘" class="headerlink" title="赛后复盘"></a>赛后复盘</h3><p>Discord 上已经有 paper 仙人指路了（或者自行搜 flag 内容）：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://eprint.iacr.org/2024/385">https://eprint.iacr.org/2024/385</a></p>
+</blockquote>
+<p>据说不直接分解是没法做的，否则这篇 paper 本身就出问题了（</p>
+<p><em>乐</em></p>
+<h2 id="Jonon"><a href="#Jonon" class="headerlink" title="Jonon"></a>Jonon</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>和 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/703721955">Imen</a> 一样，给定 $GL(p, k)$ 中的 $n$ 个矩阵 $A_1, A_2, \ldots, A_n, D$，这些矩阵的行列式均非零，每个元素 $x$ 均满足 $0 \le x \le B$，其中 $k, B$ 均较小。</p>
+<p>记</p>
+<script type="math/tex; mode=display">E_p = D \prod_{i=1}^{n}{A_i}</script><script type="math/tex; mode=display">E_s = s E_p</script><p>计算</p>
+<script type="math/tex; mode=display">M_i = E_s A_i D E_s^{-1}</script><p>已知 $M_1, M_2, \ldots, M_n, A_1, A_2, \ldots, A_n, E_p$</p>
+<p>生成 $i_1, i_2, \ldots, i_n$ 为 $1, 2, \ldots, n$ 的一个排列，并且计算</p>
+<script type="math/tex; mode=display">C = \prod_{k = 1}^{n}M_{i_{k}}</script><p>已知 $C$，求排列 $i_1, i_2, \ldots, i_n$。</p>
+<h3 id="我的解答-1"><a href="#我的解答-1" class="headerlink" title="我的解答"></a>我的解答</h3><p>题目背景详见 <a target="_blank" rel="noopener" href="https://eprint.iacr.org/2023/1745">这篇 paper</a>。</p>
+<p>这里也就是需要实现对第 3 章 Trapdoor for the Direct Construction 的解密，详见第 8 页的 Fig. 2。</p>
+<p>所以照着利用 decompose 算法搞一搞就行了。需要注意的是第一下不一定能 decompose 出，需要枚举一下。</p>
+<p>仍然这里 $p$ 未知，还是那两个办法：</p>
+<ol>
+<li>随机生成一个大素数 $p$：假设能 decompose 的话，成功 decompose 的情形和 $p$ 的具体取值无关；</li>
+<li>直接不管，在 $\mathbb{Q}$ 上去求逆去做。成功 decompose 的情形肯定能算出所有元素都是 $\mathbb{Z}$ 内的。</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line">filename = <span class="string">&#x27;output.txt&#x27;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(filename) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read().splitlines()</span><br><span class="line"></span><br><span class="line">pkey = <span class="string">&#x27;\n&#x27;</span>.join(s[:<span class="number">157</span>])[<span class="number">8</span>:-<span class="number">1</span>]</span><br><span class="line">mat_list = pkey.split(<span class="string">&#x27;], [&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_matrix</span>(<span class="params">x</span>):</span><br><span class="line">    x_ = x.replace(<span class="string">&#x27;[&#x27;</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;]&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    xlines = x_.splitlines()</span><br><span class="line">    ret = [[<span class="built_in">int</span>(xij) <span class="keyword">for</span> xij <span class="keyword">in</span> xline.strip().split()] <span class="keyword">for</span> xline <span class="keyword">in</span> xlines]</span><br><span class="line">    <span class="keyword">return</span> matrix(ZZ, ret)</span><br><span class="line"></span><br><span class="line">mat_list = <span class="built_in">list</span>(<span class="built_in">map</span>(get_matrix, mat_list))</span><br><span class="line"></span><br><span class="line">nbit = <span class="number">256</span></span><br><span class="line">k, l, _B = <span class="number">5</span>, <span class="number">19</span>, <span class="number">63</span></span><br><span class="line">M, As, Ep = mat_list[:l], mat_list[l:<span class="number">2</span>*l], mat_list[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gao_one</span>(<span class="params">i</span>):</span><br><span class="line">    Mi, Asi = M[i], As[i]</span><br><span class="line">    wtf = Asi^-<span class="number">1</span> * Ep^-<span class="number">1</span> * Mi * Ep</span><br><span class="line">    a = wtf[<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line">plist = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, l):</span><br><span class="line">    pi = gao_one(<span class="number">0</span>) - gao_one(i)</span><br><span class="line">    plist.append(pi.numerator())</span><br><span class="line">p = gcd(plist)</span><br><span class="line">Zp = Zmod(p)</span><br><span class="line">M = [A.change_ring(Zp) <span class="keyword">for</span> A <span class="keyword">in</span> M]</span><br><span class="line">As = [A.change_ring(Zp) <span class="keyword">for</span> A <span class="keyword">in</span> As]</span><br><span class="line">Ep = Ep.change_ring(Zp)</span><br><span class="line">Ds = As[<span class="number">0</span>]^-<span class="number">1</span> * Ep^-<span class="number">1</span> * M[<span class="number">0</span>] * Ep</span><br><span class="line"></span><br><span class="line">C = <span class="string">&#x27;\n&#x27;</span>.join(s[<span class="number">157</span>:<span class="number">162</span>])[<span class="number">4</span>:]</span><br><span class="line">C = get_matrix(C)</span><br><span class="line">C = C.change_ring(Zp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decompose</span>(<span class="params">A, index_list, M, Ds</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(A) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">len</span>(A) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> M != A[<span class="number">0</span>]:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> [index_list[<span class="number">0</span>]]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i, Ai <span class="keyword">in</span> <span class="built_in">enumerate</span>(A):</span><br><span class="line">            M_ = Ds^-<span class="number">1</span> * Ai^-<span class="number">1</span> * M</span><br><span class="line">            MZ = M.change_ring(ZZ).<span class="built_in">list</span>()</span><br><span class="line">            MZ_ = M_.change_ring(ZZ).<span class="built_in">list</span>()</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">all</span>(MZi_ &lt; MZi <span class="keyword">for</span> MZi, MZi_ <span class="keyword">in</span> <span class="built_in">zip</span>(MZ, MZ_))):</span><br><span class="line">                A_ = A[:i] + A[i+<span class="number">1</span>:]</span><br><span class="line">                index_list_ = index_list[:i] + index_list[i+<span class="number">1</span>:]</span><br><span class="line">                res = decompose(A_, index_list_, M_, Ds)</span><br><span class="line">                <span class="keyword">if</span> res:</span><br><span class="line">                    <span class="keyword">return</span> [index_list[i]] + res</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">C, M, As, Ep, Ds</span>):</span><br><span class="line">    T = Ep^-<span class="number">1</span> * C * Ep * Ds^-<span class="number">1</span></span><br><span class="line">    <span class="comment"># CAONIMA, exceed</span></span><br><span class="line">    index_list = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(As)))</span><br><span class="line">    <span class="keyword">for</span> i, Ai <span class="keyword">in</span> <span class="built_in">enumerate</span>(As):</span><br><span class="line">        A_ = As[:i] + As[i+<span class="number">1</span>:]</span><br><span class="line">        index_list_ = index_list[:i] + index_list[i+<span class="number">1</span>:]</span><br><span class="line">        T_ = Ds^-<span class="number">1</span> * Ai^-<span class="number">1</span> * T</span><br><span class="line">        S = decompose(A_, index_list_, T_, Ds)</span><br><span class="line">        <span class="keyword">if</span> S:</span><br><span class="line">            <span class="keyword">return</span> [i] + S</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">my_order = decrypt(C, M, As, Ep, Ds)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> printable <span class="keyword">as</span> prn</span><br><span class="line">flag = <span class="string">&#x27;CCTF&#123;&#x27;</span> + <span class="string">&#x27;&#x27;</span>.join([prn[<span class="number">10</span> + my_order[_]] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(l)]) + <span class="string">&#x27;&#125;&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;flag = &#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>解得 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;mpradjnkfcqhilsoebg&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Rehawk-x"><a href="#Rehawk-x" class="headerlink" title="Rehawk (x)"></a>Rehawk (x)</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p><strong>参数生成</strong> 在将 $m=128$ 次单位根加入而得到的分圆域 $\mathbb{C}$ 中，$\mathbb{F}$ 为其最大实子域，记 $\deg \mathbb{F} = u$。</p>
+<p>构造矩阵 $\mathbf{D} = [d_{ij}]_{u \times u}$ 有</p>
+<script type="math/tex; mode=display">d_{ij} = \left\{\begin{aligned}\binom{i}{\frac{i-j}{2}}, & \quad 2 \mid i-j \\
+0, & \quad 2 \nmid i-j \end{aligned}\right.</script><p>定义向量 $D’$ 为</p>
+<script type="math/tex; mode=display">D'_i = \sum_{i=0}^{u-1}d_{ij} x^j \in \mathbb{F}</script><p>计算矩阵 $\mathbf{D}$ 的逆 $\mathbf{D}^{-1}$，其元素为 $d’_{ij}$</p>
+<p>定义向量 $O$ 为</p>
+<script type="math/tex; mode=display">O_i = \sum_{i=0}^{u-1}d'_{ij} x^j \in \mathbb{F}</script><p><strong>密钥生成</strong> 记 $u=\deg \mathbb{F}= m/4=32$, $v=d/2$</p>
+<ol>
+<li>生成 $\mathbb{F}$ 中多项式<script type="math/tex; mode=display">a = \sum_{i=0}^{v-1} a_i x^i</script>其中 $a_i$ 的值较小，满足 $-u \le a_i \le u$</li>
+<li>将 $a$ 对应的矩阵格基规约，得到矩阵 $A$</li>
+<li>生成 $\mathbb{F}$ 中多项式<script type="math/tex; mode=display">b = \sum_{i=0}^{v-1} b_i x^i</script>其中 $b_i$ 的值较小，满足 $-u \le b_i \le u$</li>
+<li>将 $b$ 对应的矩阵格基规约，得到矩阵 $B$</li>
+<li>计算<script type="math/tex; mode=display">C = \begin{bmatrix}A \\
+B\end{bmatrix}</script>并将 $C$ 中的元素转换成 $\mathbb{Z}$ 中元素</li>
+<li>$R=MC$ 为 $C$ 的 Hermite 形，$M$ 为变换矩阵，保证 $R$ 满秩</li>
+<li>计算 $c, d$ 使得<script type="math/tex; mode=display">b c = \sum_{i=0}^{v-1}{M_{0, i+v}}</script><script type="math/tex; mode=display">a d = \sum_{i=0}^{v-1}{M_{0, i}}</script></li>
+<li>计算<script type="math/tex; mode=display">n = \frac{ac + bd}{a^2 + b^2}</script></li>
+<li>将 $n$ 的各项表示成向量 $\vec{n}$，计算<script type="math/tex; mode=display">N = \vec{n} \mathbf{D}</script></li>
+<li>计算<script type="math/tex; mode=display">n' = \sum_{i=0}^{v-1}{\lfloor\vec{N}_i\rceil O_i}</script></li>
+<li>计算<script type="math/tex; mode=display">c' = c - n' a</script><script type="math/tex; mode=display">d' = d - n' b</script></li>
+<li>构造矩阵<script type="math/tex; mode=display">S = \begin{bmatrix}a & c' \\
+b & d'\end{bmatrix}</script></li>
+<li>计算<script type="math/tex; mode=display">P = (S + I)(S^\top - I)</script></li>
+</ol>
+<p>已知矩阵 $P$，求矩阵 $S$</p>
+<h3 id="我的解答-2"><a href="#我的解答-2" class="headerlink" title="我的解答"></a>我的解答</h3><p>比赛的时候被它这一通输出给绕晕了，又是分圆域，又是各种矩阵运算，光想着用 $a, b, c, d$ 做自变量，根据 $P$ 构造方程去了，多捞哦~</p>
+<p>用 $a, b, c, d$ 做自变量是不太行的，虽然可以列出如下式子：</p>
+<script type="math/tex; mode=display">\left\{\begin{aligned}a^2 n^2 - 2 a c n + a^2 + c^2 - 1 & = P_{00} \\
+a b n^2 - b c n - a d n + a b + c d + a n + b - c & = P_{01} \\
+a b n^2 - b c n - a d n + a b + c d - a n - b + c & = P_{10} \\
+b^2 n^2 - 2 b d n + b^2 + d^2 - 1 & = P_{11} \\
+(a^2 + b^2) n &= (a c + b d)\end{aligned}\right.</script><p>直接用 variety 大法是不行滴，因为上述的自由度是 1……</p>
+<p>然后我们玩了一下，发现玩出一个式子来：</p>
+<script type="math/tex; mode=display">a d - b c = 1</script><p><em>可能需要复盘一下这式子为什么成立</em></p>
+<p>加进理想中再试试 variety，发现无济于事，上述的自由度仍旧是 1……</p>
+<h3 id="赛后复盘-1"><a href="#赛后复盘-1" class="headerlink" title="赛后复盘"></a>赛后复盘</h3><p>但是其实，因为我们只需要已知矩阵 $P$ 求 $S$，直接根据最后一个式子 $P=(S+I)(S^\top-I)$ 就是四个方程四个未知数，直接解 variety 就完事儿了。</p>
+<p>先尝试用一些更“数学”的方法来求解：</p>
+<script type="math/tex; mode=display">P = S S^\top + S^\top - S - I</script><p>上式两端同求转置：</p>
+<script type="math/tex; mode=display">P^\top = S S^\top + S - S^\top - I</script><p>然后求和：</p>
+<script type="math/tex; mode=display">P + P^\top = 2 S S^\top - 2 I</script><p>整理得</p>
+<script type="math/tex; mode=display">S S^\top = \frac{P + P^\top}{2} + I</script><p>这里就需要右边是半正定了，这个方程是可以从一个特解推到通解的，参考 <a target="_blank" rel="noopener" href="https://math.stackexchange.com/questions/1908517/how-to-solve-the-matricial-equation-a-at-b">这里</a></p>
+<p>上面那两个式子还可以求差：</p>
+<script type="math/tex; mode=display">P - P^\top = 2(S^\top - S)</script><p>也就是</p>
+<script type="math/tex; mode=display">S^\top - S = \frac{P - P^\top}{2}</script><p>也就是说，在满足上面那个通解的同时，又要被这玩意儿进一步限制成某个特解，很烦。</p>
+<p>所以人生苦短，直接用 sagemath 一把梭得了。这里给上 <a target="_blank" rel="noopener" href="https://blog.maple3142.net/">maple3142 大神</a> 的代码，看大神的代码真是一种享受~</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">PR = PolynomialRing(F, [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>])</span><br><span class="line">a, b, c, d = PR.gens()</span><br><span class="line">sk_sym = matrix([[a, c], [b, d]])</span><br><span class="line">eqs = (</span><br><span class="line">    (sk_sym + identity_matrix(<span class="number">2</span>)) * (sk_sym.T - identity_matrix(<span class="number">2</span>)) - pkey</span><br><span class="line">).<span class="built_in">list</span>() + [a * d - b * c - <span class="number">1</span>]</span><br><span class="line">I = ideal(eqs)</span><br><span class="line">V = I.variety()</span><br><span class="line">sol = V[<span class="number">0</span>]</span><br><span class="line">a, b, c, d = sol[a], sol[b], sol[c], sol[d]</span><br><span class="line">sk = Matrix([[a, c], [b, d]])</span><br></pre></td></tr></table></figure>
+<p>然后就是朴实无华的出 flag，整体代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">m = <span class="number">128</span></span><br><span class="line">C = CyclotomicField(m)</span><br><span class="line">F, PHI = C.maximal_totally_real_subfield()</span><br><span class="line">zeta1280 = F.gen()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;pk.txt&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="built_in">exec</span>(f.read().replace(<span class="string">&#x27;^&#x27;</span>, <span class="string">&#x27;**&#x27;</span>))</span><br><span class="line"></span><br><span class="line">pkey = matrix([[pk00, pk01], [pk10, pk11]])</span><br><span class="line"></span><br><span class="line">PR = PolynomialRing(F, [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>])</span><br><span class="line">a, b, c, d = PR.gens()</span><br><span class="line">sk_sym = matrix([[a, c], [b, d]])</span><br><span class="line">eqs = (</span><br><span class="line">    (sk_sym + identity_matrix(<span class="number">2</span>)) * (sk_sym.T - identity_matrix(<span class="number">2</span>)) - pkey</span><br><span class="line">).<span class="built_in">list</span>() + [a * d - b * c - <span class="number">1</span>]</span><br><span class="line">I = ideal(eqs)</span><br><span class="line">V = I.variety()</span><br><span class="line">sol = V[<span class="number">0</span>]</span><br><span class="line">a, b, c, d = sol[a], sol[b], sol[c], sol[d]</span><br><span class="line">sk = Matrix([[a, c], [b, d]])</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line">flag = <span class="built_in">str</span>(<span class="built_in">sum</span>(sk.coefficients()).polynomial()(<span class="number">2</span>^<span class="number">128</span>))</span><br><span class="line">flag = <span class="string">&#x27;CCTF&#123;&#x27;</span> + sha256(flag.encode()).hexdigest() + <span class="string">&#x27;&#125;&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;flag = &#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>最后 flag 为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;22729b5551b78e96a8cbe624c138967e93df1cb58c9e3208ceb5029451093612&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>注意到两点</p>
+<p><strong>方程的解有两组</strong> 所以说对应的 flag 也有两个，我最后测试选择 <code>sol = V[0]</code> 和 <code>sol = V[1]</code> 会得出不同的 flag。但是 <strong>注意到 $a$, $b$ 的系数应该较小</strong>，可以把解出来 $a$ 的值打印出来看一下，所以就只有 <code>V[0]</code> 是问题的解。</p>
+<p><strong>代码中后面手动加的那个等式</strong> 其实 maple3142 大神的代码里面也加了</p>
+<script type="math/tex; mode=display">a d' - b c' = 1</script><p>这个等式。实测下来并没有起到约束自由度的作用（本来理想就已经是自由度为 0 了），但是能极快地增加方程的求解速度。在我的机器上，增加这个等式之前：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">real    0m42.132s</span><br><span class="line">user    0m41.829s</span><br><span class="line">sys     0m0.114s</span><br></pre></td></tr></table></figure>
+<p>增加这个等式之后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">real    0m4.571s</span><br><span class="line">user    0m4.269s</span><br><span class="line">sys     0m0.138s</span><br></pre></td></tr></table></figure>
+<p>这个等式的成立是因为：</p>
+<script type="math/tex; mode=display">c' = c - n' a</script><script type="math/tex; mode=display">d' = d - n' b</script><p>所以</p>
+<script type="math/tex; mode=display">\begin{aligned}a d' - b c' &= a (d - n' b) - b (c - n' a) \\
+&= a d - b c \\
+&= 1\end{aligned}</script><p>所以说还是要多看问题需要求解什么，不相关的东西就不要去管了……</p>
+<h2 id="Vorop"><a href="#Vorop" class="headerlink" title="Vorop"></a>Vorop</h2><h3 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h3><p>$q, m, d, u$ 为已知参数，其中 $q$ 为模数。题目基于矩阵，元素均在 $GF(p)$ 中运算。</p>
+<ul>
+<li>首先生成一个 $u \times (m+d)$ 的随机矩阵 $O$</li>
+<li>然后将 $O$ 和 $(m+d) \times (m+d)$ 的单位矩阵 $I$ 拼起来，得到大小为 $(m+d+u) \times (m+d)$ 的矩阵 $O’$<script type="math/tex; mode=display">O' = \begin{bmatrix}O \\
+I\end{bmatrix}</script></li>
+<li>然后再生成 $m$ 个大矩阵 $P^{(i)}$，大小为 $(u+m+d) \times (u+m+d)$<script type="math/tex; mode=display">P^{(i)} = \begin{bmatrix}A^{(i)} & B^{(i)} \\
+D^{(i)} & C^{(i)}\end{bmatrix}</script>其中<ul>
+<li>$A^{(i)}$ 为 $u \times u$ 随机上三角矩阵<script type="math/tex; mode=display">A^{(i)}_{jk} = \left\{\begin{aligned}\mathrm{random}, & \quad j \le k \\
+0, & \quad j > k\end{aligned}\right.</script></li>
+<li>$B^{(i)}$ 为 $u \times (m+d)$ 随机矩阵</li>
+<li>$D^{(i)}$ 为 $(m+d) \times u$ 全零矩阵</li>
+<li>$C^{(i)}$ 为 $(m+d) \times (m+d)$ 的矩阵，计算公式如下：<script type="math/tex; mode=display">C^{(i)} = \mathrm{upper}(O^\top (A^{(i)} O + B^{(i)}))</script>其中 <code>upper</code> 是一个对矩阵逐元素运算的函数，将一个矩阵强行变成上三角，定义如下：<script type="math/tex; mode=display">\mathrm{upper}\left(x_{jk}\right) = \left\{\begin{aligned}x_{jk} + x_{kj}, & \quad j < k \\
+x_{jk}, & \quad j = k \\
+0, & \quad j > k\end{aligned}\right.</script></li>
+</ul>
+</li>
+<li>然后生成了一个 $m+d$ 维随机向量 $\vec{v}$，并计算<script type="math/tex; mode=display">\vec{u} = O' \vec{v}</script>且保证 $\vec{u} \ne \vec{0}$</li>
+</ul>
+<p>题目还定义了一个验证函数 $\mathrm{verify}(X)$：</p>
+<ol>
+<li>计算 $m$ 个矩阵<script type="math/tex; mode=display">K^{(i)} = X^\top P^{(i)} X</script></li>
+<li>验证这 $m$ 个矩阵的二次型<script type="math/tex; mode=display">x^\top K^{(i)} x</script>是否恒为 0，其中，对于每个矩阵 $K^{(i)}$，都用 $m$ 个随机向量 $x$ 去测试</li>
+</ol>
+<p>题目还计算了 $\mathrm{verify}(O’)$ 函数，有 $K^{(i)} = O’^\top P^{(i)} O’$ 是一个 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Skew-symmetric_matrix">反对称矩阵</a>，并且主对角线上的元素为 0。</p>
+<p>我们还已知 $\vec{u}$ 的值，需要输入一个 $(m+d+u) \times (m+d)$ 的非零矩阵 $X$，使得 $\mathrm{verify}(X)$ 返回真。</p>
+<h3 id="我的解答-3"><a href="#我的解答-3" class="headerlink" title="我的解答"></a>我的解答</h3><p>稍加验算与尝试：</p>
+<ul>
+<li>如果我们将 $\vec{u}$ 代入：</li>
+</ul>
+<script type="math/tex; mode=display">K^{(i)} = \vec{u}^\top P^{(i)} \vec{u} = \vec{v}^\top O'^\top P^{(i)} O' \vec{v} = 0</script><ul>
+<li>如果我们将 $\vec{0}$ 代入：</li>
+</ul>
+<script type="math/tex; mode=display">K^{(i)} = \vec{0}^\top P^{(i)} \vec{0} = 0</script><p>所以我们只需要令 $X = \begin{bmatrix}\vec{u} &amp; vec{0} &amp; \ldots &amp; \vec{0}\end{bmatrix}$ 即可。代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># self.conn = process([&#x27;another.sage&#x27;])</span></span><br><span class="line">        self.conn = remote(<span class="string">&#x27;00.cr.yp.toc.tf&#x27;</span>, <span class="number">37733</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_params</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit&#x27;</span>, <span class="string">&#x27;G&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_oracle_output</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit&#x27;</span>, <span class="string">&#x27;O&#x27;</span>)</span><br><span class="line">        self.conn.recvuntil(<span class="string">&#x27;output U = [&#x27;</span>)</span><br><span class="line">        U = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, self.conn.recvuntil(<span class="string">&#x27;]&#x27;</span>)[:-<span class="number">1</span>].decode().split()))</span><br><span class="line">        <span class="keyword">return</span> U</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_matrix</span>(<span class="params">self, U</span>):</span><br><span class="line">        q, m, d, u = <span class="number">2</span>**<span class="number">8</span>, <span class="number">26</span>, <span class="number">8</span>, <span class="number">46</span></span><br><span class="line">        zeros = matrix(ZZ, m+d+u, m+d-<span class="number">1</span>)</span><br><span class="line">        U_ = matrix(ZZ, [U]).transpose()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;U_.nrows() = &#125;</span>, <span class="subst">&#123;U_.ncols() = &#125;</span>&#x27;</span>)</span><br><span class="line">        OI_ = block_matrix(ZZ, [[U_, zeros]])</span><br><span class="line">        <span class="keyword">return</span> OI_.transpose()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">matrix_to_lines</span>(<span class="params">self, M</span>):</span><br><span class="line">        lines = []</span><br><span class="line">        <span class="keyword">for</span> Mline <span class="keyword">in</span> M:</span><br><span class="line">            lines.append(<span class="string">&#x27;,&#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, Mline)))</span><br><span class="line">        <span class="keyword">return</span> lines</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">verify</span>(<span class="params">self, U</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit&#x27;</span>, <span class="string">&#x27;V&#x27;</span>)</span><br><span class="line">        M = self.make_matrix(U)</span><br><span class="line"></span><br><span class="line">        lines = self.matrix_to_lines(M)</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">            self.conn.sendline(line)</span><br><span class="line">        </span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        U = self.get_oracle_output()</span><br><span class="line">        self.verify(U)</span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    g = Gao()</span><br><span class="line">    g.gao()</span><br></pre></td></tr></table></figure>
+<p>然后有丶搞心态的就是，是远程参数跟他那个下发代码的参数，是对！他！妈！不！上！的！</p>
+<p><em>一个公告也不发，附件也不 update 一下，搞飞机呢？</em></p>
+<p>总之套到了 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;p0lYnOm1aL_7im3_k3Y_R3c0vEry_4TtaCk_0n_7hE_PROV!&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>感觉他提到的这个 PROV 应该是 <a target="_blank" rel="noopener" href="https://prov-sign.github.io/">这个</a></p>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 已经结束咧 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> Goodbye --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2024/06/18/cryptoctf-2024-summary/">
+        <span>CryptoCTF 2024 战果速报</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2024/06/18/cryptoctf-2024-tough/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Capac"><span class="toc-number">1.</span> <span class="toc-text">Capac</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94"><span class="toc-number">1.2.</span> <span class="toc-text">我的解答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%9B%98"><span class="toc-number">1.3.</span> <span class="toc-text">赛后复盘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jonon"><span class="toc-number">2.</span> <span class="toc-text">Jonon</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-1"><span class="toc-number">2.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rehawk-x"><span class="toc-number">3.</span> <span class="toc-text">Rehawk (x)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-2"><span class="toc-number">3.2.</span> <span class="toc-text">我的解答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%9B%98-1"><span class="toc-number">3.3.</span> <span class="toc-text">赛后复盘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vorop"><span class="toc-number">4.</span> <span class="toc-text">Vorop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3"><span class="toc-number">4.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-3"><span class="toc-number">4.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
+      </div>
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2024 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        ZM-J
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

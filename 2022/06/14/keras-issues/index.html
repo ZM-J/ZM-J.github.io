@@ -252,7 +252,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-04-18
+      Edited on:&nbsp;2024-04-19
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -420,6 +420,8 @@
 <blockquote>
 <p>对于不熟悉的功能/框架/特性，需要<strong>谨慎引入</strong></p>
 </blockquote>
+<h2 id="更改模型里面层的名称"><a href="#更改模型里面层的名称" class="headerlink" title="更改模型里面层的名称"></a>更改模型里面层的名称</h2><p>这个事情本来的需求是想在模型构建的时候嵌入一个 metadata，但是呢 keras 模型本身是没有预留一个类似于 metadata 之类的字段的。后面发现如果是只要嵌一个 metadata 的话，其实就直接嵌入到层的 <code>name</code> 字段里面就行了。于是某些 stackoverflow 上的解决方法就是：</p>
+<p><del>之后如果需要增加 metadata 内容的话还得通过另外 dump 个 pickle 对象的方式来搞</del></p>
 
   </div>
   <!--文末结束语-->
@@ -449,7 +451,7 @@
     <ul class="mdui-menu" id="toc">
       <li class="mdui-menu-item">
         <a href="/2022/06/14/keras-issues/" id="toc-header" class="mdui-ripple">Table of Contents</a>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#keras-Sequential-%E4%B8%AD-model-build-%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">keras.Sequential 中 model.build 的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E6%97%B6-checkpoint-%E5%9B%9E%E8%B0%83%E4%B8%8D%E5%81%9C%E5%9C%B0%E6%8A%A5%E5%85%B3%E4%BA%8E-LSTMcell-%E7%9A%84-warning"><span class="toc-number">2.</span> <span class="toc-text">训练时 checkpoint 回调不停地报关于 LSTMcell 的 warning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93-model-fit-%E7%9A%84%E8%AE%AD%E7%BB%83%E9%9B%86%E4%BD%BF%E7%94%A8-generator-%E6%97%B6%E5%81%9C%E4%B8%8D%E4%B8%8B%E6%9D%A5"><span class="toc-number">3.</span> <span class="toc-text">当 model.fit 的训练集使用 generator 时停不下来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93-model-fit-%E7%9A%84%E8%AE%AD%E7%BB%83%E9%9B%86%E4%BD%BF%E7%94%A8-generator-%E6%97%B6%E4%B8%8D%E8%83%BD%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">4.</span> <span class="toc-text">当 model.fit 的训练集使用 generator 时不能多线程取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cuDNN-%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD-dll"><span class="toc-number">5.</span> <span class="toc-text">cuDNN 不能加载 dll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-XLA"><span class="toc-number">6.</span> <span class="toc-text">关于 XLA</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#keras-Sequential-%E4%B8%AD-model-build-%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">keras.Sequential 中 model.build 的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E6%97%B6-checkpoint-%E5%9B%9E%E8%B0%83%E4%B8%8D%E5%81%9C%E5%9C%B0%E6%8A%A5%E5%85%B3%E4%BA%8E-LSTMcell-%E7%9A%84-warning"><span class="toc-number">2.</span> <span class="toc-text">训练时 checkpoint 回调不停地报关于 LSTMcell 的 warning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93-model-fit-%E7%9A%84%E8%AE%AD%E7%BB%83%E9%9B%86%E4%BD%BF%E7%94%A8-generator-%E6%97%B6%E5%81%9C%E4%B8%8D%E4%B8%8B%E6%9D%A5"><span class="toc-number">3.</span> <span class="toc-text">当 model.fit 的训练集使用 generator 时停不下来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93-model-fit-%E7%9A%84%E8%AE%AD%E7%BB%83%E9%9B%86%E4%BD%BF%E7%94%A8-generator-%E6%97%B6%E4%B8%8D%E8%83%BD%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">4.</span> <span class="toc-text">当 model.fit 的训练集使用 generator 时不能多线程取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cuDNN-%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD-dll"><span class="toc-number">5.</span> <span class="toc-text">cuDNN 不能加载 dll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-XLA"><span class="toc-number">6.</span> <span class="toc-text">关于 XLA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E6%A8%A1%E5%9E%8B%E9%87%8C%E9%9D%A2%E5%B1%82%E7%9A%84%E5%90%8D%E7%A7%B0"><span class="toc-number">7.</span> <span class="toc-text">更改模型里面层的名称</span></a></li></ol>
       </li>
     </ul>
   </div>

@@ -50,6 +50,62 @@
 
 
 
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
           
 
 
@@ -57,7 +113,7 @@
     
     <title>
         
-            Tensorflow Profiler 踩坑记 | 春勃
+            CryptoCTF 2024 战果速报 | 春勃
         
     </title>
     
@@ -244,19 +300,19 @@
     
     
       <div class="post-header"> 
-  <a class="post-header-title" href="/2024/04/19/tensorflow-profile-issues/">Tensorflow Profiler 踩坑记</a>
+  <a class="post-header-title" href="/2024/06/18/cryptoctf-2024-summary/">CryptoCTF 2024 战果速报</a>
   <div class="post-header-meta">
     <span>
       <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2024-04-19
+      Posted on:&nbsp;2024-06-18
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-04-19
+      Edited on:&nbsp;2024-06-18
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/%E5%B7%A5%E5%9C%B0%E9%9A%8F%E7%AC%94/">工地随笔</a>
+      In:&nbsp;
     </span>
     
       <span>
@@ -278,25 +334,25 @@
       <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
       <ul class="mdui-menu" id="share_menu">
         <li class="mdui-menu-item">
-          <a href="http://service.weibo.com/share/share.php?appkey=&title=Tensorflow Profiler 踩坑记&url=http://example.com/2024/04/19/tensorflow-profile-issues/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=CryptoCTF 2024 战果速报&url=http://example.com/2024/06/18/cryptoctf-2024-summary/&pic=http://example.com/null&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://twitter.com/intent/tweet?text=Tensorflow Profiler 踩坑记&url=http://example.com/2024/04/19/tensorflow-profile-issues/&via=ZM-J" target="_blank" class="mdui-ripple">Share to Twitter</a>
+          <a href="https://twitter.com/intent/tweet?text=CryptoCTF 2024 战果速报&url=http://example.com/2024/06/18/cryptoctf-2024-summary/&via=ZM-J" target="_blank" class="mdui-ripple">Share to Twitter</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2024/04/19/tensorflow-profile-issues/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2024/06/18/cryptoctf-2024-summary/" target="_blank" class="mdui-ripple">Share to Facebook</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://plus.google.com/share?url=http://example.com/2024/04/19/tensorflow-profile-issues/" target="_blank" class="mdui-ripple">Share to Google+</a>
+          <a href="https://plus.google.com/share?url=http://example.com/2024/06/18/cryptoctf-2024-summary/" target="_blank" class="mdui-ripple">Share to Google+</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2024/04/19/tensorflow-profile-issues/&title=Tensorflow Profiler 踩坑记" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2024/06/18/cryptoctf-2024-summary/&title=CryptoCTF 2024 战果速报" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="http://connect.qq.com/widget/shareqq/index.html?site=春勃&title=Tensorflow Profiler 踩坑记&summary=丧失年轻，勿失年华&pics=http://example.com/null&url=http://example.com/2024/04/19/tensorflow-profile-issues/" target="_blank" class="mdui-ripple">Share to QQ</a>
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=春勃&title=CryptoCTF 2024 战果速报&summary=丧失年轻，勿失年华&pics=http://example.com/null&url=http://example.com/2024/06/18/cryptoctf-2024-summary/" target="_blank" class="mdui-ripple">Share to QQ</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://telegram.me/share/url?url=http://example.com/2024/04/19/tensorflow-profile-issues/&text=Tensorflow Profiler 踩坑记" target="_blank" class="mdui-ripple">Share to Telegram</a>
+          <a href="https://telegram.me/share/url?url=http://example.com/2024/06/18/cryptoctf-2024-summary/&text=CryptoCTF 2024 战果速报" target="_blank" class="mdui-ripple">Share to Telegram</a>
         </li>
       </ul>
     
@@ -309,56 +365,81 @@
   <div class="post-tags">
     
       <i class="iconfont icon-tag">
-        <a rel="tag" href = /tags/AI/ >AI</a>
+        <a rel="tag" href = /tags/CTF/ >CTF</a>
       </i>
     
       <i class="iconfont icon-tag">
-        <a rel="tag" href = /tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/ >深度学习</a>
-      </i>
-    
-      <i class="iconfont icon-tag">
-        <a rel="tag" href = /tags/tensorflow/ >tensorflow</a>
+        <a rel="tag" href = /tags/Crypto/ >Crypto</a>
       </i>
     
   </div>
 
   
   <div class="mdui-card-content mdui-typo mdui-p-x-4">
-    <p>众所周知，在 AI 模型落地的时候，我们不仅仅关注模型的准确率，同样也会关注模型的性能。</p>
-<p>在使用 VSCode 等 IDE 开发 C++、C# 应用的时候，我们就会去开启 debug 模式，通过可视化工具分析应用的热点与瓶颈在哪里，这个过程一般叫做 profiling。当然，在 linux 上，我们也有 valgrind 等工具可以方便我们分析。</p>
-<p>那么具体到 tensorflow 的模型中，我们也想要进行类似的分析。好在 Google 官方提供了 tensorflow profiler 以及<a target="_blank" rel="noopener" href="https://tensorflow.google.cn/tensorboard/tensorboard_profiling_keras">官方教程</a>，我们可以 follow 这个教程来分析。此外，也有其他人写过<a target="_blank" rel="noopener" href="https://ehsanyousefzadehasl.medium.com/profiling-with-tensorflow-9eaa283e8c3">博客</a>来介绍 tensorflow profiler 的使用。</p>
-<p>当然 Google 在知乎中也发表过一篇<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/283468373">介绍文</a>。</p>
-<p>但是这玩意儿它坑就坑在在自己机器上作分析的话，这些东西要自己装。那么要装这些东西就会踩到一些坑。</p>
-<p>_甚至用 Google Colab 都不可避免地会踩到一些坑_</p>
-<h2 id="包的版本"><a href="#包的版本" class="headerlink" title="包的版本"></a>包的版本</h2><p>首先，为了稳定性，工地的 docker 镜像都是统一采用 <code>tensorflow=2.10.0</code>，尽管现在有更新的版本。因此，为了和工地的设置一致，我们本地也安装这个版本，tensorboard 也需要和 tensorflow 版本一致（最好是 <code>2.10.0</code>，我一开始直接<code>pip install tensorflow=2.10</code> 结果安装成了 <code>2.10.1</code>，后面也乖乖地设置成了 <code>2.10.0</code>）</p>
-<p>然后就是 <code>tensorboard_plugin_profile</code> 包的版本。我一开始是直接 follow 官方教程的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorboard_plugin_profile</span><br></pre></td></tr></table></figure>
-<p>来进行安装，结果训练时能正常 dump 记录到文件，但是启动 tensorboard 到浏览器上去看 profile 页面的时候，发现如下内容的页面：</p>
-<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**No profile data was found.**</span></span><br><span class="line"></span><br><span class="line">If you have a model running on CPU, GPU, or Google Cloud TPU, you may be able to use the above button to capture a profile.</span><br><span class="line"></span><br><span class="line">If you&#x27;re a CPU or GPU user, please use the IP address option. You may want to check out the [<span class="string">tutorial</span>](<span class="link">https://colab.research.google.com/github/tensorflow/tensorboard/blob/master/docs/tensorboard_profiling_keras.ipynb</span>) on how to start a TensorFlow profiler server and profile a Keras model on a GPU.</span><br><span class="line"></span><br><span class="line">If you&#x27;re a TPU user, please use the TPU name option and you may want to check out the [<span class="string">tutorial</span>](<span class="link">https://cloud.google.com/tpu/docs/cloud-tpu-tools</span>) on how to interpreting the profiling results.</span><br><span class="line"></span><br><span class="line">If you think profiling is done properly, please see the page of [<span class="string">Google Cloud TPU Troubleshooting and FAQ</span>](<span class="link">https://cloud.google.com/tpu/docs/troubleshooting</span>) and consider filing an issue on GitHub.</span><br></pre></td></tr></table></figure>
-<p>一开始看到这玩意儿一头雾水，然后就去搜了下，发现有几个 Github issue：</p>
+    <blockquote>
+<p>一九九七年</p>
+<p>我学会了开汽车</p>
+<p>上坡 下坡</p>
+<p>轧死了一千多</p>
+<p>警察来抓我</p>
+<p>我跑到女厕所</p>
+<p>女厕所的灯</p>
+<p>没 有 开</p>
+<p>一脚掉到茅屎坑</p>
+<p>和粑粑交朋友</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1m64y1F7Ce">点此欣赏芜湖童谣</a></p>
+<hr>
+<img src="/2024/06/18/cryptoctf-2024-summary/page.png" class="" title="芝士密码">
+<p>这周末，一年一度的 Crypto CTF 如期举行。<a target="_blank" rel="noopener" href="https://yijiujiuqinianwoxuehuilekaiqiche.github.io/">1997</a> 如之前几年一样穿上发病棉袄，和队友们一起参加周六晚 22:00 开始的 Crypto CTF。</p>
+<p>在注册队伍的时候，哥们本来想队伍把弄成这样：</p>
+<img src="/2024/06/18/cryptoctf-2024-summary/team_name.png" class="" title="曾经我是不安河水">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/bangumi/play/ep454146/?share_source=copy_web&amp;t=330">点此欣赏 1997 队歌</a></p>
+<p>在移动端直接显示成这样：</p>
+<img src="/2024/06/18/cryptoctf-2024-summary/another_team_name.jpg" class="" title="穿过森林误入你心">
+<p>结果就被制裁了</p>
+<img src="/2024/06/18/cryptoctf-2024-summary/sanction.jpg" class="" title="你说到底为什么都是我的错">
+<p>最后交涉了一下只能变成这样子：</p>
+<img src="/2024/06/18/cryptoctf-2024-summary/gg.png" class="" title="还要多远才能进入你的心">
+<hr>
+<p>最后，1997 差两题 AK 了此次比赛。老规矩，先鸣谢下队友：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/issues/61212">https://github.com/tensorflow/tensorflow/issues/61212</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/issues/62373">https://github.com/tensorflow/tensorflow/issues/62373</a></li>
+<li>沛公 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/guan-pei-dong-41">@沛公</a></li>
+<li>石卡库 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/ai-kan-chun-yu-de-mao">@爱看春雨的猫</a></li>
+<li>苏氨酸 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/fish-amoy">@苏氨酸</a></li>
+<li>To1in <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/chen-tang-lin-60">@To1in</a></li>
+<li>V <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/nilin-77">@Van1sh</a></li>
+<li>等风 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/deng-feng-10-87-48">@等风</a></li>
+<li>Xenny <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/xenny-84">@Xenny</a></li>
+<li>Tover <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/tover-55">@Tover</a></li>
+<li>三顺七 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/qiu-yue-feng-xia-21">@珊瑚青树</a></li>
+<li>未央 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/shi-ye-na-tian">@是夜那天</a></li>
 </ul>
-<p>里面给出的解决方案基本上是调调文件目录结构，甚至还有给出一个手动下载并覆盖 <code>events.out.tfevents.TIMESTAMP.USER.profile-empty</code> 这种 monkey patch 级别的修复。试了一下，发现都不管用。</p>
-<p>后面想到 tensorboard 本质上是一个 B-S 结构，那么看看服务端，结果发现了两行日志：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">W tensorflow/core/profiler/convert/xplane_to_tools_data.cc:231] Can not find tool: tool_names. Please update to the latest version of Tensorflow.</span><br><span class="line">2024-04-17 14:31:57.295365: W tensorflow/core/profiler/convert/xplane_to_tools_data.cc:231] Can not find tool: tool_names. Please update to the latest version of Tensorflow.</span><br></pre></td></tr></table></figure>
-<p>然后就在猜想这个 <code>tool_names</code> 是不是 tensorflow profiler 后续版本引入的新字段，但是在老版本的 tensorboard 中，该字段并不能够解析；并且刷新浏览器并仔细观察，发现是有一个 load 的进度条的，走到三分之一的地方才说 <strong>No profile data was found</strong>，这个现象其实从某红程度上来说作证了我们的猜想。<code>pip</code> 查看 <code>tensorboard_plugin_profile</code> 包的版本，发现为 <code>2.15.1</code>。</p>
-<p>然后尝试装 <code>2.10.0</code> 的版本：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorboard_plugin_profile==2.10.0</span><br></pre></td></tr></table></figure>
-<p>结果发现还是没得：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Could not find a version that satisfies the requirement tensorboard_plugin_profile==2.10.0 (from versions: 2.2.0a1, 2.2.0a2, 2.2.0a3, 2.2.0a4, 2.2.0a5, 2.2.0a6, 2.2.0rc0, 2.2.0, 2.3.0rc0, 2.3.0, 2.4.0, 2.5.0, 2.8.0, 2.11.1, 2.11.2, 2.13.0, 2.13.1, 2.14.0, 2.15.0, 2.15.1)</span><br><span class="line">ERROR: No matching distribution found for tensorboard_plugin_profile==2.10.0</span><br></pre></td></tr></table></figure>
-<p>猜想就是可能这种插件性质的包更新速度不如 tensorflow 和 tensorboard 更新得频繁，可能 <code>tensorflow=2.8.0</code> 的下一次更新就直接到了 <code>tensorflow=2.11.1</code>，所以我们选择装 <code>2.8.0</code> 版本的 <code>tensorboard_plugin_profile</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorboard_plugin_profile==2.8.0</span><br></pre></td></tr></table></figure>
-<p>然后重新捕捉训练的记录，结果 tensorboard 就能正常显示 profile 信息了。</p>
-<h2 id="CUPTI-DLL-缺失"><a href="#CUPTI-DLL-缺失" class="headerlink" title="CUPTI DLL 缺失"></a>CUPTI DLL 缺失</h2><p>在捕捉训练记录的过程中，会看到</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CUPTI error: CUPTI could not be loaded or symbol could not be found.</span><br></pre></td></tr></table></figure>
-<p>然后其实主要就是：</p>
+<p>然后放个总榜</p>
+<img src="/2024/06/18/cryptoctf-2024-summary/result.png" class="" title="难受啊马飞">
+<blockquote>
+<p>配合得不是很好</p>
+</blockquote>
+<p>这次的题目要么是乱搞，要么是无解然后把附件一更新需要 redownload 附件（<del>非常好奇redownload前的题目出题人有什么添腹亿饼的方法解出来？</del>），更难蚌的是最后零解的那个 Duzly 居然是 Medium 分类的题，那真的牛批，啊，那真的牛批。然后因为最后那个 Rehawk 最后大家都搞得神志不清了，导致把一个简单问题复杂化了，最后也是寄，痛失前四。</p>
+<blockquote>
+<p>CryptoCTF×<br>RedownloadCTF√<br>FactorCTF√</p>
+</blockquote>
+<p><em>玩具车，遥控车，玩具玩具遥控车……</em></p>
+<p>下方为 writeup 传送门：</p>
+<hr>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/101398340">复制 DLL</a>：将 <code>CUDA\v11.6\extras\CUPTI\lib64\cupti64_2022.1.1.dll</code> 移动到 <code>CUDA\v11.6\bin</code> 目录下</li>
-<li><a target="_blank" rel="noopener" href="https://icode.best/i/02241457262307">改名</a>：CUPTI 新版 DLL 的命名规则发生了改变，需要遵循旧版的命名法则，手动改成 <code>cupti64_112.dll</code>。这里需要特别注意，虽然我本地的 CUDA 版本已经是 11.6，但是因为 tensorflow 只认 <code>cupti64_112.dll</code> 这个文件名，所以就改成这个一模一样的文件名就好</li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/61877915/could-not-load-dynamic-library-cupti64-101-dll-dlerror-cupti64-101-dll-not-f">再次确认环境变量</a>：确保 CUDA 的 bin 目录和 CUPTI 目录在 PATH 环境变量下</li>
+<li><a target="_blank" rel="noopener" href="https://zm-j.github.io/2024/06/18/cryptoctf-2024-easy/">easy 分类</a></li>
+<li><a target="_blank" rel="noopener" href="https://zm-j.github.io/2024/06/18/cryptoctf-2024-medium-1/">medium 分类之一</a></li>
+<li><a target="_blank" rel="noopener" href="https://zm-j.github.io/2024/06/18/cryptoctf-2024-medium-2/">medium 分类之二</a></li>
+<li><a target="_blank" rel="noopener" href="https://zm-j.github.io/2024/06/18/cryptoctf-2024-medium-3/">medium 分类之三</a></li>
+<li><a target="_blank" rel="noopener" href="https://zm-j.github.io/2024/06/18/cryptoctf-2024-medium-4/">medium 分类之四</a></li>
+<li><a target="_blank" rel="noopener" href="https://zm-j.github.io/2024/06/18/cryptoctf-2024-hard-1/">hard 分类之一</a></li>
+<li><a target="_blank" rel="noopener" href="https://zm-j.github.io/2024/06/18/cryptoctf-2024-hard-2/">hard 分类之二</a></li>
+<li><a target="_blank" rel="noopener" href="https://zm-j.github.io/2024/06/18/cryptoctf-2024-tough/">tough 分类</a></li>
 </ul>
+<hr>
+<p>这里也贴一贴队友写的一些 writeup 的传送门：</p>
+<p>TODO</p>
 
   </div>
   <!--文末结束语-->
@@ -371,14 +452,14 @@
   
   <nav>
     
-      <a rel="prev" class="post-nav-item mdui-float-left" href="/2024/06/18/cryptoctf-2024-medium-4/">
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/2024/06/18/cryptoctf-2024-tough/">
         <i class="iconfont icon-angle-left"></i>
-        <span>CryptoCTF 2024 medium 分类 团队解题 writeup 之四</span>
+        <span>CryptoCTF 2024 tough 分类 团队解题 writeup</span>
       </a>
     
     
-      <a rel="next" class="post-nav-item mdui-float-right" href="/2024/03/07/learn-english-with-chatgpt/">
-        <span>用 ChatGPT 学洋文</span>
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2024/06/18/cryptoctf-2024-easy/">
+        <span>CryptoCTF 2024 easy 分类 团队解题 writeup</span>
         <i class="iconfont icon-angle-right"></i>
       </a>
     
@@ -392,8 +473,8 @@
     <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
     <ul class="mdui-menu" id="toc">
       <li class="mdui-menu-item">
-        <a href="/2024/04/19/tensorflow-profile-issues/" id="toc-header" class="mdui-ripple">Table of Contents</a>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.</span> <span class="toc-text">包的版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CUPTI-DLL-%E7%BC%BA%E5%A4%B1"><span class="toc-number">2.</span> <span class="toc-text">CUPTI DLL 缺失</span></a></li></ol>
+        <a href="/2024/06/18/cryptoctf-2024-summary/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        
       </li>
     </ul>
   </div>

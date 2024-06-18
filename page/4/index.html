@@ -50,6 +50,62 @@
 
 
 
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
           
 
 
@@ -240,125 +296,171 @@
   
   <main id="main-contain" class="mdui-container mdui-m-t-5">
     
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2023/03/21/reinforcement-learning-hungyi-1/">李宏毅强化学习个人笔记 - 概览</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2023-03-21
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-20
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+    </span>
+    
+  </div>
+</div>   
+    
 
-<div class="mdui-card mdui-p-a-4 mdui-m-b-5">
-    <div class="page-describe">
-        33 posts in total.
-    </div>
-    <div class="posts-collapse">
-        
-            
-            
-                <div class="collection-title">
-                    <a href="/archives/2024"><h2>2024<small>Archives</small></h2></a>
-                </div>
-                
-            
 
-            <div class="collection-item">
-                <h3><a href="/2024/06/18/cryptoctf-2024-tough/">CryptoCTF 2024 tough 分类 团队解题 writeup</a></h3>
-                <time itemprop="dateCreated" datetime=2024-06-18 >
-                    2024.06.18
-                </time>
-            </div>
-        
-            
-            
 
-            <div class="collection-item">
-                <h3><a href="/2024/06/18/cryptoctf-2024-summary/">CryptoCTF 2024 战果速报</a></h3>
-                <time itemprop="dateCreated" datetime=2024-06-18 >
-                    2024.06.18
-                </time>
-            </div>
-        
-            
-            
+      
+      
+  <div class="tag-line-space"></div>
 
-            <div class="collection-item">
-                <h3><a href="/2024/06/18/cryptoctf-2024-easy/">CryptoCTF 2024 easy 分类 团队解题 writeup</a></h3>
-                <time itemprop="dateCreated" datetime=2024-06-18 >
-                    2024.06.18
-                </time>
-            </div>
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <p>课程链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1UE411G78S/">【【李宏毅】2020 最新课程 (完整版) 强化学习  - 71.作業十五 ML Lecture 23-1 - Deep Re】 </a></p>
+<p>其他人的笔记：</p>
+<p>强化学习-李宏毅-学习笔记 &lt;总&gt; - 恒大大的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/344975862">https://zhuanlan.zhihu.com/p/344975862</a></...
+          
+        </div>
         
-            
-            
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/03/21/reinforcement-learning-hungyi-1/">Read More</a>
+        </div>
+      </div>
+    </article>
 
-            <div class="collection-item">
-                <h3><a href="/2024/06/18/cryptoctf-2024-hard-1/">CryptoCTF 2024 hard 分类 团队解题 writeup 之一</a></h3>
-                <time itemprop="dateCreated" datetime=2024-06-18 >
-                    2024.06.18
-                </time>
-            </div>
-        
-            
-            
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2022/11/21/python-multiprocessing/">python multiprocessing 多进程踩坑</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2022-11-21
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-03-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/%E5%B7%A5%E5%9C%B0%E9%9A%8F%E7%AC%94/">工地随笔</a>
+    </span>
+    
+  </div>
+</div>   
+    
 
-            <div class="collection-item">
-                <h3><a href="/2024/06/18/cryptoctf-2024-hard-2/">CryptoCTF 2024 hard 分类 团队解题 writeup 之二</a></h3>
-                <time itemprop="dateCreated" datetime=2024-06-18 >
-                    2024.06.18
-                </time>
-            </div>
-        
-            
-            
 
-            <div class="collection-item">
-                <h3><a href="/2024/06/18/cryptoctf-2024-medium-1/">CryptoCTF 2024 medium 分类 团队解题 writeup 之一</a></h3>
-                <time itemprop="dateCreated" datetime=2024-06-18 >
-                    2024.06.18
-                </time>
-            </div>
-        
-            
-            
 
-            <div class="collection-item">
-                <h3><a href="/2024/06/18/cryptoctf-2024-medium-2/">CryptoCTF 2024 medium 分类 团队解题 writeup 之二</a></h3>
-                <time itemprop="dateCreated" datetime=2024-06-18 >
-                    2024.06.18
-                </time>
-            </div>
-        
-            
-            
+      
+      
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ >操作系统</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/ >进程同步</a>
+      </i>
+    
+  </div>
 
-            <div class="collection-item">
-                <h3><a href="/2024/06/18/cryptoctf-2024-medium-3/">CryptoCTF 2024 medium 分类 团队解题 writeup 之三</a></h3>
-                <time itemprop="dateCreated" datetime=2024-06-18 >
-                    2024.06.18
-                </time>
-            </div>
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <p>之所以写这个东西，还是因为之前操作系统学了个寂寞，考前背个板混个分数就过了。但是这玩意儿在实际应用的时候，才会体会到某些坑爹的地方~</p>
+<p>众所周知，在 python 中，<strong>I/O 密集型任务</strong> 可以用多线程的方式来实现（threading 库）；然而，对于 <strong>计算密集型</strong> 任务，由于 python 中全局锁 GIL 的存在，多线程并不能起到一个加速的作用。所以此时，一般使用多进程的方式实现（multiprocessing 库）。虽然对于多进程，网上资料一搜一大把，但是这并不妨碍实际操作过程中会踩到坑。</p>
+<...
+          
+        </div>
         
-            
-            
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2022/11/21/python-multiprocessing/">Read More</a>
+        </div>
+      </div>
+    </article>
 
-            <div class="collection-item">
-                <h3><a href="/2024/06/18/cryptoctf-2024-medium-4/">CryptoCTF 2024 medium 分类 团队解题 writeup 之四</a></h3>
-                <time itemprop="dateCreated" datetime=2024-06-18 >
-                    2024.06.18
-                </time>
-            </div>
-        
-            
-            
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2022/06/14/keras-issues/">不定时更新的 Keras 踩坑记</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2022-06-14
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2024-04-19
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/%E5%B7%A5%E5%9C%B0%E9%9A%8F%E7%AC%94/">工地随笔</a>
+    </span>
+    
+  </div>
+</div>   
+    
 
-            <div class="collection-item">
-                <h3><a href="/2024/04/19/tensorflow-profile-issues/">Tensorflow Profiler 踩坑记</a></h3>
-                <time itemprop="dateCreated" datetime=2024-04-19 >
-                    2024.04.19
-                </time>
-            </div>
+
+
+      
+      
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/AI/ >AI</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/ >深度学习</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/keras/ >keras</a>
+      </i>
+    
+  </div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <p>众所周知，一般 research 里面所使用的炼丹框架以 PyTorch 居多。然而在工业界的模型部署中，TensorFlow 因能较好地支持多 GPU 的特性而广受青睐。</p>
+<p>其中，Keras 以 TensorFlow 为后端（之前的 Keras 版本也能以 Theano、MXNet 等为后端），对 TensorFlow 的诸多 API 进行了封装，为模型的部署进一步降低了门槛。并且，TensorFlow 也把 Keras 集成进来，作为 TensorFlow 的一部分。</p>
+<p>俺也是最近才系统性地接触到 Keras，之前都是 PyTorch 居多，用 Tens...
+          
+        </div>
         
-    </div>
-</div>
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2022/06/14/keras-issues/">Read More</a>
+        </div>
+      </div>
+    </article>
+
 
 
   <nav style="text-align: center;">
     <div class="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="iconfont icon-angle-right"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/"><i class="iconfont icon-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
     </div>
   </nav>
 
