@@ -391,6 +391,16 @@
 </ul>
 <h3 id="有大佬做出来了！"><a href="#有大佬做出来了！" class="headerlink" title="有大佬做出来了！"></a>有大佬做出来了！</h3><p>详情请见<a target="_blank" rel="noopener" href="https://github.com/Sarkoxed/ctf-writeups/tree/master/cryptoctf2024/duzly_updated">这里</a></p>
 <p>有空再看看，给大佬递冰阔落.jpg</p>
+<p>简单来说，就是利用费马小定理：</p>
+<script type="math/tex; mode=display">x^{p-1} \equiv 1 \pmod{p}</script><p>也就是 $p \mid x^{p-1}-1$</p>
+<p>那么同时有 $p \mid f(x)$，则有</p>
+<script type="math/tex; mode=display">p \mid \gcd(x^{p-1}-1, f(x))</script><p>所以期望求出 $\gcd(x^{p-1}-1, f(x))$，看看它是不是可以得到一个关于 $x$ 的低次多项式，或者直接是一次多项式（由代数基本定理，$x - x_0$ 肯定是上面两个多项式的一个因式）</p>
+<p>这个套路就有点类似于 Franklin-Reiter Attack，之前 <a target="_blank" rel="noopener" href="https://tangcuxiaojikuai.xyz/">鸡块哥</a> 也在 NSS 上出过一道 <a target="_blank" rel="noopener" href="https://www.nssctf.cn/problem/5457">类似的题</a>。</p>
+<p>所以第一步也就是在多项式环除以 $f(x)$ 的商环中，用快速幂算法求出 $x^{p-1}-1$ 的值；</p>
+<p>第二步就是利用辗转相除法，求出这两个多项式的最大公约式。如果最大公约式直接就是一次多项式的话，就能直接求解。</p>
+<p>一开始大佬想直接用 sagemath 写，但是 sagemath 基于 NTL 实现多项式的话，对多项式的最大次数有限制，于是发现可以通过把 NTL 中的最大次数改大，从而让 $f(x)$ 能用 NTL 的多项式表示出。</p>
+<p>猜想是如果直接用长度为 $n$ 的数组实现多项式的话，理论上加减的时间复杂度都是 $O(n)$；就乘法的时间复杂度是 $O(n^2)$，然后用快速傅里叶变换实现的话，时间复杂度可以来到 $O(n \log n)$。所以理论上这题是能用 C++或者 python 纯手撕的（自己实现一个多项式类，有点造轮子了属于是）</p>
+<p>然后大佬的 C++代码可以优化：因为算法一开始对明文进行了分块，块与块之间的运算是互不干涉的，所以可以利用线程池来加快求解速度。</p>
 <h2 id="Forghan"><a href="#Forghan" class="headerlink" title="Forghan"></a>Forghan</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>远程交互题，步骤如下：</p>
 <ol>
 <li>我们发给远程两个 256 位素数 $p$ 和 $q$</li>
