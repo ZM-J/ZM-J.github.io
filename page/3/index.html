@@ -1,854 +1,332 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
-    <meta name="renderer" content="webkit"/>
-    <meta name="force-rendering" content="webkit"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
-    
-    
-        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
-        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
-    
-    
-    
-        <link rel="shortcut icon" href="/icons/favicon.ico">
-    
-
-    
-    
-        
-<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
-
-    
-    
-<link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/iconfont.css">
-
-
-    
-    
-
-    
-        <script data-ad-client="ca-" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-    
-        <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        
-            load: ['[tex]/mhchem'],
-        
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        
-            packages: {'[+]': ['mhchem']},
-        
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>春勃 - 반갑습니다</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="丧失年轻，勿失年华">
+<meta property="og:type" content="website">
+<meta property="og:title" content="春勃">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="春勃">
+<meta property="og:description" content="丧失年轻，勿失年华">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:author" content="ZM-J">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '春勃',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-06-26 14:11:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
       }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-          
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="春勃"><span class="site-name">春勃</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">春勃</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/07/10/cryptoctf-2023-easy/" title="CryptoCTF 2023 easy分类 团队解题writeup">CryptoCTF 2023 easy分类 团队解题writeup</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-07-10T06:10:00.000Z" title="Created 2023-07-10 14:10:00">2023-07-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CTF/">CTF</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CTF/Crypto/">Crypto</a></span></div><div class="content">这次 easy 分类偏简单，
+不过由于配合得不是很好，所以在实战中会有部分题目卡壳的情况
+不过还好能有其他人也帮忙看一看，所以马上就能够解围
+Did it!题目描述记 $n = 127$，$N=\{0, 1, 2, \ldots, n-1\}$，有随机的未知 $K \subseteq N$，且 $|K| \le 20$。
+有至多 12 次的机会，输入一个集合 $A \subseteq N$，且 $|A| \le 20$，返回结果
+\{x_0^2 \bmod n + r_0, x_1^2 \bmod n + r_1, \ldots\}对于所有 ${x_i \in A - K}$
+其中 $r_i \in \{0, 1\}$ 为一个关于 $x_i$ 的随机数。
+如果输入的 $A = K$，则得到 flag。
+我的解答也就是说，有至多 11 次的机会去得到结果，然后就要猜出 $K$ 来。
+因为 $n$ 是素数，所以对于结果中的每一组 $x_i^2 \bmod n + r_i$，都可以枚举 $r_i$，通过开平方求得可能的 $x_i$。然后再用 $A$ 减去这些 $x_i$ 构成的集合，就得到  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/06/29/cryptoctf-2023-summary/" title="CryptoCTF 2023 战果速报">CryptoCTF 2023 战果速报</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-06-29T07:58:00.000Z" title="Created 2023-06-29 15:58:00">2023-06-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CTF/">CTF</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CTF/Crypto/">Crypto</a></span></div><div class="content">
+一九九七年
+我学会了开汽车
+上坡 下坡
+轧死了一千多
+警察来抓我
+我跑到女厕所
+女厕所的灯
+没 有 开
+一脚掉到茅屎坑
+和粑粑交朋友
+
+点此欣赏芜湖童谣
 
 
-    
-    
-    <title>
-          
-            春勃
-        
-    </title>
-    
-    
-<meta name="generator" content="Hexo 7.1.1"></head>
-<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
-  
-  <header class="mdui-appbar mdui-appbar-fixed">
-  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
-    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
-    <a href="/" class="mdui-typo-headline">春勃</a>
-    <a href="/" class="header-subtitle mdui-typo-headline">반갑습니다</a>
-    <div class="mdui-toolbar-spacer"></div>
-    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
-  </div>
-</header>
+这周末，一年一度的 Crypto CTF 如期举行。在炎炎夏季，穿上发病棉袄，和队友们一起参加周五晚 22: 00 开始的 Crypto CTF，并 AK 了此次比赛。老规矩，先鸣谢下队友：
 
-<div class="mdui-dialog" id="search">
-  
-    <div class="search-form">
-      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
-    </div>
-    <div class="search-result" data-resource="/search.xml"></div>
-  
-</div>
+沛公 @沛公
+石卡库 @爱看春雨的猫
+苏氨酸 @苏氨酸
+To1in @To1in
+V @Van1sh
+等风 @等风
+Xenny @Xenny
+Tover @Tover
 
-  <aside id="sidebar" class="mdui-drawer">
-    <div class="mdui-tab" mdui-tab>
-        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
-        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
-    </div>
 
-    
-    <div id="sidebar-tab1" class="mdui-p-a-1">
-        <div class="mdui-list">
-            
-                
-                <a href="/" class="mdui-list-item mdui-ripple">
-                    <div class="mdui-list-item-icon">
-                        <i class="iconfont icon-home"></i>
-                    </div>
-                    <div class="mdui-list-item-content">Home</div>
-                </a>
-            
-                
-                <a href="/tags/" class="mdui-list-item mdui-ripple">
-                    <div class="mdui-list-item-icon">
-                        <i class="iconfont icon-bookmark"></i>
-                    </div>
-                    <div class="mdui-list-item-content">Tags</div>
-                </a>
-            
-                
-                <a href="/categories/" class="mdui-list-item mdui-ripple">
-                    <div class="mdui-list-item-icon">
-                        <i class="iconfont icon-folder"></i>
-                    </div>
-                    <div class="mdui-list-item-content">Categories</div>
-                </a>
-            
-                
-                <a href="/archives/" class="mdui-list-item mdui-ripple">
-                    <div class="mdui-list-item-icon">
-                        <i class="iconfont icon-archive"></i>
-                    </div>
-                    <div class="mdui-list-item-content">Archives</div>
-                </a>
-            
-                
-                <a href="/tools/" class="mdui-list-item mdui-ripple">
-                    <div class="mdui-list-item-icon">
-                        <i class="iconfont icon-tools"></i>
-                    </div>
-                    <div class="mdui-list-item-content">tools</div>
-                </a>
-            
-                
-                <a href="/about/" class="mdui-list-item mdui-ripple">
-                    <div class="mdui-list-item-icon">
-                        <i class="iconfont icon-user"></i>
-                    </div>
-                    <div class="mdui-list-item-content">About</div>
-                </a>
-            
-                
-                <a href="/links/" class="mdui-list-item mdui-ripple">
-                    <div class="mdui-list-item-icon">
-                        <i class="iconfont icon-link"></i>
-                    </div>
-                    <div class="mdui-list-item-content">links</div>
-                </a>
-            
-            <div class="mdui-list-item mdui-ripple">
-                <div class="mdui-list-item-icon">
-                    <i class="iconfont icon-moon"></i>
-                </div>
-                <div class="mdui-list-item-content">Night Mode</div>
-                <label class="mdui-switch" id="darkmode">
-                  <input type="checkbox" id="nightmode_switch"/>
-                  <i class="mdui-switch-icon"></i>
-                </label>
-            </div>           
-        </div>
-    </div>
+这波配合得不错
 
-    
-    <div id="sidebar-tab2" class="mdui-p-a-1">
-        <div class="sidebar-overview">
-            <div class="sidebar-avatar">
-                
-                    <img src="/icons/avatar.jpg"/>
-                
+然后放个总榜
+
+这次的题目总体来说都偏简（luan）单（gao），最难搞的反而是偏 misc 的几道题。所以说手速，或者是出 idea 的速度是最关键的。因为我们队伍还是贯彻一个养生 CTF，所以说基本上没搞得很晚就先歇逼了一阵，痛失前五。
+之后更 writeup，下方为 writeup 传送门：
+
+
+easy 分类
+medium 分类之一
+medium 分类之二
+medium 分类之三
+medium 分类之四
+hard 分类之一
+hard 分类之二
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/06/29/reinforcement-learning-hungyi-7/" title="李宏毅强化学习个人笔记 - 其他姿势">李宏毅强化学习个人笔记 - 其他姿势</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-06-29T07:55:00.000Z" title="Created 2023-06-29 15:55:00">2023-06-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a></span></div><div class="content">
+回到概览
+
+Sparse Reward实际上，用强化学习的算法去学 agent 的时候，多数情况下，agent 都是没办法得到奖励的。经常不获得奖励对 agent 的训练来说非常困难。
+不管 actor 做了什么事情，得到的奖励都是 0，所以到最后什么都不会学到。
+（譬如训练一个机械臂去开门，因为绝大多数情况下机械臂都在去伸手，在最后把门打开了才能获得一个正的奖励）
+Reward Shaping环境有一个固定的奖励。为了让 agent 学的东西是我们想要的样子，我们去刻意设计一些奖励去引导 agent。
+
+如上图所示，在小鹏与的 Q 函数中
+
+对于玩的认知是，当前可以获得一个正的奖励，长时间后获得一个负的奖励
+相反地，对于学习的认知是，当前可以获得一个负的奖励，长时间后获得一个正的奖励
+假设小鹏与的衰减系数设得比较小的话，那么就总会关注短期奖励，从而会去玩，而不是学习
+这个时候，就人为地“给一个棒棒糖”：在采取学习这个动作的时候，将短期奖励也“改”为正的奖励，虽然这个奖励不是环境真正的奖励
+
+
+Facebook 训练去玩 FPS 游戏 VizDoom 的 agent：设计掉血扣分、耗 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/06/28/reinforcement-learning-hungyi-6/" title="李宏毅强化学习个人笔记 - Actor-Critic">李宏毅强化学习个人笔记 - Actor-Critic</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-06-28T08:58:53.000Z" title="Created 2023-06-28 16:58:53">2023-06-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a></span></div><div class="content">
+回到概览
+
+A3C: Asynchronous Advantage Actor-Critic
+A2C: Advantage Actor-Critic
+复习 policy gradient之前用 policy gradient 去学习 actor 的时候，都是看奖励函数的输出，来决定 actor 要怎么更新，才能得到最大的奖励。
+但是因为互动的过程中有非常大的随机性，所以直接根据互动的过程学可能没有办法学得很好。
+\nabla \bar{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} \left( \sum_{t'=t}^{T_n} \gamma^{t'-t} r_{t'}^n - b \right) \nabla \log p_{\theta} (a_t^n | s_t^n)从 $t$ 到 $T_n$ 的奖励加起来，乘上一个随时间减少的衰减因子，再减去一个 bias（baseline）。
+可以记 $G_{t}^n = \sum_{t’=t}^{T_n} \gamma^{t’-t} r_{t’}^n$，$G ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/06/28/reinforcement-learning-hungyi-5-3/" title="李宏毅强化学习个人笔记 - 对于连续动作的 Q-learning">李宏毅强化学习个人笔记 - 对于连续动作的 Q-learning</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-06-28T05:55:00.000Z" title="Created 2023-06-28 13:55:00">2023-06-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a></span></div><div class="content">
+回到概览
+
+跟 policy gradient 比较起来，Q-learning 比较稳定（policy gradient 玩不起来什么游戏）
+Q-learning 一个比较好训练的理由是：只要你找得到一个比较好的 Q 函数，那么你就有一个比较好的策略；也就是说如果你能恰当估计 Q 函数（其实比较容易，就是一个回归问题，只需要看到 loss 有无下降就能看出模型学得好不好），你就能更新你的策略。
+Q-learning 最大的一个问题就是：比较难处理连续动作的情形。
+a = \arg \max_{a} Q(s, a)假设现在动作 $a$ 是一个 连续向量，首先就不能通过枚举所有的 $a$ 去求 argmax。
+解法一对于连续的动作 $a$，对其抽样：抽样出一个动作的集合 $\{a_1, a_2, \ldots, a_N\}$，看看哪个动作能得到最大的 Q 值。
+在实际的操作上，可以抽样完后都丢到 Q 函数里面算。因为实际都在用 GPU 进行张量计算，所以也没有到很慢。
+但是，采样毕竟不是个精确的方法。可能存在没抽到的更优的动作。
+解法二用梯度上升法来解这个最优化问题。
+最小化就用梯度下降 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/06/28/reinforcement-learning-hungyi-5-2/" title="李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧">李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-06-28T04:11:00.000Z" title="Created 2023-06-28 12:11:00">2023-06-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a></span></div><div class="content">
+回到概览
+
+Double DQNDouble DQN 提出的动机：在实际的 Q-learning 中，Q 值是经常被高估的。
+
+总体来说，DQN 的 Q 值随着训练的进行逐步上升。Q 函数依赖于策略，在学习的过程中，策略会变得越来越强，Q 值就会越来越大。
+实际值：训练结束后，再和环境互动，得到的真实奖励。（互动多次取期望）
+Double DQN 能让估测值跟实际值更接近，且实际值（真正的累计期望）比原来的 DQN 要更大（模型更强）。
+为什么 DQN 中的 Q 值老是被高估？ 注意到学习时回归问题的形式：
+Q(s_t, a_t) \longleftrightarrow r_t + \max_{a}{Q(s_{t+1}, a)}目标值很容易一不小心就被设太高：在算目标值的时候，看哪一个 $a$ 能得到最大的 $Q$ 值，就把它加上去。假设现在有某个动作 $a$，它得到的 $Q$ 值是被高估的。那么，在回归的时候，总是会选这个被高估的值来作为目标。如下图，本来大家的真实 Q 值都是差不多的，绿色部分表示被高估，那么总会采取被高估的动作对应的 Q 值作为回归目标。
+
+这样，回归训练出的的 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/06/28/reinforcement-learning-hungyi-5-1/" title="李宏毅强化学习个人笔记 - Q-learning 简介">李宏毅强化学习个人笔记 - Q-learning 简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-06-28T04:08:00.000Z" title="Created 2023-06-28 12:08:00">2023-06-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a></span></div><div class="content">
+回到概览
+
+Q-learning 是基于值的方法。我们并不学习策略（Actor），而是学习 Critic。Critic 不直接采取行为，而是评价现在的行为有多好。
+假设现在有一个 actor $\pi$，critic 的工作就是评价这个 actor $\pi$ 做得有多好。
+譬如这个 critic 可以做成是跟状态有关的函数：$V^{\pi}(s)$。它的含义为使用 actor $\pi$ 时，到了状态 $s$ 之后，可获得的 期望累积奖励。
+
+例如上图，剩下的怪不多了的时候，$V^{\pi}(s)$ 就会比较小；反之，剩下的怪多的时候，$V^{\pi}(s)$ 就会比较大。
+这里注意：critic 是必须要绑定一个 actor 的。critic 没办法凭空去评估一个状态的好坏；它评估的东西是给定一个状态，假设接下来跟环境互动的 actor 是 $\pi$，那么会得到多少奖励。因为就算给同一个状态，给定不同的 $\pi$，得到的奖励也会不一样的。（譬如很叼的玩家会在绝境秀操作，很捞的玩家就只会是个呆头鹅）
+所以 critic 的取值跟状态和 actor 都有关。critic 是用来衡 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/04/18/reinforcement-learning-hungyi-4/" title="李宏毅强化学习个人笔记 - PPO">李宏毅强化学习个人笔记 - PPO</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-18T10:44:00.000Z" title="Created 2023-04-18 18:44:00">2023-04-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a></span></div><div class="content">
+回到概览
+
+PPO: Proximal Policy Optimization，该算法为 OpenAI 的默认强化学习算法。
+复习：将神经网络作为 actor
+神经网络擅长拟合函数
+网络输入：机器的观测表示成向量或矩阵；
+网络输出：每个动作对应输出层的一个神经元；
+
+$p(s_{t+1}|s_t, a_t)$ 不能控制，由环境来决定，我们只能控制 $p_{\theta}(a_t|s_t)$。
+任务是要最大化期望累积奖励 $\bar{R}_{\theta}$
+\bar{R}_{\theta}=\sum_{\tau}R(\tau) p_{\theta}(\tau)=E_{\tau \sim p_{\theta}(\tau)}[R(\tau)]（注意到 $R_{\theta}$ 是一个随机变量）
+也就是说，在 $p_{\theta}(\tau)$ 这个分布里面采样轨迹 $\tau$，计算 $R(\tau)$ 的期望值。
+然后 $R(\tau)$ 这一项不需要可微。上一次讲到策略梯度（Policy Gradient）可以推出：
+\begin{align*}\nabla \bar{R}_{\t ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/21/reinforcement-learning-hungyi-3/" title="李宏毅强化学习个人笔记 - 基于值的方法（学习critic）">李宏毅强化学习个人笔记 - 基于值的方法（学习critic）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-21T11:39:00.000Z" title="Created 2023-03-21 19:39:00">2023-03-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a></span></div><div class="content">
+回到概览
+
+这里我们不学习 actor，也就是不学习怎么做事，而是学习一个 critic。
+critic 的性质
+critic 本身不决定动作；
+给定 actor，critic 可以评估 actor 的好坏；
+实际上，可以从 critic 里面得到一个 actor，这就是 Q-learning。
+critic 实际上就是一个评估 actor $\pi$ 的函数 $V^\pi$
+这个函数可以是一个神经网络
+
+
+
+critic 的形式关于状态 $V^\pi(s)$ 当 actor 使用 $\pi$ 的时候，在观测到状态 $s$ 后获得的期望累积奖励。
+
+如上图：
+
+左边的状态，还剩很多飞机可以打，所以 $V^\pi(s)$ 较大；
+右边的状态，较少飞机可以打，而且飞机渐渐靠下了，所以 $V^\pi(s)$ 较小。
+
+对于不同的 actor $\pi$，给出一样的状态，可能给出的 critic $V^\pi(s)$ 也会不同。
+
+譬如棋魂中的例子，之前藤原佐为建议进藤光下小飞，因为之前进藤光比较弱，后续变化较简单，更易驾驭；
+之后变强了，就能够下变化更复杂的大飞；
+也就是说，critic  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/21/reinforcement-learning-hungyi-2/" title="李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）">李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-21T04:07:00.000Z" title="Created 2023-03-21 12:07:00">2023-03-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a></span></div><div class="content">
+回到概览
+
+基于策略的方法，也就是学习 actor。换言之，也就是学习一个策略函数 $\pi$：该函数输入观测，输出动作。
+
+将神经网络作为 actor
+神经网络擅长拟合函数
+网络输入：机器的观测表示成向量或矩阵；
+网络输出：每个动作对应输出层的一个神经元；
+
+
+神经网络相较于查表的作为 actor 的好处
+有“采样”的步骤，可以带来更多变的决策。譬如猜拳，会随机出锤子剪刀布。
+
+譬如上面的打飞机，无法穷举所有的像素值，这种情况下建立表不现实。
+
+神经网络泛化性好，可以举一反三。就算有些画面机器完全没有看过，也能够得到较好的结果（动作）。
+
+
+决定 actor 的好坏回顾监督学习：用 loss 来刻画所学到函数的质量。
+
+求网络参数 $\theta’$ 使得能够最小化总误差 $L$
+或者说，使得预测分布与目标（target）越近越好
+
+给定具有网络参数 $\theta$ 的 actor：$\pi_{\theta}(s)$，用该 actor 来玩游戏：
+
+每一步可以记为三元组：(观测, 动作, 奖励)
+$(s_1, a_1, r_1) \to (s_2, a_2, r_2) \to \ ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ZM-J</div><div class="author-info__description">丧失年轻，勿失年华</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/18/cryptoctf-2024-tough/" title="CryptoCTF 2024 tough 分类 团队解题 writeup">CryptoCTF 2024 tough 分类 团队解题 writeup</a><time datetime="2024-06-18T07:01:31.000Z" title="Created 2024-06-18 15:01:31">2024-06-18</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/06/18/cryptoctf-2024-summary/" title="CryptoCTF 2024 战果速报">CryptoCTF 2024 战果速报</a><time datetime="2024-06-18T06:43:33.000Z" title="Created 2024-06-18 14:43:33">2024-06-18</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/06/18/cryptoctf-2024-easy/" title="CryptoCTF 2024 easy 分类 团队解题 writeup">CryptoCTF 2024 easy 分类 团队解题 writeup</a><time datetime="2024-06-18T06:43:33.000Z" title="Created 2024-06-18 14:43:33">2024-06-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/18/cryptoctf-2024-hard-1/" title="CryptoCTF 2024 hard 分类 团队解题 writeup 之一">CryptoCTF 2024 hard 分类 团队解题 writeup 之一</a><time datetime="2024-06-18T06:43:33.000Z" title="Created 2024-06-18 14:43:33">2024-06-18</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/06/18/cryptoctf-2024-hard-2/" title="CryptoCTF 2024 hard 分类 团队解题 writeup 之二">CryptoCTF 2024 hard 分类 团队解题 writeup 之二</a><time datetime="2024-06-18T06:43:33.000Z" title="Created 2024-06-18 14:43:33">2024-06-18</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
             </div>
-            <div class="sidebar-author-name">ZM-J</div>
-            <div class="sidebar-description">丧失年轻，勿失年华</div>
-        </div>
-        <div class="sidebar-links">
-            
-                
-                <div class="mdui-chip">
-                    <span class="mdui-chip-icon"><i class="iconfont icon-mail"></i></span>
-                    <a href="mailto:zhumj7@mail2.sysu.edu.cn" class="mdui-chip-title">E-Mail</a>
-                </div>
-            
-                
-                <div class="mdui-chip">
-                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
-                    <a target="_blank" rel="noopener" href="https://github.com/ZM-J" class="mdui-chip-title">GitHub</a>
-                </div>
-            
-                
-                <div class="mdui-chip">
-                    <span class="mdui-chip-icon"><i class="iconfont icon-zhihu"></i></span>
-                    <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/ZM_________J/posts" class="mdui-chip-title">Zhihu</a>
-                </div>
-            
-        </div>
-        <ul class="mdui-list" mdui-collapse="{accordion: true}">
-            <li class="mdui-collapse-item">
-                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-                    <div class="mdui-list-item-icon">
-                        <i class="iconfont icon-link"></i>
-                    </div>
-                    <div class="mdui-list-item-content">Links</div>
-                    <div class="mdui-collapse-item-arrow">
-                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
-                    </div>
-                </div>
-                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
-                    
-                        <a target="_blank" rel="noopener" href="https://sh1k4ku.github.io/" class="mdui-list-item mdui-ripple">
-                            石卡酷
-                        </a>
-                    
-                        <a target="_blank" rel="noopener" href="https://tover.xyz/" class="mdui-list-item mdui-ripple">
-                            套娃
-                        </a>
-                    
-                        <a target="_blank" rel="noopener" href="https://jayxv.github.io/" class="mdui-list-item mdui-ripple">
-                            V
-                        </a>
-                    
-                        <a target="_blank" rel="noopener" href="https://love-deng-feng.top/" class="mdui-list-item mdui-ripple">
-                            等风
-                        </a>
-                    
-                        <a target="_blank" rel="noopener" href="https://github.com/kokifish/CTF-detailed-writeups/" class="mdui-list-item mdui-ripple">
-                            沛公
-                        </a>
-                    
-                </ul>
-            </li>
-        </ul>
-    </div>
-
-    <div class="mdui-divider"></div>
-    
-    
-</aside>
-  
-  <main id="main-contain" class="mdui-container mdui-m-t-5">
-    
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/07/10/cryptoctf-2023-easy/">CryptoCTF 2023 easy分类 团队解题writeup</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-07-10
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-02-29
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/CTF/">CTF</a> > <a class="category-link" href="/categories/CTF/Crypto/">Crypto</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <p>这次 easy 分类偏简单，</p>
-<p>不过由于配合得不是很好，所以在实战中会有部分题目卡壳的情况</p>
-<p>不过还好能有其他人也帮忙看一看，所以马上就能够解围</p>
-<h2 id="Did-it"><a href="#Did-it" class="headerlink" title="Did it!"></a>Did it!</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>记 $n = 127$，$N=\{0, 1, 2, \ldots, n-1\}$，有...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/07/10/cryptoctf-2023-easy/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/06/29/cryptoctf-2023-summary/">CryptoCTF 2023 战果速报</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-06-29
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-02-29
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/CTF/">CTF</a> > <a class="category-link" href="/categories/CTF/Crypto/">Crypto</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <blockquote>
-<p>一九九七年</p>
-<p>我学会了开汽车</p>
-<p>上坡 下坡</p>
-<p>轧死了一千多</p>
-<p>警察来抓我</p>
-<p>我跑到女厕所</p>
-<p>女厕所的灯</p>
-<p>没 有 开</p>
-<p>一脚掉到茅屎坑</p>
-<p>和粑粑交朋友</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1m64y1F7Ce">点此欣赏芜湖童谣</a></p>
-<hr>
-<img src="/2023/06/29/cryptoctf-2023-summary/page.png"...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/29/cryptoctf-2023-summary/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/06/29/reinforcement-learning-hungyi-7/">李宏毅强化学习个人笔记 - 其他姿势</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-06-29
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-03-20
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
-</ul>
-<h2 id="Sparse-Reward"><a href="#Sparse-Reward" class="headerlink" title="Sparse Reward"></a>Sparse Reward</h2><p>实际上，用强化学习的算法去学 agent 的时候，多数情况下，agent 都是没办法得到奖励的。经常不获得奖励对 agent 的训练来说非常困难。</p>
-<p>不管 actor 做了什么事情，得到的奖励都是 ...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/29/reinforcement-learning-hungyi-7/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-6/">李宏毅强化学习个人笔记 - Actor-Critic</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-06-28
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-03-20
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
-</ul>
-<p>A3C: Asynchronous Advantage Actor-Critic</p>
-<p>A2C: Advantage Actor-Critic</p>
-<h2 id="复习-policy-gradient"><a href="#复习-policy-gradient" class="headerlink" title="复习 policy gradient"></a>复习 policy gradient</h2><p>之前...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/28/reinforcement-learning-hungyi-6/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-5-3/">李宏毅强化学习个人笔记 - 对于连续动作的 Q-learning</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-06-28
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-03-20
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
-</ul>
-<p>跟 policy gradient 比较起来，Q-learning 比较稳定（policy gradient 玩不起来什么游戏）</p>
-<p>Q-learning 一个比较好训练的理由是：只要你找得到一个比较好的 Q 函数，那么你就有一个比较好的策略；也就是说如果你能恰当估计 Q 函数（其实比较容易，就是一个回归问题，只需要看到 loss 有无下降就能看出模型学得好不好），你就能更新你的策略。</p>
-<p>Q-learnin...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/28/reinforcement-learning-hungyi-5-3/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-5-2/">李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-06-28
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-03-20
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
-</ul>
-<h2 id="Double-DQN"><a href="#Double-DQN" class="headerlink" title="Double DQN"></a>Double DQN</h2><p>Double DQN 提出的动机：在实际的 Q-learning 中，Q 值是经常被高估的。</p>
-<img src="/2023/06/28/reinforcement-learning-hungyi-5-2/5-10.png" ...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/28/reinforcement-learning-hungyi-5-2/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/06/28/reinforcement-learning-hungyi-5-1/">李宏毅强化学习个人笔记 - Q-learning 简介</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-06-28
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-03-20
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
-</ul>
-<p>Q-learning 是基于值的方法。我们并不学习策略（Actor），而是学习 Critic。Critic 不直接采取行为，而是评价现在的行为有多好。</p>
-<p>假设现在有一个 actor $\pi$，critic 的工作就是评价这个 actor $\pi$ 做得有多好。</p>
-<p>譬如这个 critic 可以做成是跟状态有关的函数：$V^{\pi}(s)$。它的含义为使用 actor $\pi$ 时，到了状态 $s$ ...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/06/28/reinforcement-learning-hungyi-5-1/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/04/18/reinforcement-learning-hungyi-4/">李宏毅强化学习个人笔记 - PPO</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-04-18
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-03-21
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
-</ul>
-<p>PPO: Proximal Policy Optimization，该算法为 OpenAI 的默认强化学习算法。</p>
-<h2 id="复习：将神经网络作为-actor"><a href="#复习：将神经网络作为-actor" class="headerlink" title="复习：将神经网络作为 actor"></a>复习：将神经网络作为 actor</h2><ul>
-<li>神经网络擅长拟合函数</li>
-<li>网络输...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/04/18/reinforcement-learning-hungyi-4/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/03/21/reinforcement-learning-hungyi-3/">李宏毅强化学习个人笔记 - 基于值的方法（学习critic）</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-03-21
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-03-20
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
-</ul>
-<p>这里我们不学习 actor，也就是不学习怎么做事，而是学习一个 critic。</p>
-<h2 id="critic-的性质"><a href="#critic-的性质" class="headerlink" title="critic 的性质"></a>critic 的性质</h2><ul>
-<li>critic 本身不决定动作；</li>
-<li>给定 actor，critic 可以评估 actor 的好坏；</li>
-<l...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/03/21/reinforcement-learning-hungyi-3/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2023/03/21/reinforcement-learning-hungyi-2/">李宏毅强化学习个人笔记 - 基于策略的方法（学习actor）</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      Posted on:&nbsp;2023-03-21
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      Edited on:&nbsp;2024-03-20
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      In:&nbsp;<a class="category-link" href="/categories/AI/">AI</a> > <a class="category-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
-    </span>
-    
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/615724004">回到概览</a></li>
-</ul>
-<p>基于策略的方法，也就是学习 actor。换言之，也就是学习一个策略函数 $\pi$：该函数输入观测，输出动作。</p>
-<img src="/2023/03/21/reinforcement-learning-hungyi-2/2-1.png" class="" title="一图流">
-<h2 id="将神经网络作为-actor"><a href="#将神经网络作为-actor" class="headerlink" titl...
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2023/03/21/reinforcement-learning-hungyi-2/">Read More</a>
-        </div>
-      </div>
-    </article>
-
-
-
-  <nav style="text-align: center;">
-    <div class="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="iconfont icon-angle-right"></i></a>
-    </div>
-  </nav>
-
-  </main>
-  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
-  <div class="mdui-container">
-    <div class="mdui-row">
-      
-        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
-      
-      <span>
-        &copy; 2015 - 2024 
-        
-          <span style="color:#d9333f" class="iconfont icon-heart"></span>
-        
-        ZM-J
-      </span>
-    </div>
-    <div class="mdui-row">
-      
-        <div class="mdui-col-xs-6 mdui-text-right">
-          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
-        </div>
-        <div class="mdui-col-xs-6 mdui-text-left">
-          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
-        </div>
-      
-    </div>
-    <div class="mdui-row">
-      
-        <div class="mdui-col-xs-6 mdui-text-right">
-          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
-        </div>
-        <div class="mdui-col-xs-6 mdui-text-left">
-          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
-        </div>
-      
-    </div>
- </div>
-</footer>
-  
-  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
-  
-  
-
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-
-    
-<script src="/js/mdui.min.v1.0.0.js"></script>
-
-
-
-
-<script src="/js/meadow.js"></script>
-
-</body>
-</html >
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/"><span class="card-category-list-name">AI</span><span class="card-category-list-count">9</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">强化学习</span><span class="card-category-list-count">9</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CTF/"><span class="card-category-list-name">CTF</span><span class="card-category-list-count">9</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CTF/Crypto/"><span class="card-category-list-name">Crypto</span><span class="card-category-list-count">9</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/English/"><span class="card-category-list-name">English</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%9C%B0%E9%9A%8F%E7%AC%94/"><span class="card-category-list-name">工地随笔</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%87%8A%E7%9A%AE/"><span class="card-category-list-name">臊皮</span><span class="card-category-list-count">1</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/Crypto/" style="font-size: 1.5em; color: #99a9bf">Crypto</a> <a href="/tags/keras/" style="font-size: 1.1em; color: #999">keras</a> <a href="/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/" style="font-size: 1.1em; color: #999">进程同步</a> <a href="/tags/CTF/" style="font-size: 1.5em; color: #99a9bf">CTF</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">操作系统</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.3em; color: #99a1ac">深度学习</a> <a href="/tags/tensorflow/" style="font-size: 1.1em; color: #999">tensorflow</a> <a href="/tags/AI/" style="font-size: 1.3em; color: #99a1ac">AI</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="View More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">June 2024</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">April 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">February 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">July 2023</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">June 2023</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">April 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">March 2023</span><span class="card-archive-list-count">3</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">33</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-06-26T06:11:35.227Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By ZM-J</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat-btn" type="button" title="Chat"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
