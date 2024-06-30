@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2024 hard 分类 团队解题 writeup 之二 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这次 hard 分类的题目难道是碳基生物能整出来的活儿？？？ O7R题目描述题目基于 RSA 和七！段！数！码！管！ 题目给出了 $p, q, n, n^2$ 的七段数码管的 损坏形式，以及密文 $c$ 的七段数码管形式，其中一个数的七段数码管的损坏形式被定义为：这个七段数码管的每一位数都会以 50%的概率，某一段数码管本来要亮的，结果没亮了，如下就是一个数位 7 损坏了一个数码管的例子： 123">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2024 hard 分类 团队解题 writeup 之二 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="这次 hard 分类的题目难道是碳基生物能整出来的活儿？？？ O7R题目描述题目基于 RSA 和七！段！数！码！管！ 题目给出了 $p, q, n, n^2$ 的七段数码管的 损坏形式，以及密文 $c$ 的七段数码管形式，其中一个数的七段数码管的损坏形式被定义为：这个七段数码管的每一位数都会以 50%的概率，某一段数码管本来要亮的，结果没亮了，如下就是一个数位 7 损坏了一个数码管的例子： 123">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CryptoCTF 2024 hard 分类 团队解题 writeup 之二">
 <meta property="og:url" content="http://example.com/2024/06/18/cryptoctf-2024-hard-2/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

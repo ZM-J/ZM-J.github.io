@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2024 easy 分类 团队解题 writeup | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这次 easy 分类比赛的时候我当时看了一道 MD5 的，结果感觉很谜语，就没去仔细看了。要懂得把球传给队友 那么赛后就复盘一下 Alibos题目描述私钥 $s_k$ 为 $d_s$ 位十进制数，公钥 $p_k$ 可被写成如下形式： p_k &#x3D; \lfloor 10^{d_s} \left( \sqrt{s_k} - \lfloor \sqrt{s_k} \rfloor \right) \rflo">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2024 easy 分类 团队解题 writeup | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="这次 easy 分类比赛的时候我当时看了一道 MD5 的，结果感觉很谜语，就没去仔细看了。要懂得把球传给队友 那么赛后就复盘一下 Alibos题目描述私钥 $s_k$ 为 $d_s$ 位十进制数，公钥 $p_k$ 可被写成如下形式： p_k &#x3D; \lfloor 10^{d_s} \left( \sqrt{s_k} - \lfloor \sqrt{s_k} \rfloor \right) \rflo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CryptoCTF 2024 easy 分类 团队解题 writeup">
 <meta property="og:url" content="http://example.com/2024/06/18/cryptoctf-2024-easy/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

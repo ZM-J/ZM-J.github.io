@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - PPO | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="回到概览  PPO: Proximal Policy Optimization，该算法为 OpenAI 的默认强化学习算法。 复习：将神经网络作为 actor 神经网络擅长拟合函数 网络输入：机器的观测表示成向量或矩阵； 网络输出：每个动作对应输出层的一个神经元；  $p(s_{t+1}|s_t, a_t)$ 不能控制，由环境来决定，我们只能控制 $p_{\theta}(a_t|s_t)$。 任">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - PPO | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="回到概览  PPO: Proximal Policy Optimization，该算法为 OpenAI 的默认强化学习算法。 复习：将神经网络作为 actor 神经网络擅长拟合函数 网络输入：机器的观测表示成向量或矩阵； 网络输出：每个动作对应输出层的一个神经元；  $p(s_{t+1}|s_t, a_t)$ 不能控制，由环境来决定，我们只能控制 $p_{\theta}(a_t|s_t)$。 任">
 <meta property="og:type" content="article">
 <meta property="og:title" content="李宏毅强化学习个人笔记 - PPO">
 <meta property="og:url" content="http://example.com/2023/04/18/reinforcement-learning-hungyi-4/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

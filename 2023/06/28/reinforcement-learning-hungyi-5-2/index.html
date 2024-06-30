@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="回到概览  Double DQNDouble DQN 提出的动机：在实际的 Q-learning 中，Q 值是经常被高估的。  总体来说，DQN 的 Q 值随着训练的进行逐步上升。Q 函数依赖于策略，在学习的过程中，策略会变得越来越强，Q 值就会越来越大。 实际值：训练结束后，再和环境互动，得到的真实奖励。（互动多次取期望） Double DQN 能让估测值跟实际值更接近，且实际值（真正的累计期">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="回到概览  Double DQNDouble DQN 提出的动机：在实际的 Q-learning 中，Q 值是经常被高估的。  总体来说，DQN 的 Q 值随着训练的进行逐步上升。Q 函数依赖于策略，在学习的过程中，策略会变得越来越强，Q 值就会越来越大。 实际值：训练结束后，再和环境互动，得到的真实奖励。（互动多次取期望） Double DQN 能让估测值跟实际值更接近，且实际值（真正的累计期">
 <meta property="og:type" content="article">
 <meta property="og:title" content="李宏毅强化学习个人笔记 - Q-learning 在训练时的一些技巧">
 <meta property="og:url" content="http://example.com/2023/06/28/reinforcement-learning-hungyi-5-2/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

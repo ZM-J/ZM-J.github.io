@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2024 medium 分类 团队解题 writeup 之一 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这次 medium 分类题量还是最多的，结果一开始里面很多题都不可解，甚至比赛结束了还 TMD 有一道零解。 我去年买了个表 Ahoo题目描述给定整数 $n$，找最小正整数 $c$ 使得 $nc$ 的二进制表示中 1 的个数最小。 我的解答这种问题看上去没有一个比较直观的解。一开始在想是不是要找 $k$ 使得 $n$ 为 $2^k+1$ 的约数，后面发现这个数应该不是所有的数都能找得出来的。这种时">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2024 medium 分类 团队解题 writeup 之一 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="这次 medium 分类题量还是最多的，结果一开始里面很多题都不可解，甚至比赛结束了还 TMD 有一道零解。 我去年买了个表 Ahoo题目描述给定整数 $n$，找最小正整数 $c$ 使得 $nc$ 的二进制表示中 1 的个数最小。 我的解答这种问题看上去没有一个比较直观的解。一开始在想是不是要找 $k$ 使得 $n$ 为 $2^k+1$ 的约数，后面发现这个数应该不是所有的数都能找得出来的。这种时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CryptoCTF 2024 medium 分类 团队解题 writeup 之一">
 <meta property="og:url" content="http://example.com/2024/06/18/cryptoctf-2024-medium-1/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

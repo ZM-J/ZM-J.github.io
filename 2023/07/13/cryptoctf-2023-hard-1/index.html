@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2023 hard分类 团队解题writeup 之一 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这次 hard 分类也有 5 题，虽然思维方面肯定比 medium 要难些，但也还中规中矩。 Big题目描述$p$ 是一个 512 位的 $4k+3$ 型素数，$q$ 是把 $p$ 的十进制表示进行逆序之后的数，也是素数。$N&#x3D;pq$。 然后 $a$ 是一个模 $N$ 的二次剩余。 首先得到 flag 的二进制为 $\{m_1, m_2, \ldots, m_l\}$，其中 $m_i \in \{">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2023 hard分类 团队解题writeup 之一 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="这次 hard 分类也有 5 题，虽然思维方面肯定比 medium 要难些，但也还中规中矩。 Big题目描述$p$ 是一个 512 位的 $4k+3$ 型素数，$q$ 是把 $p$ 的十进制表示进行逆序之后的数，也是素数。$N&#x3D;pq$。 然后 $a$ 是一个模 $N$ 的二次剩余。 首先得到 flag 的二进制为 $\{m_1, m_2, \ldots, m_l\}$，其中 $m_i \in \{">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CryptoCTF 2023 hard分类 团队解题writeup 之一">
 <meta property="og:url" content="http://example.com/2023/07/13/cryptoctf-2023-hard-1/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>python multiprocessing 多进程踩坑 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="之所以写这个东西，还是因为之前操作系统学了个寂寞，考前背个板混个分数就过了。但是这玩意儿在实际应用的时候，才会体会到某些坑爹的地方~ 众所周知，在 python 中，I&#x2F;O 密集型任务 可以用多线程的方式来实现（threading 库）；然而，对于 计算密集型 任务，由于 python 中全局锁 GIL 的存在，多线程并不能起到一个加速的作用。所以此时，一般使用多进程的方式实现（multiproc">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>python multiprocessing 多进程踩坑 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="之所以写这个东西，还是因为之前操作系统学了个寂寞，考前背个板混个分数就过了。但是这玩意儿在实际应用的时候，才会体会到某些坑爹的地方~ 众所周知，在 python 中，I&#x2F;O 密集型任务 可以用多线程的方式来实现（threading 库）；然而，对于 计算密集型 任务，由于 python 中全局锁 GIL 的存在，多线程并不能起到一个加速的作用。所以此时，一般使用多进程的方式实现（multiproc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python multiprocessing 多进程踩坑">
 <meta property="og:url" content="http://example.com/2022/11/21/python-multiprocessing/index.html">
@@ -131,7 +131,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

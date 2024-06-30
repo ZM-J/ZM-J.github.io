@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - 基于值的方法（学习critic） | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="回到概览  这里我们不学习 actor，也就是不学习怎么做事，而是学习一个 critic。 critic 的性质 critic 本身不决定动作； 给定 actor，critic 可以评估 actor 的好坏； 实际上，可以从 critic 里面得到一个 actor，这就是 Q-learning。 critic 实际上就是一个评估 actor $\pi$ 的函数 $V^\pi$ 这个函数可以是一个">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - 基于值的方法（学习critic） | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="回到概览  这里我们不学习 actor，也就是不学习怎么做事，而是学习一个 critic。 critic 的性质 critic 本身不决定动作； 给定 actor，critic 可以评估 actor 的好坏； 实际上，可以从 critic 里面得到一个 actor，这就是 Q-learning。 critic 实际上就是一个评估 actor $\pi$ 的函数 $V^\pi$ 这个函数可以是一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="李宏毅强化学习个人笔记 - 基于值的方法（学习critic）">
 <meta property="og:url" content="http://example.com/2023/03/21/reinforcement-learning-hungyi-3/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

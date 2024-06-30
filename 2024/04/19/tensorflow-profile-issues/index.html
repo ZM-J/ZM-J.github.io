@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Tensorflow Profiler 踩坑记 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="众所周知，在 AI 模型落地的时候，我们不仅仅关注模型的准确率，同样也会关注模型的性能。 在使用 VSCode 等 IDE 开发 C++、C# 应用的时候，我们就会去开启 debug 模式，通过可视化工具分析应用的热点与瓶颈在哪里，这个过程一般叫做 profiling。当然，在 linux 上，我们也有 valgrind 等工具可以方便我们分析。 那么具体到 tensorflow 的模型中，我们也">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Tensorflow Profiler 踩坑记 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="众所周知，在 AI 模型落地的时候，我们不仅仅关注模型的准确率，同样也会关注模型的性能。 在使用 VSCode 等 IDE 开发 C++、C# 应用的时候，我们就会去开启 debug 模式，通过可视化工具分析应用的热点与瓶颈在哪里，这个过程一般叫做 profiling。当然，在 linux 上，我们也有 valgrind 等工具可以方便我们分析。 那么具体到 tensorflow 的模型中，我们也">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensorflow Profiler 踩坑记">
 <meta property="og:url" content="http://example.com/2024/04/19/tensorflow-profile-issues/index.html">
@@ -132,7 +132,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

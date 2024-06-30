@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2024 tough 分类 团队解题 writeup | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这次 tough 分类配合得不是很好，最后一个解方程的题目想复杂了，被他的题目设置有点弄晕了，所以到结束的时候都没有做出来。配合得不是很好~ Capac题目描述题目基于某一种神奇的曲线： x^3 + c y^3 + c^2 z^3 - 3 c x y z &#x3D; 1其中，如果 $z&#x3D;0$ 的话（也就是题目的生成点 $G$ 满足的条件），$c &#x3D; (1-x^3) &#x2F; y^3$。 事实上，上面那个结论就是">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2024 tough 分类 团队解题 writeup | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="这次 tough 分类配合得不是很好，最后一个解方程的题目想复杂了，被他的题目设置有点弄晕了，所以到结束的时候都没有做出来。配合得不是很好~ Capac题目描述题目基于某一种神奇的曲线： x^3 + c y^3 + c^2 z^3 - 3 c x y z &#x3D; 1其中，如果 $z&#x3D;0$ 的话（也就是题目的生成点 $G$ 满足的条件），$c &#x3D; (1-x^3) &#x2F; y^3$。 事实上，上面那个结论就是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CryptoCTF 2024 tough 分类 团队解题 writeup">
 <meta property="og:url" content="http://example.com/2024/06/18/cryptoctf-2024-tough/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

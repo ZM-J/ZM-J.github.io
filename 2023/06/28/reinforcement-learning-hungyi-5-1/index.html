@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - Q-learning 简介 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="回到概览  Q-learning 是基于值的方法。我们并不学习策略（Actor），而是学习 Critic。Critic 不直接采取行为，而是评价现在的行为有多好。 假设现在有一个 actor $\pi$，critic 的工作就是评价这个 actor $\pi$ 做得有多好。 譬如这个 critic 可以做成是跟状态有关的函数：$V^{\pi}(s)$。它的含义为使用 actor $\pi$ 时，">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - Q-learning 简介 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="回到概览  Q-learning 是基于值的方法。我们并不学习策略（Actor），而是学习 Critic。Critic 不直接采取行为，而是评价现在的行为有多好。 假设现在有一个 actor $\pi$，critic 的工作就是评价这个 actor $\pi$ 做得有多好。 譬如这个 critic 可以做成是跟状态有关的函数：$V^{\pi}(s)$。它的含义为使用 actor $\pi$ 时，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="李宏毅强化学习个人笔记 - Q-learning 简介">
 <meta property="og:url" content="http://example.com/2023/06/28/reinforcement-learning-hungyi-5-1/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

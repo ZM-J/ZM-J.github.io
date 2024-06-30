@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>不定时更新的 Keras 踩坑记 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="众所周知，一般 research 里面所使用的炼丹框架以 PyTorch 居多。然而在工业界的模型部署中，TensorFlow 因能较好地支持多 GPU 的特性而广受青睐。 其中，Keras 以 TensorFlow 为后端（之前的 Keras 版本也能以 Theano、MXNet 等为后端），对 TensorFlow 的诸多 API 进行了封装，为模型的部署进一步降低了门槛。并且，TensorF">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>不定时更新的 Keras 踩坑记 | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="众所周知，一般 research 里面所使用的炼丹框架以 PyTorch 居多。然而在工业界的模型部署中，TensorFlow 因能较好地支持多 GPU 的特性而广受青睐。 其中，Keras 以 TensorFlow 为后端（之前的 Keras 版本也能以 Theano、MXNet 等为后端），对 TensorFlow 的诸多 API 进行了封装，为模型的部署进一步降低了门槛。并且，TensorF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不定时更新的 Keras 踩坑记">
 <meta property="og:url" content="http://example.com/2022/06/14/keras-issues/index.html">
@@ -132,7 +132,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')

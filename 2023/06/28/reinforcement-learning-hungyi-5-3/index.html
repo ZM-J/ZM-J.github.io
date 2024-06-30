@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - 对于连续动作的 Q-learning | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="回到概览  跟 policy gradient 比较起来，Q-learning 比较稳定（policy gradient 玩不起来什么游戏） Q-learning 一个比较好训练的理由是：只要你找得到一个比较好的 Q 函数，那么你就有一个比较好的策略；也就是说如果你能恰当估计 Q 函数（其实比较容易，就是一个回归问题，只需要看到 loss 有无下降就能看出模型学得好不好），你就能更新你的策略。">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>李宏毅强化学习个人笔记 - 对于连续动作的 Q-learning | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="回到概览  跟 policy gradient 比较起来，Q-learning 比较稳定（policy gradient 玩不起来什么游戏） Q-learning 一个比较好训练的理由是：只要你找得到一个比较好的 Q 函数，那么你就有一个比较好的策略；也就是说如果你能恰当估计 Q 函数（其实比较容易，就是一个回归问题，只需要看到 loss 有无下降就能看出模型学得好不好），你就能更新你的策略。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="李宏毅强化学习个人笔记 - 对于连续动作的 Q-learning">
 <meta property="og:url" content="http://example.com/2023/06/28/reinforcement-learning-hungyi-5-3/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')
