@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CryptoCTF 2025 brain buster 分类 团队解题 writeup | 春勃</title><meta name="author" content="ZM-J"><meta name="copyright" content="ZM-J"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="这次 brain buster 分类由于人力短缺，有一题没有做出来。这里不得不说一句，1997 的各位真是尽力了，本来已经有其他日程安排的石卡库和托林都尽力拿时间出来做题。反观某个叛徒，在 1997 人手短缺的时候临阵叛逃，完全就是负贡献，如此行为，令人汗颜！ Leptocole (x)题目描述令 $q &#x3D; 127, n &#x3D; 26, k &#x3D; 14$，题目中讨论的矩阵元素均在 $\mathbb{F}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CryptoCTF 2025 brain buster 分类 团队解题 writeup">
+<meta property="og:url" content="https://zm-j.github.io/2025/09/09/cryptoctf-2025-brain-buster/index.html">
+<meta property="og:site_name" content="春勃">
+<meta property="og:description" content="这次 brain buster 分类由于人力短缺，有一题没有做出来。这里不得不说一句，1997 的各位真是尽力了，本来已经有其他日程安排的石卡库和托林都尽力拿时间出来做题。反观某个叛徒，在 1997 人手短缺的时候临阵叛逃，完全就是负贡献，如此行为，令人汗颜！ Leptocole (x)题目描述令 $q &#x3D; 127, n &#x3D; 26, k &#x3D; 14$，题目中讨论的矩阵元素均在 $\mathbb{F}">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zm-j.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-09-09T07:04:00.000Z">
+<meta property="article:modified_time" content="2025-09-09T07:06:12.673Z">
+<meta property="article:author" content="ZM-J">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zm-j.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zm-j.github.io/2025/09/09/cryptoctf-2025-brain-buster/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CryptoCTF 2025 brain buster 分类 团队解题 writeup',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-09-09 15:06:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="春勃"><span class="site-name">春勃</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CryptoCTF 2025 brain buster 分类 团队解题 writeup</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-09-09T07:04:00.000Z" title="Created 2025-09-09 15:04:00">2025-09-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-09-09T07:06:12.673Z" title="Updated 2025-09-09 15:06:12">2025-09-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/">CTF</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/Crypto/">Crypto</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CryptoCTF 2025 brain buster 分类 团队解题 writeup"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>这次 brain buster 分类由于人力短缺，有一题没有做出来。这里不得不说一句，1997 的各位真是尽力了，本来已经有其他日程安排的石卡库和托林都尽力拿时间出来做题。<strong>反观某个叛徒，在 1997 人手短缺的时候临阵叛逃，完全就是负贡献，如此行为，令人汗颜！</strong></p>
+<h2 id="Leptocole-x"><a href="#Leptocole-x" class="headerlink" title="Leptocole (x)"></a>Leptocole (x)</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>令 $q = 127, n = 26, k = 14$，题目中讨论的矩阵元素均在 $\mathbb{F} = GF(q)$ 中。</p>
+<p>服务器先生成一个随机的矩阵 $G \in \mathbb{F}^{k \times n}$，以及一个随机的 $n \times n$ 排列矩阵 $Q$，该排列矩阵中的每行和每列恰好有一个随机非零元素。$H$ 是 $GQ$ 的最简行阶梯形式。$G$ 和 $H$ 已知。</p>
+<p>我们需要给出矩阵 $U$ 和 $P$，使得：</p>
+<ul>
+<li>$P$ 也满足上述对排列矩阵的定义</li>
+<li>$U$ 和 $P$ 均可逆</li>
+<li>$U G P = H$</li>
+</ul>
+<p>若能给出这样的两个矩阵，那么就能拿到 flag。</p>
+<h3 id="我的尝试"><a href="#我的尝试" class="headerlink" title="我的尝试"></a>我的尝试</h3><p>因为时间问题，在比赛的时候，我只是简单地做了一些尝试，并没有深入研究。这题比赛的时候是套娃看的，虽然他没做出来，但是他也贡献出了自己的一份力量。</p>
+<p><strong>反观某个叛徒，因为被人唆使而临阵叛逃，造成 1997 的人力短缺！</strong></p>
+<h3 id="赛后复盘-x"><a href="#赛后复盘-x" class="headerlink" title="赛后复盘 (x)"></a>赛后复盘 (x)</h3><p>首先，最简行阶梯形式的变换可以写成一系列初等矩阵的乘积。如果我们把这个乘积记成 $R$ 的话，那么式子也就是可以写成</p>
+<script type="math/tex; mode=display">H = R G Q</script><p>也就是说，如果直接令 $U = R$，$P = Q$ 的话，就可以解出来了。</p>
+<p>然后由于 $H \in \mathbb{F}^{k \times n}$，所以 $U \in \mathbb{F}^{k \times k}$，$P \in \mathbb{F}^{n \times n}$。</p>
+<p>重排并放缩 $G$ 矩阵的列，使得其行向量均在 $H$ 的行空间中，且 $H$ 矩阵的可以写成分块矩阵的形式：</p>
+<script type="math/tex; mode=display">H = \begin{bmatrix}I & H_1\end{bmatrix}</script><p>如果我们将 $GQ$ 也写成分块矩阵的形式：</p>
+<script type="math/tex; mode=display">T := GQ = \begin{bmatrix}T_1 & T_2\end{bmatrix}</script><p>如果我们能保证列重排之后， $T_1$ 是正确的，那么其最简行变换之后的矩阵为</p>
+<script type="math/tex; mode=display">H' = R' T = \begin{bmatrix}I & R' T_2\end{bmatrix}</script><p>实在没招了</p>
+<h2 id="Multi-Shooti"><a href="#Multi-Shooti" class="headerlink" title="Multi Shooti"></a>Multi Shooti</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目基于一个块加密的系统。</p>
+<p>题目有 8 个密钥 $k_i, i=0, 1, \ldots, 7$，以及有一个初始向量 $v$。</p>
+<p>对于每个密钥，都有一个对应的块加密的系统 $E_{i} = E_{k_i, v}$。加密时，该系统内部是根据密钥 $k_i$ 和初始向量 $v$ 生成一系列流密钥，并让流密钥和明文对应位置异或。</p>
+<p>对于整个块加密系统，对消息 $m$ 的加密则是依次用每个分系统进行加密：</p>
+<script type="math/tex; mode=display">E(m) = E_7(\ldots(E_1(E_0(m)))\ldots)</script><p>我们有已知特定 17 字节长消息 $m_0$，对该消息用该加密系统加密成已知 $c_0$。需要提供另一组密钥 $k’_i$，以及根据该组密钥对应的块加密系统 $E’$（初始向量仍然是 $v$），使得 $E’(c_0) = m_0$。如果能构造出这样一组密钥 $k’_i$，那么就能得到 flag。</p>
+<h3 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h3><p>首先注意到加密的方式是异或，而且每次都是新初始化加密系统的实例。所以只要密钥固定，流密钥也就固定，两次加密就变成解密了。</p>
+<p>其次也是流密钥的性质：上面公式里面嵌套加密的形式换成流密钥就是依次异或所有的流密钥，也就是密钥 $k_i$ 的 <strong>顺序芜锁胃</strong>。为了方便下面表述，我们记密钥 $k_i$ 对应的块加密系统为 $E_i$，所生成的流密钥是 $s_i$。这样，加密过程也可以被写为：</p>
+<script type="math/tex; mode=display">E(m) = m \oplus s_0 \oplus s_1 \oplus \ldots \oplus s_7</script><p>根据上面两点，在比赛的时候，我首先想的是如果 $k_i’ = k_i, i = 0, 1, \ldots, 7$，那么检验式肯定满足。于是我就想着能否用 z3-solver 之类的去把加密系统给参数化，然后去解密钥，结果是不行地。</p>
+<p>然后就是代码审计这一块了：要敏锐地察觉到 <strong>服务器对我们输入的另一组密钥 $k’_i$ 的个数是没有限制的！</strong> 也就是说，我们理论上可以输入很多组密钥 $k’_i$，它也会按照顺序去计算加密过程。假设我们输入 $t$ 组密钥，服务器就会计算</p>
+<script type="math/tex; mode=display">E'(c_0) = E'_{t-1}(\ldots(E'_1(E'_0(c_0)))\ldots)</script><p>也就是说，我们可以调大密钥组数 $t$，来增加构造成功的可能性。</p>
+<p>还是代码审计：在审计加密系统 $E_i$ 的实现的时候，我 tmd 居然发现初始向量 $v$ 是 <strong>没有被用到</strong> 的！也就是说，给定一组 $k’_i$，我们可以 <strong>本地</strong> 算出密钥 $k’_i$ 对应的流密钥 $s’_i$ 的，也就是</p>
+<script type="math/tex; mode=display">c_0 \oplus s'_0 \oplus s'_1 \oplus \ldots \oplus s'_{t-1} = m_0</script><p>也就是说，我们要找到 $s’_0, s’_1, \ldots s’_{t-1}$，使得</p>
+<script type="math/tex; mode=display">s'_0 \oplus s'_1 \oplus \ldots \oplus s'_{t-1} = m_0 \oplus c_0</script><p>其中 $m_0 \oplus c_0$ 是 $17 \times 8 = 136$ 比特，可以看作是一个 136 维的 $GF(2)$ 向量。在 $GF(2)$ 中，上面这个式子的右边是一个常量，左边是一堆 136 维向量的和。把这个问题放得广一点，因为这些向量是我们自己生成的，用或者是不用完全是由我们自己决定的，所以可以引入一个用或者不用的“开关”变量 $x_i$，那么把这些列向量 $s_i$ 拼起来，上面这个式子也就变成了</p>
+<script type="math/tex; mode=display">S x = \begin{bmatrix}s_0 & s_1 & \ldots & s_{t-1}\end{bmatrix} \begin{bmatrix}x_1 \\ x_2 \\ \vdots \\ x_{t-1}\end{bmatrix} = x_0 s_0 + x_1 s_1 + \ldots + x_{t-1} s_{t-1} = u</script><p>此时最大的问题就是这个方程要有解，关键在于向量 $s_0, s_1, \ldots s_{t-1}$ 张成的空间要囊括 $u$ 这个向量，也就是 $S$ 矩阵要满秩。实际上，把 $t$ 往大了设，譬如大过 136，$S$ 就很可能满秩。</p>
+<p>所以思路就是：</p>
+<ol>
+<li>生成 $t$ 个密钥 $k’_i, i = 0, 1, \ldots, t-1$</li>
+<li>对每个密钥 $k’_i$，计算其对应的流密钥 $s’_i$</li>
+<li>解上面的方程 $Sx = u$，解得 $x_i, i = 0, 1, \ldots, t-1$</li>
+<li>只取那些 $x_i = 1$ 对应的 $k’_i$，送给服务器</li>
+</ol>
+<p>代码如下，首先为了代码的模块化，先把题目的加密类给抽出来，然后直接 import 之。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> sage.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> shoot <span class="keyword">import</span> Shooti</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># self.conn = process([&#x27;python3&#x27;, &#x27;another.py&#x27;])</span></span><br><span class="line">        self.conn = remote(<span class="string">&quot;91.107.252.0&quot;</span>, <span class="string">&quot;13137&quot;</span>)</span><br><span class="line">        self.bits = []</span><br><span class="line">        self.keys = []</span><br><span class="line">        self.ans = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_one</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit\n&#x27;</span>, <span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">        c = self.conn.recvline().decode().strip()</span><br><span class="line">        self.cnt += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;y = &#x27;</span> <span class="keyword">in</span> c:</span><br><span class="line">            y = self.R(c.split(<span class="string">&#x27;y = &#x27;</span>)[<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span>, y</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span>, <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">recv_dest</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit\n&#x27;</span>, <span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">        self.conn.recvuntil(<span class="string">&#x27;cipher = &#x27;</span>)</span><br><span class="line">        c = <span class="built_in">eval</span>(self.conn.recvline().decode().strip())</span><br><span class="line">        m = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">ord</span>, <span class="string">&quot;give me the flag!&quot;</span>))</span><br><span class="line">        dest_bits = []</span><br><span class="line">        <span class="keyword">for</span> mi, ci <span class="keyword">in</span> <span class="built_in">zip</span>(m, c):</span><br><span class="line">            dest = mi ^ ci</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">                dest_bits.append((dest &gt;&gt; j) &amp; <span class="number">1</span>)</span><br><span class="line">        self.dest_bits = dest_bits</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_bits</span>(<span class="params">self</span>):</span><br><span class="line">        N = <span class="number">200</span></span><br><span class="line">        vec = <span class="string">&#x27;ed6b8b40a4944397&#x27;</span></span><br><span class="line">        A = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            key = <span class="string">&#x27;ff&#x27;</span> + os.urandom(<span class="number">9</span>).<span class="built_in">hex</span>()</span><br><span class="line">            s = Shooti(key, vec)</span><br><span class="line">            keystream = [s.BITSEQ() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span> * <span class="number">17</span>)]</span><br><span class="line">            self.keys.append(key)</span><br><span class="line">            A.append(keystream)</span><br><span class="line">        A = matrix(GF(<span class="number">2</span>), A)</span><br><span class="line">        b = vector(GF(<span class="number">2</span>), self.dest_bits)</span><br><span class="line">        x = A.solve_left(b)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            <span class="keyword">if</span> x[i] == <span class="number">1</span>:</span><br><span class="line">                self.ans.append(self.keys[i])</span><br><span class="line">        self.ans = <span class="string">&#x27;,&#x27;</span>.join(self.ans)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">submit_ans</span>(<span class="params">self</span>):</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit\n&#x27;</span>, <span class="string">&#x27;d&#x27;</span>)</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;keys:\n&#x27;</span>, self.ans)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        self.recv_dest()</span><br><span class="line">        self.get_bits()</span><br><span class="line">        self.submit_ans()</span><br><span class="line">        self.conn.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    g = Gao()</span><br><span class="line">    g.gao()</span><br></pre></td></tr></table></figure>
+<p>得到 flag 为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;t3X7_3ncRyp7i0n_uS!nG__Grain__c1ph3R!!&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="赛后复盘"><a href="#赛后复盘" class="headerlink" title="赛后复盘"></a>赛后复盘</h3><p>之后某天，V 在 1997 群里面谈到了一个区块链上的攻击场景：</p>
+<p>记 $H$ 为 SHA3 哈希函数的后 224 位，需要构造一个“碰撞”满足：</p>
+<script type="math/tex; mode=display">H(a_0) \oplus H(a_1) = H(b_0) \oplus H(b_1) \oplus \ldots \oplus H(b_{124})</script><p>构造手法应该和这题的解法是差不多，也是随机找一组 $b_0, b_1, \ldots, b_{t}$ 并算出这些哈希来，然后构造一个 $GF(2)$ 下的线性方程组去解。但是如何最小化 $x_i$ 中不为 0 的值个数，说实话有点 8 知道，目前看来最好的方法也就是在解空间里面硬搜+拼人品了。</p>
+<h2 id="Phoney"><a href="#Phoney" class="headerlink" title="Phoney"></a>Phoney</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>先生成三个未知的素数 $p, q, r$，其中 $p$ 为 512 比特，$q$ 为 576 比特，$r$ 为 640 比特。已知加密指数 $e = 1234567891$。服务器给出</p>
+<ul>
+<li>$N = pqr$</li>
+<li>$s = (p^{-1} \bmod qr) + p$</li>
+<li>$l = q \bmod p$</li>
+<li>$c = m^e \bmod N$</li>
+</ul>
+<p>试求 $m$</p>
+<h3 id="我的解答-1"><a href="#我的解答-1" class="headerlink" title="我的解答"></a>我的解答</h3><p>首先看到题目给出的一些条件，会想到把同余式写成整除式：</p>
+<script type="math/tex; mode=display">q = k p + l</script><p>其中由大小关系，$k$ 大概为 64 比特。</p>
+<p>然后对 $s$ 模 $q$ 分析：</p>
+<script type="math/tex; mode=display">s \equiv p + p^{-1} \pmod{q}</script><p>然后就是把整除式用模 $q$ 分析：</p>
+<script type="math/tex; mode=display">kp + l \equiv 0 \pmod{q}</script><script type="math/tex; mode=display">p \equiv -l/k \pmod{q}</script><p>代入 $s$ 的式子中：</p>
+<script type="math/tex; mode=display">s \equiv -l/k-k/l \pmod{q}</script><p>化简：</p>
+<script type="math/tex; mode=display">s (k + l) \equiv -l^2-k^2 \pmod{q}</script><p>也就是</p>
+<script type="math/tex; mode=display">k^2 + l^2 + s(k+l) \equiv 0 \pmod{q}</script><p>这就是一个关于 $k$ 的方程，看看能不能用 coppersmith 来做：Coppersmith 方法要求解 $x_0$ 的 <a target="_blank" rel="noopener" href="https://doc.sagemath.org/html/en/reference/polynomial_rings/sage/rings/polynomial/polynomial_modn_dense_ntl.html#sage.rings.polynomial.polynomial_modn_dense_ntl.small_roots">界</a> 满足：</p>
+<script type="math/tex; mode=display">|x_0| < \frac{1}{2}N^{\frac{\beta^2}{\delta} - \epsilon}</script><p>这里 $N$ 是 1728 bit，$q$ 是 576 bit，所以 $\beta = 1/3$，多项式的度数 $\delta = 2$，所以右边的数大概是 $1728 \times (1/18) - 1 = 95$ 比特这个量级，64 比特是能解的。在解的时候，我还是不放心，就用一个变换 $k’ = k + 2^{63} + 2^{62}$ 代换了一下，就把解的范围变换到 $[-2^{62}, 2^{62}]$ 了。</p>
+<p>如果 coppersmith 可以解出解的话，那么就可以利用最大公约数求得 $q$ 的值，然后利用 $p = (q - l) / k$，$r = N / pq$ 得到其他素数的值，最后用 RSA 解密即可。代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">n = </span><br><span class="line">s = </span><br><span class="line">l = </span><br><span class="line">c = </span><br><span class="line">e = <span class="number">1234567891</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PR.&lt;k0&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">k = k0 + <span class="number">2</span>^<span class="number">63</span> + <span class="number">2</span>^<span class="number">62</span></span><br><span class="line">f = k^<span class="number">2</span> + l^<span class="number">2</span> + l * k * s</span><br><span class="line">sol = f.small_roots(X=<span class="number">2</span>^<span class="number">62</span>, beta=<span class="number">0.32</span>, epsilon=<span class="number">0.015</span>)</span><br><span class="line">k_ = sol[<span class="number">0</span>]</span><br><span class="line">q = gcd(ZZ(f(k_)), n)</span><br><span class="line">k = ZZ(k_ + <span class="number">2</span>^<span class="number">63</span> + <span class="number">2</span>^<span class="number">62</span>)</span><br><span class="line">p = (q - l) // k</span><br><span class="line">r = n // (p * q)</span><br><span class="line"><span class="keyword">assert</span> n == p * q * r</span><br><span class="line">d = inverse_mod(e, (p-<span class="number">1</span>)*(q-<span class="number">1</span>)*(r-<span class="number">1</span>))</span><br><span class="line">m = <span class="built_in">pow</span>(c, d, n)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
+<p>解得 flag 为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;c0UlD_b3_ReCoVEr3d_v!4_Coppersmiths_m3ThOd?&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Snails"><a href="#Snails" class="headerlink" title="Snails"></a>Snails</h2><h3 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目基于 ECDSA。给出一个已知的模 $p$ 的椭圆曲线 $E_p: y^2 = x^3 + a x + b$，其中 $p$ 为 521 bit，阶为 $n$；以及已知生成点 $G$，私钥 $d$ 为 flag。给定固定的 38 字节长消息 $m_0$。</p>
+<p>服务器接受 <strong>任意次交互</strong>：输入消息 $m$，其中要求 $m_0$ 为 $m$ 的子串，且 $m$ 为 40 字节长。然后就是魔改了的 ECDSA 流程：</p>
+<ol>
+<li>计算 $m$ 的 SHA512 哈希值 $h = H(m)$</li>
+<li>记 $t$ 为 $h$ 作为整数的比特数（忽略前导 0），<strong>生成一个 $t$ 比特的随机数 $k$</strong></li>
+<li>计算倍点 $P = kG$</li>
+<li>计算 $r = x_P$</li>
+<li>计算 $s = (k^{-1}(h + r d)) \bmod n$</li>
+<li>返回 $(r, s)$</li>
+</ol>
+<p>试求私钥 $d$</p>
+<h3 id="我的解答-2"><a href="#我的解答-2" class="headerlink" title="我的解答"></a>我的解答</h3><p>这里的猫腻就在这个随机数 $k$ 太小了，小过 $n$ 的 521bit，于是就可以当成一个 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/581146119">HNP</a> 来解。</p>
+<p>特别地，因为 $m_0$ 要是 $m$的子串，所以我们可以遍历一下所有的 $m$，一共是 $3 \times 256^2$ 个，选出 SHA256 值最小的那个送过去：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha512</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">H = <span class="number">2</span>**<span class="number">999</span></span><br><span class="line">s = <span class="string">b&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">m = <span class="string">&#x27;✔✔✔ My signature is the priority&#x27;</span>.encode()</span><br><span class="line"><span class="keyword">for</span> i, j <span class="keyword">in</span> itertools.product(<span class="built_in">range</span>(<span class="number">256</span>), repeat=<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">for</span> mi <span class="keyword">in</span> [m + <span class="built_in">bytes</span>([i, j]), <span class="built_in">bytes</span>([i, j]) + m, <span class="built_in">bytes</span>([i]) + m + <span class="built_in">bytes</span>([j])]:</span><br><span class="line">        h = bytes_to_long(sha512(mi).digest())</span><br><span class="line">        <span class="keyword">if</span> h &lt; H:</span><br><span class="line">            H = h</span><br><span class="line">            s = mi</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;s = &#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;H = &#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;H.bit_length() = &#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>算出来的结果是 <code>H.bit_length() = 497</code>，也就是说$k$的高15bit都为0，所以我们就可以利用格基规约，解出私钥$d$ 来（具体方法可移步春乎）。</p>
+<p>需要注意的就是，这题的 pull 数据和求解可以分成两步来做。Pull 数据的代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> trange</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gao</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># self.conn = process([&#x27;sage&#x27;, &#x27;another.sage&#x27;])</span></span><br><span class="line">        self.conn = remote(<span class="string">&quot;91.107.133.165&quot;</span>, <span class="string">&quot;33337&quot;</span>)</span><br><span class="line">        self.rlist = []</span><br><span class="line">        self.slist = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao_one</span>(<span class="params">self</span>):</span><br><span class="line">        m = <span class="string">b&#x27;\x97;\xe2\x9c\x94\xe2\x9c\x94\xe2\x9c\x94 My signature is the priority&#x27;</span></span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;[Q]uit\n&#x27;</span>, <span class="string">&#x27;s&#x27;</span>)</span><br><span class="line">        self.conn.sendlineafter(<span class="string">&#x27;message: \n&#x27;</span>, m)</span><br><span class="line">        self.conn.recvuntil(<span class="string">&#x27;r = &#x27;</span>)</span><br><span class="line">        r = <span class="built_in">eval</span>(self.conn.recvline())</span><br><span class="line">        self.conn.recvuntil(<span class="string">&#x27;s = &#x27;</span>)</span><br><span class="line">        s = <span class="built_in">eval</span>(self.conn.recvline())</span><br><span class="line">        self.rlist.append(r)</span><br><span class="line">        self.slist.append(s)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gao</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> trange(<span class="number">50</span>):</span><br><span class="line">            self.gao_one()</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;1.pickle&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            pickle.dump((self.rlist, self.slist), f)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    g = Gao()</span><br><span class="line">    g.gao()</span><br></pre></td></tr></table></figure>
+<p>求解代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;1.pickle&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    rlist, slist = pickle.load(f)</span><br><span class="line"></span><br><span class="line">n = </span><br><span class="line">h = </span><br><span class="line"></span><br><span class="line">N = <span class="number">50</span></span><br><span class="line">L = [[<span class="number">0</span> <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N+<span class="number">1</span>)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N+<span class="number">1</span>)]</span><br><span class="line">r0, s0 = rlist[<span class="number">0</span>], slist[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N-<span class="number">1</span>):</span><br><span class="line">    ri, si = rlist[i+<span class="number">1</span>], slist[i+<span class="number">1</span>]</span><br><span class="line">    A = ri * s0 * inverse_mod(r0 * si, n) % n</span><br><span class="line">    B = (r0 * h - ri * h) * inverse_mod(r0 * si, n) % n</span><br><span class="line">    L[i][i] = n</span><br><span class="line">    L[N-<span class="number">1</span>][i] = A</span><br><span class="line">    L[N][i] = B</span><br><span class="line">L[N-<span class="number">1</span>][N-<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">L[N][N] = h</span><br><span class="line">L = matrix(ZZ, L)</span><br><span class="line">L = L.BKZ(block_size=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">k0 = L[<span class="number">0</span>][-<span class="number">2</span>]</span><br><span class="line">m = (k0 * s0 - h) * inverse_mod(r0, n) % n</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
+<p>得到 flag 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCTF&#123;prIv4T3_kEy_rEc0v3rY_fOr_P521_!n_r3AL_w0rlD!&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://zm-j.github.io">ZM-J</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://zm-j.github.io/2025/09/09/cryptoctf-2025-brain-buster/">https://zm-j.github.io/2025/09/09/cryptoctf-2025-brain-buster/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/09/02/cryptoctf-2025-tough-cookie-3/" title="CryptoCTF 2025 tough cookie 分类 团队解题 writeup 之三"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">CryptoCTF 2025 tough cookie 分类 团队解题 writeup 之三</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ZM-J</div><div class="author-info__description">丧失年轻，勿失年华</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZM-J"><i class="fab fa-github"></i><span>信春哥</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://www.zhihu.com/people/ZM_________J" target="_blank" title="Zhihu"><i class="fab fa-zhihu" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">春哥纯爷们，铁血真汉子。人民好兄弟，父亲好儿子。拳上能站人，臂上能走马！夜御十女枪不倒，菊花百战色仍红！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Leptocole-x"><span class="toc-number">1.</span> <span class="toc-text">Leptocole (x)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E5%B0%9D%E8%AF%95"><span class="toc-number">1.2.</span> <span class="toc-text">我的尝试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%9B%98-x"><span class="toc-number">1.3.</span> <span class="toc-text">赛后复盘 (x)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multi-Shooti"><span class="toc-number">2.</span> <span class="toc-text">Multi Shooti</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94"><span class="toc-number">2.2.</span> <span class="toc-text">我的解答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%9B%98"><span class="toc-number">2.3.</span> <span class="toc-text">赛后复盘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phoney"><span class="toc-number">3.</span> <span class="toc-text">Phoney</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-1"><span class="toc-number">3.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Snails"><span class="toc-number">4.</span> <span class="toc-text">Snails</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3"><span class="toc-number">4.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94-2"><span class="toc-number">4.2.</span> <span class="toc-text">我的解答</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/09/cryptoctf-2025-brain-buster/" title="CryptoCTF 2025 brain buster 分类 团队解题 writeup">CryptoCTF 2025 brain buster 分类 团队解题 writeup</a><time datetime="2025-09-09T07:04:00.000Z" title="Created 2025-09-09 15:04:00">2025-09-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/02/cryptoctf-2025-tough-cookie-3/" title="CryptoCTF 2025 tough cookie 分类 团队解题 writeup 之三">CryptoCTF 2025 tough cookie 分类 团队解题 writeup 之三</a><time datetime="2025-09-02T09:28:00.000Z" title="Created 2025-09-02 17:28:00">2025-09-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/13/cryptoctf-2025-tough-cookie-2/" title="CryptoCTF 2025 tough cookie 分类 团队解题 writeup 之二">CryptoCTF 2025 tough cookie 分类 团队解题 writeup 之二</a><time datetime="2025-08-13T09:52:00.000Z" title="Created 2025-08-13 17:52:00">2025-08-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/04/cryptoctf-2025-tough-cookie-1/" title="CryptoCTF 2025 tough cookie 分类 团队解题 writeup 之一">CryptoCTF 2025 tough cookie 分类 团队解题 writeup 之一</a><time datetime="2025-08-04T03:54:00.000Z" title="Created 2025-08-04 11:54:00">2025-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/25/cryptoctf-2025-getting-there-2/" title="CryptoCTF 2025 getting there 分类 团队解题 writeup 之二">CryptoCTF 2025 getting there 分类 团队解题 writeup 之二</a><time datetime="2025-07-25T07:29:00.000Z" title="Created 2025-07-25 15:29:00">2025-07-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By ZM-J</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="Chat"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const initGitalk = () => {
+    const gitalk = new Gitalk(Object.assign({
+      clientID: 'Ov23lib8keprJGNom7Yt',
+      clientSecret: 'ec292b94fcfc3c36860e77622a4a4b37639c983a',
+      repo: 'ZM-J.github.io',
+      owner: 'ZM-J',
+      admin: ['ZM-J'],
+      id: 'eef230a7c1827e1ad7486e5bfa9a6bb1',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async() => {
+    if (typeof Gitalk === 'function') initGitalk()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk()
+    }
+  }
+  
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  if ('Gitalk' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
